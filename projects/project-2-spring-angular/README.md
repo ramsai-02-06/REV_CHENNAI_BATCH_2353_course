@@ -1,7 +1,9 @@
 # Project 2: Full-Stack Web Application with Spring Boot and Angular
 
 ## Project Overview
-This is a comprehensive full-stack web application project that demonstrates your ability to build modern enterprise applications using Spring Boot for the backend and Angular for the frontend. You'll create RESTful APIs and a responsive single-page application.
+**Individual Learner Project 2**
+
+Building on your first project, this is your second individual project where you'll create a comprehensive full-stack web application. This project demonstrates your ability to build modern enterprise applications using Spring Boot for the backend and Angular for the frontend. You'll create RESTful APIs and a responsive single-page application.
 
 ## Timeline
 **Start:** Week 7 (after Spring Data JPA)
@@ -568,4 +570,4 @@ Include this in your README:
 
 ---
 
-**This project brings together everything you've learned so far. Take your time, plan well, and build something you're proud of!** 🚀
+**This second individual project brings together everything you've learned so far. Take your time, plan well, and build something you're proud of!**

@@ -1,7 +1,9 @@
 # Project 3: Cloud-Native Microservices Deployment
 
 ## Project Overview
-This capstone project demonstrates your ability to build, containerize, and deploy a cloud-native microservices application on Google Cloud Platform. You'll work with the full modern stack: Spring Boot microservices, Docker containers, Kubernetes orchestration, and GCP services.
+**Individual Learner Project 3 (Capstone)**
+
+This is your third and final individual project, serving as your capstone. Building on your previous two projects, this capstone demonstrates your ability to build, containerize, and deploy a cloud-native microservices application on Google Cloud Platform. You'll work with the full modern stack: Spring Boot microservices, Docker containers, Kubernetes orchestration, and GCP services.
 
 ## Timeline
 **Start:** Week 12
@@ -693,6 +695,6 @@ kubectl get service api-gateway
 
 ---
 
-**This is your capstone project - showcase everything you've learned and build something impressive!** 🚀🎓
+**This is your third and final individual project - showcase everything you've learned and build something impressive!**
 
 **Remember to delete your GCP resources after the project to avoid unexpected charges!**

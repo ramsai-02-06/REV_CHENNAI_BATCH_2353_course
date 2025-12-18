@@ -1,7 +1,9 @@
 # Project 1: Java Console Application with MySQL and JDBC
 
 ## Project Overview
-This is your first major project where you'll build a complete Java console application that interacts with a MySQL database using JDBC. This project demonstrates your understanding of Core Java, database concepts, and JDBC connectivity.
+**Individual Learner Project 1**
+
+This is your first individual project where you'll build a complete Java console application that interacts with a MySQL database using JDBC. This project demonstrates your understanding of Core Java, database concepts, and JDBC connectivity.
 
 ## Timeline
 **Start:** Week 3 (after MySQL and Java basics)
@@ -430,4 +432,4 @@ public class BookDAO {
 
 ---
 
-**Good luck with your first project! This is where your Java and database skills come together.** 🚀
+**Good luck with your first individual project! This is where your Java and database skills come together.**
