@@ -50,8 +50,9 @@ course/
 │
 ├── projects-self/               # Individual projects
 │   ├── project-1-java-mysql-jdbc/
-│   ├── project-2-spring-angular/
-│   └── project-3-cloud-deployment/
+│   ├── project-2-spring-boot/
+│   ├── project-3-angular/
+│   └── project-4-cloud-deployment/
 │
 ├── projects-team/               # Team-based collaborative projects
 │   ├── README.md                # Project guidelines & timeline
@@ -179,9 +180,10 @@ course/
 
 | Project | Technologies | Week | Description |
 |---------|-------------|------|-------------|
-| [Project 1](./projects-self/project-1-java-mysql-jdbc/) | Java, MySQL, JDBC | 3 | Console-based application with database |
-| [Project 2](./projects-self/project-2-spring-angular/) | Spring Boot, Angular | 7-10 | Full-stack web application |
-| [Project 3](./projects-self/project-3-cloud-deployment/) | Full Stack + Cloud | 11-13 | Cloud-native deployment |
+| [Project 1](./projects-self/project-1-java-mysql-jdbc/) | Java, MySQL, JDBC | 3-5 | Console-based application with database |
+| [Project 2](./projects-self/project-2-spring-boot/) | Spring Boot, Spring Data JPA | 7-8 | RESTful API backend |
+| [Project 3](./projects-self/project-3-angular/) | Angular, TypeScript, RxJS | 9-10 | Single page application frontend |
+| [Project 4](./projects-self/project-4-cloud-deployment/) | Docker, Kubernetes, GCP | 11-13 | Cloud-native deployment |
 
 ### Team Projects (projects-team/)
 
