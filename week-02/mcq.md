@@ -20,10 +20,10 @@ This document contains 120 multiple choice questions covering the key concepts f
 
 What keyword declares a block-scoped variable that cannot be reassigned?
 
-A) `const`
-B) `let`
-C) `var`
-D) `static`
+- A) `const`
+- B) `let`
+- C) `var`
+- D) `static`
 
 
 ---
@@ -33,10 +33,10 @@ D) `static`
 
 Which class creates a full-width container in Bootstrap?
 
-A) `container-wide`
-B) `container-fluid`
-C) `container-full`
-D) `container-100`
+- A) `container-wide`
+- B) `container-fluid`
+- C) `container-full`
+- D) `container-100`
 
 
 ---
@@ -46,10 +46,10 @@ D) `container-100`
 
 What does `$(document).ready()` wait for before executing code?
 
-A) All images to load
-B) All external scripts to load
-C) The DOM to be fully parsed
-D) CSS styles to be applied
+- A) All images to load
+- B) All external scripts to load
+- C) The DOM to be fully parsed
+- D) CSS styles to be applied
 
 
 ---
@@ -59,10 +59,10 @@ D) CSS styles to be applied
 
 Which value is NOT falsy in JavaScript?
 
-A) `0`
-B) `""`
-C) `[]`
-D) `null`
+- A) `0`
+- B) `""`
+- C) `[]`
+- D) `null`
 
 
 ---
@@ -72,10 +72,10 @@ D) `null`
 
 What is the correct order of Bootstrap's grid hierarchy?
 
-A) row > container > col
-B) col > row > container
-C) container > col > row
-D) container > row > col
+- A) row > container > col
+- B) col > row > container
+- C) container > col > row
+- D) container > row > col
 
 
 ---
@@ -85,10 +85,10 @@ D) container > row > col
 
 What does the `===` operator check?
 
-A) Value only
-B) Type only
-C) Value and type
-D) Reference only
+- A) Value only
+- B) Type only
+- C) Value and type
+- D) Reference only
 
 
 ---
@@ -98,10 +98,10 @@ D) Reference only
 
 Which method is used to hide an element with animation?
 
-A) `hide()`
-B) `remove()`
-C) `fadeOut()`
-D) `display(false)`
+- A) `hide()`
+- B) `remove()`
+- C) `fadeOut()`
+- D) `display(false)`
 
 
 ---
@@ -111,10 +111,10 @@ D) `display(false)`
 
 Which breakpoint prefix targets tablets (768px and up)?
 
-A) `sm`
-B) `md`
-C) `lg`
-D) `xl`
+- A) `sm`
+- B) `md`
+- C) `lg`
+- D) `xl`
 
 
 ---
@@ -124,10 +124,10 @@ D) `xl`
 
 What is a closure in JavaScript?
 
-A) A function that has been closed/completed
-B) A function with access to its outer scope after the outer function returns
-C) A way to close a browser window
-D) A method to end a loop early
+- A) A function that has been closed/completed
+- B) A function with access to its outer scope after the outer function returns
+- C) A way to close a browser window
+- D) A method to end a loop early
 
 
 ---
@@ -137,10 +137,10 @@ D) A method to end a loop early
 
 What is the shorthand for `$(document).ready(function() {})`?
 
-A) `$.ready(function() {})`
-B) `$().ready(function() {})`
-C) `$(function() {})`
-D) `ready(function() {})`
+- A) `$.ready(function() {})`
+- B) `$().ready(function() {})`
+- C) `$(function() {})`
+- D) `ready(function() {})`
 
 
 ---
@@ -150,10 +150,10 @@ D) `ready(function() {})`
 
 Which method adds an element at the end of an array?
 
-A) `push()`
-B) `unshift()`
-C) `append()`
-D) `add()`
+- A) `push()`
+- B) `unshift()`
+- C) `append()`
+- D) `add()`
 
 
 ---
@@ -163,10 +163,10 @@ D) `add()`
 
 Which class adds shadow to an element?
 
-A) `box-shadow`
-B) `shadow`
-C) `drop-shadow`
-D) `with-shadow`
+- A) `box-shadow`
+- B) `shadow`
+- C) `drop-shadow`
+- D) `with-shadow`
 
 
 ---
@@ -176,10 +176,10 @@ D) `with-shadow`
 
 What does `event.preventDefault()` do?
 
-A) Stops event bubbling
-B) Removes the event listener
-C) Prevents the default browser action
-D) Cancels the event completely
+- A) Stops event bubbling
+- B) Removes the event listener
+- C) Prevents the default browser action
+- D) Cancels the event completely
 
 
 ---
@@ -189,10 +189,10 @@ D) Cancels the event completely
 
 Which method selects the parent element in jQuery?
 
-A) `parent()`
-B) `parentElement()`
-C) `up()`
-D) `container()`
+- A) `parent()`
+- B) `parentElement()`
+- C) `up()`
+- D) `container()`
 
 
 ---
@@ -202,10 +202,10 @@ D) `container()`
 
 How do you center text horizontally in Bootstrap?
 
-A) `center-text`
-B) `align-center`
-C) `text-center`
-D) `horizontal-center`
+- A) `center-text`
+- B) `align-center`
+- C) `text-center`
+- D) `horizontal-center`
 
 
 ---
@@ -215,10 +215,10 @@ D) `horizontal-center`
 
 What is the output of `typeof null`?
 
-A) "null"
-B) "undefined"
-C) "object"
-D) "boolean"
+- A) "null"
+- B) "undefined"
+- C) "object"
+- D) "boolean"
 
 
 ---
@@ -228,10 +228,10 @@ D) "boolean"
 
 Which method gets or sets the HTML content of an element?
 
-A) `content()`
-B) `innerHTML()`
-C) `text()`
-D) `html()`
+- A) `content()`
+- B) `innerHTML()`
+- C) `text()`
+- D) `html()`
 
 
 ---
@@ -241,10 +241,10 @@ D) `html()`
 
 Which class hides an element on mobile but shows it on desktop?
 
-A) `d-none d-lg-block`
-B) `hidden-mobile`
-C) `visible-desktop`
-D) `show-lg`
+- A) `d-none d-lg-block`
+- B) `hidden-mobile`
+- C) `visible-desktop`
+- D) `show-lg`
 
 
 ---
@@ -254,10 +254,10 @@ D) `show-lg`
 
 What does the spread operator `...` do in this context: `[...arr1, ...arr2]`?
 
-A) Compares two arrays
-B) Combines two arrays into one
-C) Creates a reference to both arrays
-D) Deletes elements from both arrays
+- A) Compares two arrays
+- B) Combines two arrays into one
+- C) Creates a reference to both arrays
+- D) Deletes elements from both arrays
 
 
 ---
@@ -267,10 +267,10 @@ D) Deletes elements from both arrays
 
 Which class creates equal spacing between flex items?
 
-A) `space-between`
-B) `justify-content-between`
-C) `flex-space`
-D) `gap-between`
+- A) `space-between`
+- B) `justify-content-between`
+- C) `flex-space`
+- D) `gap-between`
 
 
 ---
@@ -280,10 +280,10 @@ D) `gap-between`
 
 Which array method creates a new array with elements that pass a test?
 
-A) `find()`
-B) `map()`
-C) `filter()`
-D) `reduce()`
+- A) `find()`
+- B) `map()`
+- C) `filter()`
+- D) `reduce()`
 
 
 ---
@@ -293,10 +293,10 @@ D) `reduce()`
 
 How do you add a class to an element in jQuery?
 
-A) `$(el).class('active')`
-B) `$(el).addClassName('active')`
-C) `$(el).addClass('active')`
-D) `$(el).setClass('active')`
+- A) `$(el).class('active')`
+- B) `$(el).addClassName('active')`
+- C) `$(el).addClass('active')`
+- D) `$(el).setClass('active')`
 
 
 ---
@@ -306,10 +306,10 @@ D) `$(el).setClass('active')`
 
 What does the `g-3` class do in a row?
 
-A) Creates 3 columns
-B) Sets gap/gutter between columns
-C) Sets grid template
-D) Groups 3 items
+- A) Creates 3 columns
+- B) Sets gap/gutter between columns
+- C) Sets grid template
+- D) Groups 3 items
 
 
 ---
@@ -319,10 +319,10 @@ D) Groups 3 items
 
 What is event delegation?
 
-A) Passing events between windows
-B) Attaching event listener to parent for child elements
-C) Delegating events to other developers
-D) Removing event listeners
+- A) Passing events between windows
+- B) Attaching event listener to parent for child elements
+- C) Delegating events to other developers
+- D) Removing event listeners
 
 
 ---
@@ -332,10 +332,10 @@ D) Removing event listeners
 
 Which method removes an element from the DOM in jQuery?
 
-A) `delete()`
-B) `destroy()`
-C) `hide()`
-D) `remove()`
+- A) `delete()`
+- B) `destroy()`
+- C) `hide()`
+- D) `remove()`
 
 
 ---
@@ -345,10 +345,10 @@ D) `remove()`
 
 Which class makes a button full width?
 
-A) `btn-full`
-B) `btn-block`
-C) `w-100`
-D) `btn-wide`
+- A) `btn-full`
+- B) `btn-block`
+- C) `w-100`
+- D) `btn-wide`
 
 
 ---
@@ -358,10 +358,10 @@ D) `btn-wide`
 
 What is the output of `console.log(2 + '2')`?
 
-A) 4
-B) 22
-C) "22"
-D) NaN
+- A) 4
+- B) 22
+- C) "22"
+- D) NaN
 
 
 ---
@@ -371,10 +371,10 @@ D) NaN
 
 What does `$(this)` refer to inside an event handler?
 
-A) The window object
-B) The document object
-C) The element that triggered the event
-D) The jQuery library
+- A) The window object
+- B) The document object
+- C) The element that triggered the event
+- D) The jQuery library
 
 
 ---
@@ -384,10 +384,10 @@ D) The jQuery library
 
 Which class adds rounded corners to all sides?
 
-A) `rounded`
-B) `border-radius`
-C) `corners`
-D) `round`
+- A) `rounded`
+- B) `border-radius`
+- C) `corners`
+- D) `round`
 
 
 ---
@@ -397,10 +397,10 @@ D) `round`
 
 Which method converts a JSON string to a JavaScript object?
 
-A) `JSON.stringify()`
-B) `JSON.parse()`
-C) `JSON.toObject()`
-D) `JSON.convert()`
+- A) `JSON.stringify()`
+- B) `JSON.parse()`
+- C) `JSON.toObject()`
+- D) `JSON.convert()`
 
 
 ---
@@ -410,10 +410,10 @@ D) `JSON.convert()`
 
 How many columns does Bootstrap's grid system have?
 
-A) 10
-B) 12
-C) 16
-D) 24
+- A) 10
+- B) 12
+- C) 16
+- D) 24
 
 
 ---
@@ -423,10 +423,10 @@ D) 24
 
 What does `Array.isArray([])` return?
 
-A) true
-B) false
-C) undefined
-D) null
+- A) true
+- B) false
+- C) undefined
+- D) null
 
 
 ---
@@ -436,10 +436,10 @@ D) null
 
 Which method attaches an event handler that runs only once?
 
-A) `once()`
-B) `single()`
-C) `one()`
-D) `first()`
+- A) `once()`
+- B) `single()`
+- C) `one()`
+- D) `first()`
 
 
 ---
@@ -449,10 +449,10 @@ D) `first()`
 
 Which class makes an image responsive?
 
-A) `responsive-img`
-B) `img-responsive`
-C) `img-fluid`
-D) `image-auto`
+- A) `responsive-img`
+- B) `img-responsive`
+- C) `img-fluid`
+- D) `image-auto`
 
 
 ---
@@ -462,10 +462,10 @@ D) `image-auto`
 
 What is the purpose of `async/await`?
 
-A) To make synchronous code faster
-B) To write asynchronous code that looks synchronous
-C) To create new threads
-D) To stop code execution
+- A) To make synchronous code faster
+- B) To write asynchronous code that looks synchronous
+- C) To create new threads
+- D) To stop code execution
 
 
 ---
@@ -475,10 +475,10 @@ D) To stop code execution
 
 What is the correct way to make a GET request in jQuery?
 
-A) `$.get(url, callback)`
-B) `$.ajax.get(url, callback)`
-C) `$.request(url, 'GET', callback)`
-D) `$.fetch(url, callback)`
+- A) `$.get(url, callback)`
+- B) `$.ajax.get(url, callback)`
+- C) `$.request(url, 'GET', callback)`
+- D) `$.fetch(url, callback)`
 
 
 ---
@@ -488,10 +488,10 @@ D) `$.fetch(url, callback)`
 
 Which class vertically centers items in a flex container?
 
-A) `vertical-center`
-B) `align-middle`
-C) `align-items-center`
-D) `v-center`
+- A) `vertical-center`
+- B) `align-middle`
+- C) `align-items-center`
+- D) `v-center`
 
 
 ---
@@ -501,10 +501,10 @@ D) `v-center`
 
 What does `document.querySelector('.item')` return?
 
-A) All elements with class "item"
-B) The first element with class "item"
-C) An array of elements
-D) The last element with class "item"
+- A) All elements with class "item"
+- B) The first element with class "item"
+- C) An array of elements
+- D) The last element with class "item"
 
 
 ---
@@ -514,10 +514,10 @@ D) The last element with class "item"
 
 How do you stop event propagation in jQuery?
 
-A) `event.stop()`
-B) `event.preventDefault()`
-C) `event.stopPropagation()`
-D) `event.halt()`
+- A) `event.stop()`
+- B) `event.preventDefault()`
+- C) `event.stopPropagation()`
+- D) `event.halt()`
 
 
 ---
@@ -527,10 +527,10 @@ D) `event.halt()`
 
 Which class creates a card component?
 
-A) `panel`
-B) `box`
-C) `card`
-D) `container-card`
+- A) `panel`
+- B) `box`
+- C) `card`
+- D) `container-card`
 
 
 ---
@@ -540,10 +540,10 @@ D) `container-card`
 
 What is hoisting in JavaScript?
 
-A) Moving variables to a different scope
-B) Moving declarations to the top of their scope
-C) Raising an error
-D) Increasing performance
+- A) Moving variables to a different scope
+- B) Moving declarations to the top of their scope
+- C) Raising an error
+- D) Increasing performance
 
 
 ---
@@ -553,10 +553,10 @@ D) Increasing performance
 
 Which traversal method finds all descendants matching a selector?
 
-A) `children()`
-B) `find()`
-C) `descendants()`
-D) `search()`
+- A) `children()`
+- B) `find()`
+- C) `descendants()`
+- D) `search()`
 
 
 ---
@@ -566,10 +566,10 @@ D) `search()`
 
 What does `mb-3` add to an element?
 
-A) Margin-bottom of 1rem
-B) Margin-bottom of 3px
-C) Margin-both of 3rem
-D) Margin-border of 3
+- A) Margin-bottom of 1rem
+- B) Margin-bottom of 3px
+- C) Margin-both of 3rem
+- D) Margin-border of 3
 
 
 ---
@@ -579,10 +579,10 @@ D) Margin-border of 3
 
 Which method removes the last element from an array?
 
-A) `remove()`
-B) `delete()`
-C) `shift()`
-D) `pop()`
+- A) `remove()`
+- B) `delete()`
+- C) `shift()`
+- D) `pop()`
 
 
 ---
@@ -592,10 +592,10 @@ D) `pop()`
 
 Which class creates a primary colored button?
 
-A) `button-primary`
-B) `btn-primary`
-C) `btn btn-primary`
-D) `primary-btn`
+- A) `button-primary`
+- B) `btn-primary`
+- C) `btn btn-primary`
+- D) `primary-btn`
 
 
 ---
@@ -605,10 +605,10 @@ D) `primary-btn`
 
 What is the result of `Boolean("")`?
 
-A) true
-B) false
-C) undefined
-D) null
+- A) true
+- B) false
+- C) undefined
+- D) null
 
 
 ---
@@ -618,10 +618,10 @@ D) null
 
 Which method sets multiple CSS properties at once?
 
-A) `css({prop: value, prop: value})`
-B) `style({prop: value})`
-C) `setCSS({prop: value})`
-D) `styles({prop: value})`
+- A) `css({prop: value, prop: value})`
+- B) `style({prop: value})`
+- C) `setCSS({prop: value})`
+- D) `styles({prop: value})`
 
 
 ---
@@ -631,10 +631,10 @@ D) `styles({prop: value})`
 
 Which class makes text bold?
 
-A) `bold`
-B) `text-bold`
-C) `fw-bold`
-D) `font-bold`
+- A) `bold`
+- B) `text-bold`
+- C) `fw-bold`
+- D) `font-bold`
 
 
 ---
@@ -644,10 +644,10 @@ D) `font-bold`
 
 What does `Object.keys(obj)` return?
 
-A) Object values
-B) Object entries
-C) Array of property names
-D) Number of properties
+- A) Object values
+- B) Object entries
+- C) Array of property names
+- D) Number of properties
 
 
 ---
@@ -657,10 +657,10 @@ D) Number of properties
 
 How do you select an element by ID in jQuery?
 
-A) `$.id('myId')`
-B) `$('.myId')`
-C) `$('#myId')`
-D) `$('id=myId')`
+- A) `$.id('myId')`
+- B) `$('.myId')`
+- C) `$('#myId')`
+- D) `$('id=myId')`
 
 
 ---
@@ -670,10 +670,10 @@ D) `$('id=myId')`
 
 Which class creates a dismissible alert?
 
-A) `alert-close`
-B) `alert-dismissible`
-C) `alert-remove`
-D) `closeable-alert`
+- A) `alert-close`
+- B) `alert-dismissible`
+- C) `alert-remove`
+- D) `closeable-alert`
 
 
 ---
@@ -683,10 +683,10 @@ D) `closeable-alert`
 
 What is the purpose of `try...catch`?
 
-A) To improve performance
-B) To handle errors gracefully
-C) To create loops
-D) To define functions
+- A) To improve performance
+- B) To handle errors gracefully
+- C) To create loops
+- D) To define functions
 
 
 ---
@@ -696,10 +696,10 @@ D) To define functions
 
 Which method triggers a click event?
 
-A) `click()`
-B) `fireClick()`
-C) `triggerClick()`
-D) `doClick()`
+- A) `click()`
+- B) `fireClick()`
+- C) `triggerClick()`
+- D) `doClick()`
 
 
 ---
@@ -709,10 +709,10 @@ D) `doClick()`
 
 What does `d-flex` do?
 
-A) Sets display: flex
-B) Creates a flexbox grid
-C) Hides the element
-D) Sets default display
+- A) Sets display: flex
+- B) Creates a flexbox grid
+- C) Hides the element
+- D) Sets default display
 
 
 ---
@@ -722,10 +722,10 @@ D) Sets default display
 
 Which loop is best for iterating over object properties?
 
-A) for loop
-B) while loop
-C) for...in loop
-D) for...of loop
+- A) for loop
+- B) while loop
+- C) for...in loop
+- D) for...of loop
 
 
 ---
@@ -735,10 +735,10 @@ D) for...of loop
 
 What does `$(selector).first()` return?
 
-A) The first character
-B) The first matched element
-C) A boolean
-D) The first child
+- A) The first character
+- B) The first matched element
+- C) A boolean
+- D) The first child
 
 
 ---
@@ -748,10 +748,10 @@ D) The first child
 
 Which class creates a navigation bar?
 
-A) `nav`
-B) `navbar`
-C) `navigation`
-D) `nav-bar`
+- A) `nav`
+- B) `navbar`
+- C) `navigation`
+- D) `nav-bar`
 
 
 ---
@@ -761,10 +761,10 @@ D) `nav-bar`
 
 What is the output of `typeof undefined`?
 
-A) "null"
-B) "object"
-C) "undefined"
-D) "void"
+- A) "null"
+- B) "object"
+- C) "undefined"
+- D) "void"
 
 
 ---
@@ -774,10 +774,10 @@ D) "void"
 
 Which method slides an element up and hides it?
 
-A) `hide()`
-B) `collapse()`
-C) `slideUp()`
-D) `rollUp()`
+- A) `hide()`
+- B) `collapse()`
+- C) `slideUp()`
+- D) `rollUp()`
 
 
 ---
@@ -787,10 +787,10 @@ D) `rollUp()`
 
 Which spacing class sets padding on all sides?
 
-A) `padding-3`
-B) `p-3`
-C) `pa-3`
-D) `all-padding-3`
+- A) `padding-3`
+- B) `p-3`
+- C) `pa-3`
+- D) `all-padding-3`
 
 
 ---
@@ -800,10 +800,10 @@ D) `all-padding-3`
 
 What does `arr.map(fn)` return?
 
-A) The original array modified
-B) A new array with transformed elements
-C) A single value
-D) undefined
+- A) The original array modified
+- B) A new array with transformed elements
+- C) A single value
+- D) undefined
 
 
 ---
@@ -813,10 +813,10 @@ D) undefined
 
 How do you POST data using jQuery AJAX?
 
-A) `$.get(url, data)`
-B) `$.post(url, data)`
-C) `$.send(url, data)`
-D) `$.ajax.post(url, data)`
+- A) `$.get(url, data)`
+- B) `$.post(url, data)`
+- C) `$.send(url, data)`
+- D) `$.ajax.post(url, data)`
 
 
 ---
@@ -826,10 +826,10 @@ D) `$.ajax.post(url, data)`
 
 Which class aligns items to the end of a flex container?
 
-A) `align-end`
-B) `flex-end`
-C) `justify-content-end`
-D) `items-end`
+- A) `align-end`
+- B) `flex-end`
+- C) `justify-content-end`
+- D) `items-end`
 
 
 ---
@@ -839,10 +839,10 @@ D) `items-end`
 
 What is the DOM?
 
-A) A programming language
-B) A tree representation of HTML
-C) A database system
-D) A styling format
+- A) A programming language
+- B) A tree representation of HTML
+- C) A database system
+- D) A styling format
 
 
 ---
@@ -852,10 +852,10 @@ D) A styling format
 
 Which method gets the value of an input field?
 
-A) `value()`
-B) `text()`
-C) `val()`
-D) `input()`
+- A) `value()`
+- B) `text()`
+- C) `val()`
+- D) `input()`
 
 
 ---
@@ -865,10 +865,10 @@ D) `input()`
 
 What does `col-auto` do?
 
-A) Creates automatic columns
-B) Sizes column based on content
-C) Centers the column
-D) Hides the column
+- A) Creates automatic columns
+- B) Sizes column based on content
+- C) Centers the column
+- D) Hides the column
 
 
 ---
@@ -878,10 +878,10 @@ D) Hides the column
 
 Which method finds the first array element passing a test?
 
-A) `filter()`
-B) `search()`
-C) `find()`
-D) `locate()`
+- A) `filter()`
+- B) `search()`
+- C) `find()`
+- D) `locate()`
 
 
 ---
@@ -891,10 +891,10 @@ D) `locate()`
 
 What does `$(element).empty()` do?
 
-A) Checks if element is empty
-B) Returns empty jQuery object
-C) Removes all child elements
-D) Clears element's classes
+- A) Checks if element is empty
+- B) Returns empty jQuery object
+- C) Removes all child elements
+- D) Clears element's classes
 
 
 ---
@@ -904,10 +904,10 @@ D) Clears element's classes
 
 Which class creates a modal dialog?
 
-A) `dialog`
-B) `popup`
-C) `modal`
-D) `overlay`
+- A) `dialog`
+- B) `popup`
+- C) `modal`
+- D) `overlay`
 
 
 ---
@@ -917,10 +917,10 @@ D) `overlay`
 
 What is `NaN`?
 
-A) Null And Nothing
-B) Not a Number
-C) New Assigned Null
-D) No Array Name
+- A) Null And Nothing
+- B) Not a Number
+- C) New Assigned Null
+- D) No Array Name
 
 
 ---
@@ -930,10 +930,10 @@ D) No Array Name
 
 Which method adds elements before the selected element?
 
-A) `before()`
-B) `prepend()`
-C) `insertBefore()`
-D) `addBefore()`
+- A) `before()`
+- B) `prepend()`
+- C) `insertBefore()`
+- D) `addBefore()`
 
 
 ---
@@ -943,10 +943,10 @@ D) `addBefore()`
 
 Which class creates a small button?
 
-A) `btn-small`
-B) `btn-sm`
-C) `btn-xs`
-D) `small-btn`
+- A) `btn-small`
+- B) `btn-sm`
+- C) `btn-xs`
+- D) `small-btn`
 
 
 ---
@@ -956,10 +956,10 @@ D) `small-btn`
 
 What does `element.classList.toggle('active')` do?
 
-A) Always adds the class
-B) Always removes the class
-C) Adds if absent, removes if present
-D) Checks if class exists
+- A) Always adds the class
+- B) Always removes the class
+- C) Adds if absent, removes if present
+- D) Checks if class exists
 
 
 ---
@@ -969,10 +969,10 @@ D) Checks if class exists
 
 How do you select all paragraphs inside a div?
 
-A) `$('p, div')`
-B) `$('div p')`
-C) `$('div > p')`
-D) `$('div + p')`
+- A) `$('p, div')`
+- B) `$('div p')`
+- C) `$('div > p')`
+- D) `$('div + p')`
 
 
 ---
@@ -982,10 +982,10 @@ D) `$('div + p')`
 
 What does `order-1` do in flexbox?
 
-A) Creates first item
-B) Changes the visual order
-C) Numbers the items
-D) Sorts the items
+- A) Creates first item
+- B) Changes the visual order
+- C) Numbers the items
+- D) Sorts the items
 
 
 ---
@@ -995,10 +995,10 @@ D) Sorts the items
 
 Which statement about arrow functions is TRUE?
 
-A) They have their own `this` binding
-B) They can be used as constructors
-C) They inherit `this` from enclosing scope
-D) They must have a return statement
+- A) They have their own `this` binding
+- B) They can be used as constructors
+- C) They inherit `this` from enclosing scope
+- D) They must have a return statement
 
 
 ---
@@ -1008,10 +1008,10 @@ D) They must have a return statement
 
 What does `$.each(array, callback)` do?
 
-A) Returns a new array
-B) Filters the array
-C) Iterates over array elements
-D) Sorts the array
+- A) Returns a new array
+- B) Filters the array
+- C) Iterates over array elements
+- D) Sorts the array
 
 
 ---
@@ -1021,10 +1021,10 @@ D) Sorts the array
 
 Which class adds a border to all sides?
 
-A) `bordered`
-B) `border`
-C) `border-all`
-D) `with-border`
+- A) `bordered`
+- B) `border`
+- C) `border-all`
+- D) `with-border`
 
 
 ---
@@ -1034,10 +1034,10 @@ D) `with-border`
 
 What is the rest parameter syntax?
 
-A) `...args` in function definition
-B) `args...` in function call
-C) `*args` in function definition
-D) `rest args` in function definition
+- A) `...args` in function definition
+- B) `args...` in function call
+- C) `*args` in function definition
+- D) `rest args` in function definition
 
 
 ---
@@ -1047,10 +1047,10 @@ D) `rest args` in function definition
 
 Which method checks if an element has a specific class?
 
-A) `hasClass()`
-B) `containsClass()`
-C) `checkClass()`
-D) `isClass()`
+- A) `hasClass()`
+- B) `containsClass()`
+- C) `checkClass()`
+- D) `isClass()`
 
 
 ---
@@ -1060,10 +1060,10 @@ D) `isClass()`
 
 Which class makes a table striped?
 
-A) `table-lines`
-B) `table-striped`
-C) `table-zebra`
-D) `striped-table`
+- A) `table-lines`
+- B) `table-striped`
+- C) `table-zebra`
+- D) `striped-table`
 
 
 ---
@@ -1073,10 +1073,10 @@ D) `striped-table`
 
 What does `Promise.all()` do?
 
-A) Resolves when any promise resolves
-B) Resolves when all promises resolve
-C) Always rejects
-D) Returns the fastest promise
+- A) Resolves when any promise resolves
+- B) Resolves when all promises resolve
+- C) Always rejects
+- D) Returns the fastest promise
 
 
 ---
@@ -1086,10 +1086,10 @@ D) Returns the fastest promise
 
 How do you chain jQuery methods?
 
-A) Using && operator
-B) Using semicolons
-C) Directly calling one after another with dots
-D) Using the chain() method
+- A) Using && operator
+- B) Using semicolons
+- C) Directly calling one after another with dots
+- D) Using the chain() method
 
 
 ---
@@ -1099,10 +1099,10 @@ D) Using the chain() method
 
 Which class creates a dark background?
 
-A) `background-dark`
-B) `bg-dark`
-C) `dark-bg`
-D) `back-dark`
+- A) `background-dark`
+- B) `bg-dark`
+- C) `dark-bg`
+- D) `back-dark`
 
 
 ---
@@ -1112,10 +1112,10 @@ D) `back-dark`
 
 What is template literal syntax?
 
-A) 'string'
-B) "string"
-C) `string`
-D) /string/
+- A) 'string'
+- B) "string"
+- C) `string`
+- D) /string/
 
 
 ---
@@ -1125,10 +1125,10 @@ D) /string/
 
 What does `$(selector).siblings()` return?
 
-A) All children
-B) Parent elements
-C) All siblings of matched elements
-D) The next element
+- A) All children
+- B) Parent elements
+- C) All siblings of matched elements
+- D) The next element
 
 
 ---
@@ -1138,10 +1138,10 @@ D) The next element
 
 Which class creates a fixed position navbar?
 
-A) `navbar-fixed`
-B) `fixed-top`
-C) `position-fixed`
-D) `navbar-sticky`
+- A) `navbar-fixed`
+- B) `fixed-top`
+- C) `position-fixed`
+- D) `navbar-sticky`
 
 
 ---
@@ -1151,10 +1151,10 @@ D) `navbar-sticky`
 
 Which method joins array elements into a string?
 
-A) `concat()`
-B) `merge()`
-C) `combine()`
-D) `join()`
+- A) `concat()`
+- B) `merge()`
+- C) `combine()`
+- D) `join()`
 
 
 ---
@@ -1164,10 +1164,10 @@ D) `join()`
 
 Which method creates a deep copy of an object?
 
-A) `$.copy()`
-B) `$.clone()`
-C) `$.extend(true, {}, obj)`
-D) `$.duplicate()`
+- A) `$.copy()`
+- B) `$.clone()`
+- C) `$.extend(true, {}, obj)`
+- D) `$.duplicate()`
 
 
 ---
@@ -1177,10 +1177,10 @@ D) `$.duplicate()`
 
 What does `flex-wrap` do?
 
-A) Prevents wrapping
-B) Enables wrapping to new lines
-C) Wraps text
-D) Creates a border wrap
+- A) Prevents wrapping
+- B) Enables wrapping to new lines
+- C) Wraps text
+- D) Creates a border wrap
 
 
 ---
@@ -1190,10 +1190,10 @@ D) Creates a border wrap
 
 What is `event.target`?
 
-A) The parent element
-B) The element that triggered the event
-C) The document
-D) The window object
+- A) The parent element
+- B) The element that triggered the event
+- C) The document
+- D) The window object
 
 
 ---
@@ -1203,10 +1203,10 @@ D) The window object
 
 How do you stop an animation queue?
 
-A) `stop()`
-B) `halt()`
-C) `pause()`
-D) `end()`
+- A) `stop()`
+- B) `halt()`
+- C) `pause()`
+- D) `end()`
 
 
 ---
@@ -1216,10 +1216,10 @@ D) `end()`
 
 Which class sets equal height columns?
 
-A) `equal-height`
-B) `h-100`
-C) `same-height`
-D) `align-stretch`
+- A) `equal-height`
+- B) `h-100`
+- C) `same-height`
+- D) `align-stretch`
 
 
 ---
@@ -1229,10 +1229,10 @@ D) `align-stretch`
 
 What does `Array.from()` do?
 
-A) Creates array from string only
-B) Creates array from iterable or array-like object
-C) Converts array to object
-D) Filters an array
+- A) Creates array from string only
+- B) Creates array from iterable or array-like object
+- C) Converts array to object
+- D) Filters an array
 
 
 ---
@@ -1242,10 +1242,10 @@ D) Filters an array
 
 What does `$.trim(string)` do?
 
-A) Removes HTML tags
-B) Removes whitespace from both ends
-C) Truncates the string
-D) Removes special characters
+- A) Removes HTML tags
+- B) Removes whitespace from both ends
+- C) Truncates the string
+- D) Removes special characters
 
 
 ---
@@ -1255,10 +1255,10 @@ D) Removes special characters
 
 Which class creates a horizontal scrolling overflow?
 
-A) `scroll-x`
-B) `overflow-auto`
-C) `overflow-x-auto`
-D) `horizontal-scroll`
+- A) `scroll-x`
+- B) `overflow-auto`
+- C) `overflow-x-auto`
+- D) `horizontal-scroll`
 
 
 ---
@@ -1268,10 +1268,10 @@ D) `horizontal-scroll`
 
 What is the correct way to export a function from a module?
 
-A) `module.export = fn`
-B) `export function fn() {}`
-C) `exports.fn = fn`
-D) `return fn`
+- A) `module.export = fn`
+- B) `export function fn() {}`
+- C) `exports.fn = fn`
+- D) `return fn`
 
 
 ---
@@ -1281,10 +1281,10 @@ D) `return fn`
 
 What does `$(element).is('.active')` return?
 
-A) jQuery object
-B) Boolean
-C) undefined
-D) The class string
+- A) jQuery object
+- B) Boolean
+- C) undefined
+- D) The class string
 
 
 ---
@@ -1294,10 +1294,10 @@ D) The class string
 
 Which class hides an element completely?
 
-A) `hidden`
-B) `invisible`
-C) `d-none`
-D) `hide`
+- A) `hidden`
+- B) `invisible`
+- C) `d-none`
+- D) `hide`
 
 
 ---
@@ -1307,10 +1307,10 @@ D) `hide`
 
 What is destructuring assignment?
 
-A) Deleting object properties
-B) Extracting values from arrays/objects into variables
-C) Combining multiple objects
-D) Converting objects to arrays
+- A) Deleting object properties
+- B) Extracting values from arrays/objects into variables
+- C) Combining multiple objects
+- D) Converting objects to arrays
 
 
 ---
@@ -1320,10 +1320,10 @@ D) Converting objects to arrays
 
 Which event fires when an element gains focus?
 
-A) `focus()`
-B) `activate()`
-C) `select()`
-D) `enter()`
+- A) `focus()`
+- B) `activate()`
+- C) `select()`
+- D) `enter()`
 
 
 ---
@@ -1333,10 +1333,10 @@ D) `enter()`
 
 Which class positions an element absolutely?
 
-A) `absolute`
-B) `position-absolute`
-C) `pos-absolute`
-D) `abs-position`
+- A) `absolute`
+- B) `position-absolute`
+- C) `pos-absolute`
+- D) `abs-position`
 
 
 ---
@@ -1346,10 +1346,10 @@ D) `abs-position`
 
 What does `parseInt('42px')` return?
 
-A) NaN
-B) "42"
-C) 42
-D) 42px
+- A) NaN
+- B) "42"
+- C) 42
+- D) 42px
 
 
 ---
@@ -1359,10 +1359,10 @@ D) 42px
 
 How do you delegate events to dynamically added elements?
 
-A) `$(parent).on('click', '.child', handler)`
-B) `$(parent).delegate('.child', handler)`
-C) `$('.child').live('click', handler)`
-D) `$(parent).bind('.child', handler)`
+- A) `$(parent).on('click', '.child', handler)`
+- B) `$(parent).delegate('.child', handler)`
+- C) `$('.child').live('click', handler)`
+- D) `$(parent).bind('.child', handler)`
 
 
 ---
@@ -1372,10 +1372,10 @@ D) `$(parent).bind('.child', handler)`
 
 Which class creates a dropdown menu?
 
-A) `drop-menu`
-B) `dropdown-menu`
-C) `menu-dropdown`
-D) `select-menu`
+- A) `drop-menu`
+- B) `dropdown-menu`
+- C) `menu-dropdown`
+- D) `select-menu`
 
 
 ---
@@ -1385,10 +1385,10 @@ D) `select-menu`
 
 What is the output of `[1,2,3].reduce((a,b) => a+b, 0)`?
 
-A) [1,2,3]
-B) 0
-C) 6
-D) "123"
+- A) [1,2,3]
+- B) 0
+- C) 6
+- D) "123"
 
 
 ---
@@ -1398,10 +1398,10 @@ D) "123"
 
 What does `$(element).toggle()` do?
 
-A) Toggles a class
-B) Shows if hidden, hides if visible
-C) Toggles an attribute
-D) Switches elements
+- A) Toggles a class
+- B) Shows if hidden, hides if visible
+- C) Toggles an attribute
+- D) Switches elements
 
 
 ---
@@ -1411,10 +1411,10 @@ D) Switches elements
 
 Which class creates a list group?
 
-A) `list`
-B) `list-items`
-C) `list-group`
-D) `group-list`
+- A) `list`
+- B) `list-items`
+- C) `list-group`
+- D) `group-list`
 
 
 ---
@@ -1424,10 +1424,10 @@ D) `group-list`
 
 What method sorts array elements in place?
 
-A) `order()`
-B) `arrange()`
-C) `sort()`
-D) `organize()`
+- A) `order()`
+- B) `arrange()`
+- C) `sort()`
+- D) `organize()`
 
 
 ---
@@ -1437,10 +1437,10 @@ D) `organize()`
 
 Which method loads HTML content from server into an element?
 
-A) `fetch()`
-B) `get()`
-C) `load()`
-D) `ajax()`
+- A) `fetch()`
+- B) `get()`
+- C) `load()`
+- D) `ajax()`
 
 
 ---
@@ -1450,10 +1450,10 @@ D) `ajax()`
 
 Which class adds margin to the left?
 
-A) `ml-3`
-B) `ms-3`
-C) `margin-left-3`
-D) `left-3`
+- A) `ml-3`
+- B) `ms-3`
+- C) `margin-left-3`
+- D) `left-3`
 
 
 ---
@@ -1463,10 +1463,10 @@ D) `left-3`
 
 What does `Object.assign()` do?
 
-A) Compares objects
-B) Copies properties from source to target objects
-C) Deletes object properties
-D) Creates object reference
+- A) Compares objects
+- B) Copies properties from source to target objects
+- C) Deletes object properties
+- D) Creates object reference
 
 
 ---
@@ -1476,10 +1476,10 @@ D) Creates object reference
 
 What does `$(selector).index()` return?
 
-A) The array index of the element
-B) The element's position among siblings
-C) undefined
-D) The element's ID
+- A) The array index of the element
+- B) The element's position among siblings
+- C) undefined
+- D) The element's ID
 
 
 ---
@@ -1489,10 +1489,10 @@ D) The element's ID
 
 Which class creates a spinner animation?
 
-A) `loading`
-B) `spinner-border`
-C) `animate-spin`
-D) `loader`
+- A) `loading`
+- B) `spinner-border`
+- C) `animate-spin`
+- D) `loader`
 
 
 ---
@@ -1502,10 +1502,10 @@ D) `loader`
 
 What is `window.localStorage` used for?
 
-A) Session-only storage
-B) Persistent client-side storage
-C) Server-side storage
-D) Cache storage
+- A) Session-only storage
+- B) Persistent client-side storage
+- C) Server-side storage
+- D) Cache storage
 
 
 ---
@@ -1515,10 +1515,10 @@ D) Cache storage
 
 What does `$.noConflict()` do?
 
-A) Resolves version conflicts
-B) Releases the $ variable
-C) Removes jQuery
-D) Disables plugins
+- A) Resolves version conflicts
+- B) Releases the $ variable
+- C) Removes jQuery
+- D) Disables plugins
 
 
 ---
@@ -1528,10 +1528,10 @@ D) Disables plugins
 
 Which class creates a toast notification?
 
-A) `notification`
-B) `alert`
-C) `toast`
-D) `popup`
+- A) `notification`
+- B) `alert`
+- C) `toast`
+- D) `popup`
 
 
 ---
@@ -1541,10 +1541,10 @@ D) `popup`
 
 What is the spread operator used for in function calls?
 
-A) Collecting arguments
-B) Expanding array elements as arguments
-C) Spreading the function
-D) Creating new functions
+- A) Collecting arguments
+- B) Expanding array elements as arguments
+- C) Spreading the function
+- D) Creating new functions
 
 
 ---
@@ -1554,10 +1554,10 @@ D) Creating new functions
 
 Which method removes event handlers?
 
-A) `unbind()`
-B) `off()`
-C) `removeEvent()`
-D) `detach()`
+- A) `unbind()`
+- B) `off()`
+- C) `removeEvent()`
+- D) `detach()`
 
 
 ---
@@ -1567,7 +1567,7 @@ D) `detach()`
 
 Which class creates an accordion component?
 
-A) `collapse`
-B) `accordion`
-C) `expandable`
-D) `panel-group`
+- A) `collapse`
+- B) `accordion`
+- C) `expandable`
+- D) `panel-group`

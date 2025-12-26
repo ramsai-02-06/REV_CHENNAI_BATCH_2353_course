@@ -22,10 +22,10 @@ This document contains 150 multiple choice questions covering the key concepts f
 
 What is the Product Owner responsible for?
 
-A) Writing code
-B) Facilitating Scrum events
-C) Testing the software
-D) Maximizing product value and managing the product backlog
+- A) Writing code
+- B) Facilitating Scrum events
+- C) Testing the software
+- D) Maximizing product value and managing the product backlog
 
 
 ---
@@ -35,10 +35,10 @@ D) Maximizing product value and managing the product backlog
 
 What is a media query used for?
 
-A) Applying styles based on device conditions
-B) Playing media files
-C) Creating media players
-D) Connecting to social media
+- A) Applying styles based on device conditions
+- B) Playing media files
+- C) Creating media players
+- D) Connecting to social media
 
 
 ---
@@ -48,10 +48,10 @@ D) Connecting to social media
 
 What element groups related form inputs?
 
-A) `<group>`
-B) `<fieldset>`
-C) `<inputgroup>`
-D) `<formgroup>`
+- A) `<group>`
+- B) `<fieldset>`
+- C) `<inputgroup>`
+- D) `<formgroup>`
 
 
 ---
@@ -61,10 +61,10 @@ D) `<formgroup>`
 
 What is the correct syntax for a media query?
 
-A) `@media screen (max-width: 768px)`
-B) `media: screen and (max-width: 768px)`
-C) `@media screen and (max-width: 768px)`
-D) `@screen (max-width: 768px)`
+- A) `@media screen (max-width: 768px)`
+- B) `media: screen and (max-width: 768px)`
+- C) `@media screen and (max-width: 768px)`
+- D) `@screen (max-width: 768px)`
 
 
 ---
@@ -74,10 +74,10 @@ D) `@screen (max-width: 768px)`
 
 What is the purpose of a Sprint Retrospective?
 
-A) To demo the product
-B) To plan the next Sprint
-C) To review the budget
-D) To inspect the team's process and identify improvements
+- A) To demo the product
+- B) To plan the next Sprint
+- C) To review the budget
+- D) To inspect the team's process and identify improvements
 
 
 ---
@@ -87,10 +87,10 @@ D) To inspect the team's process and identify improvements
 
 What are the three pillars of Scrum?
 
-A) Speed, Quality, Cost
-B) Plan, Do, Check
-C) Transparency, Inspection, Adaptation
-D) Design, Develop, Deploy
+- A) Speed, Quality, Cost
+- B) Plan, Do, Check
+- C) Transparency, Inspection, Adaptation
+- D) Design, Develop, Deploy
 
 
 ---
@@ -100,10 +100,10 @@ D) Design, Develop, Deploy
 
 What is CSS Grid used for?
 
-A) One-dimensional layout
-B) Text styling only
-C) Image galleries only
-D) Two-dimensional layout (rows and columns)
+- A) One-dimensional layout
+- B) Text styling only
+- C) Image galleries only
+- D) Two-dimensional layout (rows and columns)
 
 
 ---
@@ -113,10 +113,10 @@ D) Two-dimensional layout (rows and columns)
 
 What does `git pull` do?
 
-A) Uploads changes to remote
-B) Downloads and integrates remote changes
-C) Creates a pull request
-D) Removes remote connection
+- A) Uploads changes to remote
+- B) Downloads and integrates remote changes
+- C) Creates a pull request
+- D) Removes remote connection
 
 
 ---
@@ -126,10 +126,10 @@ D) Removes remote connection
 
 What is the difference between `git fetch` and `git pull`?
 
-A) They are the same
-B) `fetch` is faster than `pull`
-C) `fetch` downloads without merging; `pull` downloads and merges
-D) `pull` works offline; `fetch` requires internet
+- A) They are the same
+- B) `fetch` is faster than `pull`
+- C) `fetch` downloads without merging; `pull` downloads and merges
+- D) `pull` works offline; `fetch` requires internet
 
 
 ---
@@ -139,10 +139,10 @@ D) `pull` works offline; `fetch` requires internet
 
 Which command uploads local commits to a remote repository?
 
-A) `git upload`
-B) `git push`
-C) `git send`
-D) `git sync`
+- A) `git upload`
+- B) `git push`
+- C) `git send`
+- D) `git sync`
 
 
 ---
@@ -152,10 +152,10 @@ D) `git sync`
 
 What is a Sprint in Scrum?
 
-A) A time-boxed iteration of work
-B) A meeting with stakeholders
-C) A type of user story
-D) A testing phase
+- A) A time-boxed iteration of work
+- B) A meeting with stakeholders
+- C) A type of user story
+- D) A testing phase
 
 
 ---
@@ -165,10 +165,10 @@ D) A testing phase
 
 What is WIP limit in Kanban?
 
-A) Weekly improvement plan
-B) Work item priority
-C) Work in Progress limit - maximum items allowed in a stage
-D) Weekly iteration planning
+- A) Weekly improvement plan
+- B) Work item priority
+- C) Work in Progress limit - maximum items allowed in a stage
+- D) Weekly iteration planning
 
 
 ---
@@ -178,10 +178,10 @@ D) Weekly iteration planning
 
 What command is used to display the current working directory in Linux?
 
-A) `pwd`
-B) `dir`
-C) `cd`
-D) `ls`
+- A) `pwd`
+- B) `dir`
+- C) `cd`
+- D) `ls`
 
 
 ---
@@ -191,10 +191,10 @@ D) `ls`
 
 What is a CSS transition?
 
-A) Moving between web pages
-B) A smooth animation between CSS property values
-C) A way to transfer files
-D) A page loading effect
+- A) Moving between web pages
+- B) A smooth animation between CSS property values
+- C) A way to transfer files
+- D) A page loading effect
 
 
 ---
@@ -204,10 +204,10 @@ D) A page loading effect
 
 What is semantic HTML?
 
-A) HTML with CSS styling
-B) HTML with JavaScript
-C) HTML elements that convey meaning about content
-D) Encrypted HTML
+- A) HTML with CSS styling
+- B) HTML with JavaScript
+- C) HTML elements that convey meaning about content
+- D) Encrypted HTML
 
 
 ---
@@ -217,10 +217,10 @@ D) Encrypted HTML
 
 Which command shows the commit history?
 
-A) `git log`
-B) `git history`
-C) `git commits`
-D) `git show`
+- A) `git log`
+- B) `git history`
+- C) `git commits`
+- D) `git show`
 
 
 ---
@@ -230,10 +230,10 @@ D) `git show`
 
 What property makes an element a grid container?
 
-A) `grid: container`
-B) `grid-type: container`
-C) `layout: grid`
-D) `display: grid`
+- A) `grid: container`
+- B) `grid-type: container`
+- C) `layout: grid`
+- D) `display: grid`
 
 
 ---
@@ -243,10 +243,10 @@ D) `display: grid`
 
 What does the `echo $PATH` command display?
 
-A) The current directory path
-B) The list of directories searched for executable commands
-C) The file path of the echo command
-D) All environment variables
+- A) The current directory path
+- B) The list of directories searched for executable commands
+- C) The file path of the echo command
+- D) All environment variables
 
 
 ---
@@ -256,10 +256,10 @@ D) All environment variables
 
 What is a Burnup Chart?
 
-A) A chart showing work completed over time
-B) A chart showing team stress levels
-C) A financial report
-D) A risk assessment graph
+- A) A chart showing work completed over time
+- B) A chart showing team stress levels
+- C) A financial report
+- D) A risk assessment graph
 
 
 ---
@@ -269,10 +269,10 @@ D) A risk assessment graph
 
 Which command creates a commit with a message?
 
-A) `git commit message`
-B) `git save "message"`
-C) `git commit -m "message"`
-D) `git add -m "message"`
+- A) `git commit message`
+- B) `git save "message"`
+- C) `git commit -m "message"`
+- D) `git add -m "message"`
 
 
 ---
@@ -282,10 +282,10 @@ D) `git add -m "message"`
 
 Which attribute specifies where to open a linked document?
 
-A) `href`
-B) `link`
-C) `open`
-D) `target`
+- A) `href`
+- B) `link`
+- C) `open`
+- D) `target`
 
 
 ---
@@ -295,10 +295,10 @@ D) `target`
 
 What does `grid-template-columns: 1fr 2fr` create?
 
-A) One column
-B) Two columns where second is twice as wide
-C) Three columns
-D) A 1px gap between columns
+- A) One column
+- B) Two columns where second is twice as wide
+- C) Three columns
+- D) A 1px gap between columns
 
 
 ---
@@ -308,10 +308,10 @@ D) A 1px gap between columns
 
 What is the purpose of the Daily Standup?
 
-A) To report to management
-B) To write code together
-C) To synchronize activities and plan for the next 24 hours
-D) To assign new tasks
+- A) To report to management
+- B) To write code together
+- C) To synchronize activities and plan for the next 24 hours
+- D) To assign new tasks
 
 
 ---
@@ -321,10 +321,10 @@ D) To assign new tasks
 
 What are the four components of the CSS Box Model?
 
-A) Content, Padding, Border, Margin
-B) Header, Body, Footer, Sidebar
-C) Width, Height, Depth, Position
-D) Top, Right, Bottom, Left
+- A) Content, Padding, Border, Margin
+- B) Header, Body, Footer, Sidebar
+- C) Width, Height, Depth, Position
+- D) Top, Right, Bottom, Left
 
 
 ---
@@ -334,10 +334,10 @@ D) Top, Right, Bottom, Left
 
 What does `justify-content` control in Flexbox?
 
-A) The flex direction
-B) The order of items
-C) Alignment along the cross axis
-D) Alignment along the main axis
+- A) The flex direction
+- B) The order of items
+- C) Alignment along the cross axis
+- D) Alignment along the main axis
 
 
 ---
@@ -347,10 +347,10 @@ D) Alignment along the main axis
 
 What is the difference between `rem` and `em` units?
 
-A) They are identical
-B) `em` is for margins only
-C) `rem` is for fonts only
-D) `rem` is relative to root; `em` is relative to parent
+- A) They are identical
+- B) `em` is for margins only
+- C) `rem` is for fonts only
+- D) `rem` is relative to root; `em` is relative to parent
 
 
 ---
@@ -360,10 +360,10 @@ D) `rem` is relative to root; `em` is relative to parent
 
 Which symbol is used for output redirection to a file in Linux?
 
-A) `|`
-B) `<`
-C) `>`
-D) `&`
+- A) `|`
+- B) `<`
+- C) `>`
+- D) `&`
 
 
 ---
@@ -373,10 +373,10 @@ D) `&`
 
 What is the purpose of commit messages?
 
-A) To name the files changed
-B) To describe what changes were made and why
-C) To specify the branch name
-D) To list contributors
+- A) To name the files changed
+- B) To describe what changes were made and why
+- C) To specify the branch name
+- D) To list contributors
 
 
 ---
@@ -386,10 +386,10 @@ D) To list contributors
 
 What property makes an element a flex container?
 
-A) `display: flex`
-B) `flex: container`
-C) `flex-type: container`
-D) `container: flex`
+- A) `display: flex`
+- B) `flex: container`
+- C) `flex-type: container`
+- D) `container: flex`
 
 
 ---
@@ -399,10 +399,10 @@ D) `container: flex`
 
 What does HTML stand for?
 
-A) Hyper Text Markup Language
-B) High Tech Modern Language
-C) Hyper Transfer Markup Language
-D) Home Tool Markup Language
+- A) Hyper Text Markup Language
+- B) High Tech Modern Language
+- C) Hyper Transfer Markup Language
+- D) Home Tool Markup Language
 
 
 ---
@@ -412,10 +412,10 @@ D) Home Tool Markup Language
 
 What is Scrum?
 
-A) A programming language
-B) An Agile framework for managing work
-C) A testing methodology
-D) A database system
+- A) A programming language
+- B) An Agile framework for managing work
+- C) A testing methodology
+- D) A database system
 
 
 ---
@@ -425,10 +425,10 @@ D) A database system
 
 What is the Product Backlog?
 
-A) A list of completed features
-B) A bug tracking system
-C) A prioritized list of work items for the product
-D) A list of team members
+- A) A list of completed features
+- B) A bug tracking system
+- C) A prioritized list of work items for the product
+- D) A list of team members
 
 
 ---
@@ -438,10 +438,10 @@ D) A list of team members
 
 Which command shows configured remote repositories?
 
-A) `git remote`
-B) `git show remote`
-C) `git list remotes`
-D) `git remotes`
+- A) `git remote`
+- B) `git show remote`
+- C) `git list remotes`
+- D) `git remotes`
 
 
 ---
@@ -451,10 +451,10 @@ D) `git remotes`
 
 What does `opacity: 0.5` do?
 
-A) Makes element invisible
-B) Sets font weight to 50%
-C) Makes element 50% transparent
-D) Changes element size
+- A) Makes element invisible
+- B) Sets font weight to 50%
+- C) Makes element 50% transparent
+- D) Changes element size
 
 
 ---
@@ -464,10 +464,10 @@ D) Changes element size
 
 Which property removes an element from the normal flow?
 
-A) `float: left`
-B) `position: absolute`
-C) `display: none`
-D) `visibility: hidden`
+- A) `float: left`
+- B) `position: absolute`
+- C) `display: none`
+- D) `visibility: hidden`
 
 
 ---
@@ -477,10 +477,10 @@ D) `visibility: hidden`
 
 What element provides a caption for a `<fieldset>`?
 
-A) `<caption>`
-B) `<title>`
-C) `<legend>`
-D) `<label>`
+- A) `<caption>`
+- B) `<title>`
+- C) `<legend>`
+- D) `<label>`
 
 
 ---
@@ -490,10 +490,10 @@ D) `<label>`
 
 Why should you use ARIA roles?
 
-A) To add animation
-B) To improve SEO
-C) To increase page speed
-D) To enhance accessibility for screen readers
+- A) To add animation
+- B) To improve SEO
+- C) To increase page speed
+- D) To enhance accessibility for screen readers
 
 
 ---
@@ -503,10 +503,10 @@ D) To enhance accessibility for screen readers
 
 What is Backlog Refinement?
 
-A) Reviewing and preparing backlog items for future Sprints
-B) Deleting old items
-C) Creating the backlog
-D) Sorting by priority
+- A) Reviewing and preparing backlog items for future Sprints
+- B) Deleting old items
+- C) Creating the backlog
+- D) Sorting by priority
 
 
 ---
@@ -516,10 +516,10 @@ D) Sorting by priority
 
 What is localStorage used for?
 
-A) Server-side storage
-B) Database storage
-C) Client-side storage that persists across sessions
-D) Cache storage
+- A) Server-side storage
+- B) Database storage
+- C) Client-side storage that persists across sessions
+- D) Cache storage
 
 
 ---
@@ -529,10 +529,10 @@ D) Cache storage
 
 What is the typical Sprint length?
 
-A) 1 day
-B) 6 months
-C) 1-4 weeks
-D) 1 year
+- A) 1 day
+- B) 6 months
+- C) 1-4 weeks
+- D) 1 year
 
 
 ---
@@ -542,10 +542,10 @@ D) 1 year
 
 What is velocity in Scrum?
 
-A) The speed of deployment
-B) How fast the team codes
-C) The number of meetings per Sprint
-D) The amount of work a team completes in a Sprint
+- A) The speed of deployment
+- B) How fast the team codes
+- C) The number of meetings per Sprint
+- D) The amount of work a team completes in a Sprint
 
 
 ---
@@ -555,10 +555,10 @@ D) The amount of work a team completes in a Sprint
 
 What is a block-level element?
 
-A) An element that floats
-B) An element that starts on a new line and takes full width
-C) An element inside a block
-D) An element with borders
+- A) An element that floats
+- B) An element that starts on a new line and takes full width
+- C) An element inside a block
+- D) An element with borders
 
 
 ---
@@ -568,10 +568,10 @@ D) An element with borders
 
 In the shorthand `margin: 10px 20px 30px`, what is applied to the right side?
 
-A) 10px
-B) 30px
-C) 20px
-D) 0px
+- A) 10px
+- B) 30px
+- C) 20px
+- D) 0px
 
 
 ---
@@ -581,10 +581,10 @@ D) 0px
 
 What are environment variables used for?
 
-A) Configure system and user settings for processes
-B) Storing user passwords
-C) Managing file permissions
-D) Compiling programs
+- A) Configure system and user settings for processes
+- B) Storing user passwords
+- C) Managing file permissions
+- D) Compiling programs
 
 
 ---
@@ -594,10 +594,10 @@ D) Compiling programs
 
 What does the `alt` attribute provide for images?
 
-A) Image caption
-B) Image title
-C) Image source
-D) Alternative text for accessibility
+- A) Image caption
+- B) Image title
+- C) Image source
+- D) Alternative text for accessibility
 
 
 ---
@@ -607,10 +607,10 @@ D) Alternative text for accessibility
 
 What is the Sprint Goal?
 
-A) A short statement describing what the Sprint aims to achieve
-B) The total number of stories
-C) The deadline date
-D) The velocity target
+- A) A short statement describing what the Sprint aims to achieve
+- B) The total number of stories
+- C) The deadline date
+- D) The velocity target
 
 
 ---
@@ -620,10 +620,10 @@ D) The velocity target
 
 What is HEAD in Git?
 
-A) The first commit
-B) The last branch created
-C) A pointer to the current branch/commit
-D) The main branch only
+- A) The first commit
+- B) The last branch created
+- C) A pointer to the current branch/commit
+- D) The main branch only
 
 
 ---
@@ -633,10 +633,10 @@ D) The main branch only
 
 What is the purpose of z-index?
 
-A) Setting element zoom level
-B) Setting horizontal position
-C) Defining element size
-D) Controlling stacking order of positioned elements
+- A) Setting element zoom level
+- B) Setting horizontal position
+- C) Defining element size
+- D) Controlling stacking order of positioned elements
 
 
 ---
@@ -646,10 +646,10 @@ D) Controlling stacking order of positioned elements
 
 What is the difference between `<section>` and `<div>`?
 
-A) They are identical
-B) `<section>` is semantic and represents a thematic grouping
-C) `<div>` is newer
-D) `<section>` is for forms only
+- A) They are identical
+- B) `<section>` is semantic and represents a thematic grouping
+- C) `<div>` is newer
+- D) `<section>` is for forms only
 
 
 ---
@@ -659,10 +659,10 @@ D) `<section>` is for forms only
 
 What is the Scrum Master's primary responsibility?
 
-A) Writing code
-B) Managing the product backlog
-C) Removing impediments and facilitating Scrum
-D) Approving releases
+- A) Writing code
+- B) Managing the product backlog
+- C) Removing impediments and facilitating Scrum
+- D) Approving releases
 
 
 ---
@@ -672,10 +672,10 @@ D) Approving releases
 
 What is the correct syntax for a class selector?
 
-A) `#classname`
-B) `.classname`
-C) `*classname`
-D) `classname`
+- A) `#classname`
+- B) `.classname`
+- C) `*classname`
+- D) `classname`
 
 
 ---
@@ -685,10 +685,10 @@ D) `classname`
 
 Which element is best for a blog post?
 
-A) `<div>`
-B) `<section>`
-C) `<article>`
-D) `<aside>`
+- A) `<div>`
+- B) `<section>`
+- C) `<article>`
+- D) `<aside>`
 
 
 ---
@@ -698,10 +698,10 @@ D) `<aside>`
 
 What is a User Story?
 
-A) A short description of a feature from the user's perspective
-B) A technical specification
-C) A bug report
-D) A test case
+- A) A short description of a feature from the user's perspective
+- B) A technical specification
+- C) A bug report
+- D) A test case
 
 
 ---
@@ -711,10 +711,10 @@ D) A test case
 
 Which command merges another branch into the current branch?
 
-A) `git combine branch-name`
-B) `git merge branch-name`
-C) `git join branch-name`
-D) `git add branch-name`
+- A) `git combine branch-name`
+- B) `git merge branch-name`
+- C) `git join branch-name`
+- D) `git add branch-name`
 
 
 ---
@@ -724,10 +724,10 @@ D) `git add branch-name`
 
 What element is used for audio playback?
 
-A) `<sound>`
-B) `<audio>`
-C) `<media>`
-D) `<music>`
+- A) `<sound>`
+- B) `<audio>`
+- C) `<media>`
+- D) `<music>`
 
 
 ---
@@ -737,10 +737,10 @@ D) `<music>`
 
 Which command searches for patterns in file contents?
 
-A) `find`
-B) `locate`
-C) `grep`
-D) `search`
+- A) `find`
+- B) `locate`
+- C) `grep`
+- D) `search`
 
 
 ---
@@ -750,10 +750,10 @@ D) `search`
 
 Which command shows disk space usage?
 
-A) `du`
-B) `disk`
-C) `space`
-D) `df`
+- A) `du`
+- B) `disk`
+- C) `space`
+- D) `df`
 
 
 ---
@@ -763,10 +763,10 @@ D) `df`
 
 What is Git?
 
-A) A distributed version control system
-B) A programming language
-C) A database
-D) A web browser
+- A) A distributed version control system
+- B) A programming language
+- C) A database
+- D) A web browser
 
 
 ---
@@ -776,10 +776,10 @@ D) A web browser
 
 What is the Increment in Scrum?
 
-A) The amount of time added to a Sprint
-B) A version number
-C) The sum of all completed backlog items that meet the Definition of Done
-D) The team size increase
+- A) The amount of time added to a Sprint
+- B) A version number
+- C) The sum of all completed backlog items that meet the Definition of Done
+- D) The team size increase
 
 
 ---
@@ -789,10 +789,10 @@ D) The team size increase
 
 What does `git stash` do?
 
-A) Deletes changes permanently
-B) Creates a new branch
-C) Commits all changes
-D) Temporarily saves uncommitted changes
+- A) Deletes changes permanently
+- B) Creates a new branch
+- C) Commits all changes
+- D) Temporarily saves uncommitted changes
 
 
 ---
@@ -802,10 +802,10 @@ D) Temporarily saves uncommitted changes
 
 What does `chmod 755` do?
 
-A) Deletes a file
-B) Changes file ownership
-C) Sets read, write, execute for owner; read, execute for group and others
-D) Hides a file
+- A) Deletes a file
+- B) Changes file ownership
+- C) Sets read, write, execute for owner; read, execute for group and others
+- D) Hides a file
 
 
 ---
@@ -815,10 +815,10 @@ D) Hides a file
 
 Which command deletes a local branch?
 
-A) `git branch -d branch-name`
-B) `git remove branch-name`
-C) `git delete branch-name`
-D) `git drop branch-name`
+- A) `git branch -d branch-name`
+- B) `git remove branch-name`
+- C) `git delete branch-name`
+- D) `git drop branch-name`
 
 
 ---
@@ -828,10 +828,10 @@ D) `git drop branch-name`
 
 What does `>>` do in command line?
 
-A) Appends output to a file
-B) Overwrites a file
-C) Reads from a file
-D) Creates a new directory
+- A) Appends output to a file
+- B) Overwrites a file
+- C) Reads from a file
+- D) Creates a new directory
 
 
 ---
@@ -841,10 +841,10 @@ D) Creates a new directory
 
 What does `position: fixed` do?
 
-A) Positions element relative to parent
-B) Fixes the element size
-C) Positions element relative to the viewport, stays in place when scrolling
-D) Prevents element movement
+- A) Positions element relative to parent
+- B) Fixes the element size
+- C) Positions element relative to the viewport, stays in place when scrolling
+- D) Prevents element movement
 
 
 ---
@@ -854,10 +854,10 @@ D) Prevents element movement
 
 What is a remote repository?
 
-A) A backup file
-B) A hidden repository
-C) A temporary repository
-D) A version of the repository hosted on a server
+- A) A backup file
+- B) A hidden repository
+- C) A temporary repository
+- D) A version of the repository hosted on a server
 
 
 ---
@@ -867,10 +867,10 @@ D) A version of the repository hosted on a server
 
 How do you use CSS custom properties (variables)?
 
-A) `var(--variable-name)`
-B) `$variable-name`
-C) `@variable-name`
-D) `#variable-name`
+- A) `var(--variable-name)`
+- B) `$variable-name`
+- C) `@variable-name`
+- D) `#variable-name`
 
 
 ---
@@ -880,10 +880,10 @@ D) `#variable-name`
 
 What is reviewed during Sprint Review?
 
-A) Team performance
-B) Individual salaries
-C) The completed work and product feedback from stakeholders
-D) Code quality only
+- A) Team performance
+- B) Individual salaries
+- C) The completed work and product feedback from stakeholders
+- D) Code quality only
 
 
 ---
@@ -893,10 +893,10 @@ D) Code quality only
 
 What does a Burndown Chart show?
 
-A) Calories burned
-B) Team energy levels
-C) Budget spent
-D) Work remaining versus time in a Sprint
+- A) Calories burned
+- B) Team energy levels
+- C) Budget spent
+- D) Work remaining versus time in a Sprint
 
 
 ---
@@ -906,10 +906,10 @@ D) Work remaining versus time in a Sprint
 
 What is mobile-first design?
 
-A) Designing for mobile first, then adding styles for larger screens
-B) Designing for desktop first
-C) Only designing for mobile
-D) Using mobile-only frameworks
+- A) Designing for mobile first, then adding styles for larger screens
+- B) Designing for desktop first
+- C) Only designing for mobile
+- D) Using mobile-only frameworks
 
 
 ---
@@ -919,10 +919,10 @@ D) Using mobile-only frameworks
 
 What is a Story Point?
 
-A) A relative measure of effort, complexity, and uncertainty
-B) The exact hours to complete a story
-C) A score for user story quality
-D) The number of team members assigned
+- A) A relative measure of effort, complexity, and uncertainty
+- B) The exact hours to complete a story
+- C) A score for user story quality
+- D) The number of team members assigned
 
 
 ---
@@ -932,10 +932,10 @@ D) The number of team members assigned
 
 What is the purpose of the staging area?
 
-A) To store backups
-B) To run tests
-C) To deploy code
-D) To prepare changes for the next commit
+- A) To store backups
+- B) To run tests
+- C) To deploy code
+- D) To prepare changes for the next commit
 
 
 ---
@@ -945,10 +945,10 @@ D) To prepare changes for the next commit
 
 Which element is an inline element?
 
-A) `<div>`
-B) `<p>`
-C) `<span>`
-D) `<section>`
+- A) `<div>`
+- B) `<p>`
+- C) `<span>`
+- D) `<section>`
 
 
 ---
@@ -958,10 +958,10 @@ D) `<section>`
 
 What is a shebang line?
 
-A) An error message
-B) `#!/bin/bash` indicating which interpreter to use
-C) A comment
-D) A variable declaration
+- A) An error message
+- B) `#!/bin/bash` indicating which interpreter to use
+- C) A comment
+- D) A variable declaration
 
 
 ---
@@ -971,10 +971,10 @@ D) A variable declaration
 
 Which command copies files?
 
-A) `cp`
-B) `mv`
-C) `copy`
-D) `duplicate`
+- A) `cp`
+- B) `mv`
+- C) `copy`
+- D) `duplicate`
 
 
 ---
@@ -984,10 +984,10 @@ D) `duplicate`
 
 Which command creates a new branch?
 
-A) `git branch new-branch`
-B) `git create new-branch`
-C) `git new new-branch`
-D) `git add-branch new-branch`
+- A) `git branch new-branch`
+- B) `git create new-branch`
+- C) `git new new-branch`
+- D) `git add-branch new-branch`
 
 
 ---
@@ -997,10 +997,10 @@ D) `git add-branch new-branch`
 
 What is a keyframe in CSS animations?
 
-A) A frame of video
-B) A keyboard shortcut
-C) A frame around content
-D) A point in animation defining property values
+- A) A frame of video
+- B) A keyboard shortcut
+- C) A frame around content
+- D) A point in animation defining property values
 
 
 ---
@@ -1010,10 +1010,10 @@ D) A point in animation defining property values
 
 What element creates a dropdown selection?
 
-A) `<dropdown>`
-B) `<select>`
-C) `<option>`
-D) `<choice>`
+- A) `<dropdown>`
+- B) `<select>`
+- C) `<option>`
+- D) `<choice>`
 
 
 ---
@@ -1023,10 +1023,10 @@ D) `<choice>`
 
 What does `git reset HEAD file.txt` do?
 
-A) Deletes the file
-B) Reverts to original file
-C) Creates a new commit
-D) Unstages the file while keeping changes in working directory
+- A) Deletes the file
+- B) Reverts to original file
+- C) Creates a new commit
+- D) Unstages the file while keeping changes in working directory
 
 
 ---
@@ -1036,10 +1036,10 @@ D) Unstages the file while keeping changes in working directory
 
 What is the difference between padding and margin?
 
-A) Padding is inside the border; margin is outside
-B) They are the same
-C) Margin is for text only
-D) Padding is for images only
+- A) Padding is inside the border; margin is outside
+- B) They are the same
+- C) Margin is for text only
+- D) Padding is for images only
 
 
 ---
@@ -1049,10 +1049,10 @@ D) Padding is for images only
 
 What is the root element of an HTML document?
 
-A) `<head>`
-B) `<body>`
-C) `<html>`
-D) `<!DOCTYPE>`
+- A) `<head>`
+- B) `<body>`
+- C) `<html>`
+- D) `<!DOCTYPE>`
 
 
 ---
@@ -1062,10 +1062,10 @@ D) `<!DOCTYPE>`
 
 What input type validates email format?
 
-A) `type="text"`
-B) `type="email"`
-C) `type="mail"`
-D) `type="address"`
+- A) `type="text"`
+- B) `type="email"`
+- C) `type="mail"`
+- D) `type="address"`
 
 
 ---
@@ -1075,10 +1075,10 @@ D) `type="address"`
 
 What does CSS stand for?
 
-A) Computer Style Sheets
-B) Cascading Style Sheets
-C) Creative Style System
-D) Coded Style Syntax
+- A) Computer Style Sheets
+- B) Cascading Style Sheets
+- C) Creative Style System
+- D) Coded Style Syntax
 
 
 ---
@@ -1088,10 +1088,10 @@ D) Coded Style Syntax
 
 What is the purpose of the `<main>` element?
 
-A) To create the footer
-B) To contain the dominant content of the document
-C) To create navigation
-D) To define the header
+- A) To create the footer
+- B) To contain the dominant content of the document
+- C) To create navigation
+- D) To define the header
 
 
 ---
@@ -1101,10 +1101,10 @@ D) To define the header
 
 What is the purpose of the `<textarea>` element?
 
-A) To display text
-B) To create a multi-line text input
-C) To format text
-D) To create a text box
+- A) To display text
+- B) To create a multi-line text input
+- C) To format text
+- D) To create a text box
 
 
 ---
@@ -1114,10 +1114,10 @@ D) To create a text box
 
 What is an Epic?
 
-A) A small task
-B) A bug fix
-C) A large body of work that can be broken into smaller stories
-D) A Sprint
+- A) A small task
+- B) A bug fix
+- C) A large body of work that can be broken into smaller stories
+- D) A Sprint
 
 
 ---
@@ -1127,10 +1127,10 @@ D) A Sprint
 
 Which element is used for navigation links?
 
-A) `<links>`
-B) `<nav>`
-C) `<navigation>`
-D) `<menu>`
+- A) `<links>`
+- B) `<nav>`
+- C) `<navigation>`
+- D) `<menu>`
 
 
 ---
@@ -1140,10 +1140,10 @@ D) `<menu>`
 
 What is the difference between localStorage and sessionStorage?
 
-A) They are identical
-B) `sessionStorage` is faster
-C) `localStorage` is for images only
-D) `localStorage` persists; `sessionStorage` clears when tab closes
+- A) They are identical
+- B) `sessionStorage` is faster
+- C) `localStorage` is for images only
+- D) `localStorage` persists; `sessionStorage` clears when tab closes
 
 
 ---
@@ -1153,10 +1153,10 @@ D) `localStorage` persists; `sessionStorage` clears when tab closes
 
 What does `git status` show?
 
-A) The state of the working directory and staging area
-B) Commit history
-C) Remote repository URL
-D) Branch list
+- A) The state of the working directory and staging area
+- B) Commit history
+- C) Remote repository URL
+- D) Branch list
 
 
 ---
@@ -1166,10 +1166,10 @@ D) Branch list
 
 What is Kanban?
 
-A) A programming language
-B) A testing framework
-C) A database type
-D) A visual method for managing work flow
+- A) A programming language
+- B) A testing framework
+- C) A database type
+- D) A visual method for managing work flow
 
 
 ---
@@ -1179,10 +1179,10 @@ D) A visual method for managing work flow
 
 What element contains form controls?
 
-A) `<form>`
-B) `<input>`
-C) `<controls>`
-D) `<formset>`
+- A) `<form>`
+- B) `<input>`
+- C) `<controls>`
+- D) `<formset>`
 
 
 ---
@@ -1192,10 +1192,10 @@ D) `<formset>`
 
 Which property controls animation timing?
 
-A) `transition-duration`
-B) `animation-speed`
-C) `animation-time`
-D) `timing`
+- A) `transition-duration`
+- B) `animation-speed`
+- C) `animation-time`
+- D) `timing`
 
 
 ---
@@ -1205,10 +1205,10 @@ D) `timing`
 
 What is Jira commonly used for?
 
-A) Writing code
-B) Designing graphics
-C) Tracking Agile projects, backlogs, and sprints
-D) Database management
+- A) Writing code
+- B) Designing graphics
+- C) Tracking Agile projects, backlogs, and sprints
+- D) Database management
 
 
 ---
@@ -1218,10 +1218,10 @@ D) Database management
 
 Which command displays the current user?
 
-A) `user`
-B) `currentuser`
-C) `me`
-D) `whoami`
+- A) `user`
+- B) `currentuser`
+- C) `me`
+- D) `whoami`
 
 
 ---
@@ -1231,10 +1231,10 @@ D) `whoami`
 
 How long should a Daily Standup last?
 
-A) 1 hour
-B) 30 minutes
-C) 15 minutes or less
-D) As long as needed
+- A) 1 hour
+- B) 30 minutes
+- C) 15 minutes or less
+- D) As long as needed
 
 
 ---
@@ -1244,10 +1244,10 @@ D) As long as needed
 
 What does `git diff` show?
 
-A) File sizes
-B) Changes between commits, working directory, and staging area
-C) Branch differences
-D) File permissions
+- A) File sizes
+- B) Changes between commits, working directory, and staging area
+- C) Branch differences
+- D) File permissions
 
 
 ---
@@ -1257,10 +1257,10 @@ D) File permissions
 
 What is Planning Poker?
 
-A) A consensus-based estimation technique using cards
-B) A card game
-C) A project planning tool
-D) A Scrum ceremony
+- A) A consensus-based estimation technique using cards
+- B) A card game
+- C) A project planning tool
+- D) A Scrum ceremony
 
 
 ---
@@ -1270,10 +1270,10 @@ D) A Scrum ceremony
 
 What values are commonly used in Story Point estimation?
 
-A) 1-10 linear scale
-B) Fibonacci sequence (1, 2, 3, 5, 8, 13...)
-C) Powers of 2
-D) Letters A-F
+- A) 1-10 linear scale
+- B) Fibonacci sequence (1, 2, 3, 5, 8, 13...)
+- C) Powers of 2
+- D) Letters A-F
 
 
 ---
@@ -1283,10 +1283,10 @@ D) Letters A-F
 
 When does a merge conflict occur?
 
-A) When branches have different names
-B) When pushing to remote
-C) When creating a branch
-D) When changes in different branches overlap and cannot be automatically merged
+- A) When branches have different names
+- B) When pushing to remote
+- C) When creating a branch
+- D) When changes in different branches overlap and cannot be automatically merged
 
 
 ---
@@ -1296,10 +1296,10 @@ D) When changes in different branches overlap and cannot be automatically merged
 
 What is a CSS gradient?
 
-A) A single color
-B) A type of font
-C) A border style
-D) A smooth transition between two or more colors
+- A) A single color
+- B) A type of font
+- C) A border style
+- D) A smooth transition between two or more colors
 
 
 ---
@@ -1309,10 +1309,10 @@ D) A smooth transition between two or more colors
 
 What is the root directory in Linux?
 
-A) `/home`
-B) `/`
-C) `/root`
-D) `C:\`
+- A) `/home`
+- B) `/`
+- C) `/root`
+- D) `C:\`
 
 
 ---
@@ -1322,10 +1322,10 @@ D) `C:\`
 
 What does the placeholder attribute do?
 
-A) Shows hint text that disappears when typing
-B) Sets the default value
-C) Labels the input
-D) Validates the input
+- A) Shows hint text that disappears when typing
+- B) Sets the default value
+- C) Labels the input
+- D) Validates the input
 
 
 ---
@@ -1335,10 +1335,10 @@ D) Validates the input
 
 Which command displays manual pages?
 
-A) `help`
-B) `man`
-C) `info`
-D) `manual`
+- A) `help`
+- B) `man`
+- C) `info`
+- D) `manual`
 
 
 ---
@@ -1348,10 +1348,10 @@ D) `manual`
 
 What is the Sprint Backlog?
 
-A) All product items
-B) Completed items
-C) Items selected for the current Sprint plus a plan for delivery
-D) Bug list
+- A) All product items
+- B) Completed items
+- C) Items selected for the current Sprint plus a plan for delivery
+- D) Bug list
 
 
 ---
@@ -1361,10 +1361,10 @@ D) Bug list
 
 How many grid columns does Bootstrap use by default?
 
-A) 10
-B) 16
-C) 8
-D) 12
+- A) 10
+- B) 16
+- C) 8
+- D) 12
 
 
 ---
@@ -1374,10 +1374,10 @@ D) 12
 
 What is the DOCTYPE declaration for HTML5?
 
-A) `<!DOCTYPE HTML5>`
-B) `<!DOCTYPE html>`
-C) `<DOCTYPE html>`
-D) `<?DOCTYPE html>`
+- A) `<!DOCTYPE HTML5>`
+- B) `<!DOCTYPE html>`
+- C) `<DOCTYPE html>`
+- D) `<?DOCTYPE html>`
 
 
 ---
@@ -1387,10 +1387,10 @@ D) `<?DOCTYPE html>`
 
 What does the pipe operator `|` do?
 
-A) Pass output of one command as input to another
-B) Saves output to a file
-C) Runs commands in background
-D) Creates a new file
+- A) Pass output of one command as input to another
+- B) Saves output to a file
+- C) Runs commands in background
+- D) Creates a new file
 
 
 ---
@@ -1400,10 +1400,10 @@ D) Creates a new file
 
 What does `box-sizing: border-box` do?
 
-A) Adds a box around content
-B) Creates a border box
-C) Sizes the box automatically
-D) Includes padding and border in the element's total width/height
+- A) Adds a box around content
+- B) Creates a border box
+- C) Sizes the box automatically
+- D) Includes padding and border in the element's total width/height
 
 
 ---
@@ -1413,10 +1413,10 @@ D) Includes padding and border in the element's total width/height
 
 What does `git clone` do?
 
-A) Copies a remote repository to local machine
-B) Creates an empty repository
-C) Duplicates a branch
-D) Copies files only
+- A) Copies a remote repository to local machine
+- B) Creates an empty repository
+- C) Duplicates a branch
+- D) Copies files only
 
 
 ---
@@ -1426,10 +1426,10 @@ D) Copies files only
 
 What is the format for a User Story?
 
-A) Bug report format
-B) "As a [user], I want [feature], so that [benefit]"
-C) Technical specification
-D) Test case format
+- A) Bug report format
+- B) "As a [user], I want [feature], so that [benefit]"
+- C) Technical specification
+- D) Test case format
 
 
 ---
@@ -1439,10 +1439,10 @@ D) Test case format
 
 What is the purpose of .gitignore?
 
-A) To ignore Git commands
-B) To hide Git files
-C) To ignore merge conflicts
-D) To specify files that Git should not track
+- A) To ignore Git commands
+- B) To hide Git files
+- C) To ignore merge conflicts
+- D) To specify files that Git should not track
 
 
 ---
@@ -1452,10 +1452,10 @@ D) To specify files that Git should not track
 
 What does `:hover` do?
 
-A) Creates animation
-B) Highlights text
-C) Adds tooltips
-D) Applies styles when mouse is over the element
+- A) Creates animation
+- B) Highlights text
+- C) Adds tooltips
+- D) Applies styles when mouse is over the element
 
 
 ---
@@ -1465,10 +1465,10 @@ D) Applies styles when mouse is over the element
 
 What pattern ignores all .log files?
 
-A) `*.log`
-B) `.log`
-C) `log.*`
-D) `*.LOG`
+- A) `*.log`
+- B) `.log`
+- C) `log.*`
+- D) `*.LOG`
 
 
 ---
@@ -1478,10 +1478,10 @@ D) `*.LOG`
 
 What does `cat file1 file2 > file3` do?
 
-A) Concatenates two files and saves to a new file
-B) Compares files
-C) Deletes files
-D) Renames files
+- A) Concatenates two files and saves to a new file
+- B) Compares files
+- C) Deletes files
+- D) Renames files
 
 
 ---
@@ -1491,10 +1491,10 @@ D) Renames files
 
 Which command shows a specific commit's details?
 
-A) `git log commit-hash`
-B) `git view commit-hash`
-C) `git show commit-hash`
-D) `git details commit-hash`
+- A) `git log commit-hash`
+- B) `git view commit-hash`
+- C) `git show commit-hash`
+- D) `git details commit-hash`
 
 
 ---
@@ -1504,10 +1504,10 @@ D) `git details commit-hash`
 
 Which command recursively removes a directory?
 
-A) `rm`
-B) `rm -r`
-C) `delete`
-D) `rmdir`
+- A) `rm`
+- B) `rm -r`
+- C) `delete`
+- D) `rmdir`
 
 
 ---
@@ -1517,10 +1517,10 @@ D) `rmdir`
 
 What is CSS specificity?
 
-A) How fast CSS loads
-B) CSS file size
-C) Number of CSS properties
-D) How browsers resolve conflicting CSS rules
+- A) How fast CSS loads
+- B) CSS file size
+- C) Number of CSS properties
+- D) How browsers resolve conflicting CSS rules
 
 
 ---
@@ -1530,10 +1530,10 @@ D) How browsers resolve conflicting CSS rules
 
 Which selector has the highest specificity?
 
-A) Class selector
-B) Element selector
-C) ID selector
-D) Universal selector
+- A) Class selector
+- B) Element selector
+- C) ID selector
+- D) Universal selector
 
 
 ---
@@ -1543,10 +1543,10 @@ D) Universal selector
 
 What is Flexbox primarily used for?
 
-A) Two-dimensional layout
-B) One-dimensional layout (row or column)
-C) Text formatting
-D) Color schemes
+- A) Two-dimensional layout
+- B) One-dimensional layout (row or column)
+- C) Text formatting
+- D) Color schemes
 
 
 ---
@@ -1556,10 +1556,10 @@ D) Color schemes
 
 What are the three main states a file can be in with Git?
 
-A) New, Old, Archived
-B) Modified, Staged, Committed
-C) Created, Updated, Deleted
-D) Draft, Review, Final
+- A) New, Old, Archived
+- B) Modified, Staged, Committed
+- C) Created, Updated, Deleted
+- D) Draft, Review, Final
 
 
 ---
@@ -1569,10 +1569,10 @@ D) Draft, Review, Final
 
 Which command terminates a process?
 
-A) `kill`
-B) `stop`
-C) `end`
-D) `terminate`
+- A) `kill`
+- B) `stop`
+- C) `end`
+- D) `terminate`
 
 
 ---
@@ -1582,10 +1582,10 @@ D) `terminate`
 
 What property adds shadow to elements?
 
-A) `shadow`
-B) `element-shadow`
-C) `drop-shadow`
-D) `box-shadow`
+- A) `shadow`
+- B) `element-shadow`
+- C) `drop-shadow`
+- D) `box-shadow`
 
 
 ---
@@ -1595,10 +1595,10 @@ D) `box-shadow`
 
 What is a pull request?
 
-A) A request to merge changes from one branch to another for review
-B) Downloading code
-C) Pulling remote changes
-D) Requesting access to repository
+- A) A request to merge changes from one branch to another for review
+- B) Downloading code
+- C) Pulling remote changes
+- D) Requesting access to repository
 
 
 ---
@@ -1608,10 +1608,10 @@ D) Requesting access to repository
 
 What does `git branch -a` show?
 
-A) Active branches only
-B) Local branches only
-C) All local and remote-tracking branches
-D) Archived branches
+- A) Active branches only
+- B) Local branches only
+- C) All local and remote-tracking branches
+- D) Archived branches
 
 
 ---
@@ -1621,10 +1621,10 @@ D) Archived branches
 
 Who decides how to do the work in a Sprint?
 
-A) Product Owner
-B) Scrum Master
-C) The Development Team
-D) Stakeholders
+- A) Product Owner
+- B) Scrum Master
+- C) The Development Team
+- D) Stakeholders
 
 
 ---
@@ -1634,10 +1634,10 @@ D) Stakeholders
 
 What is a shell script?
 
-A) A compiled program
-B) A system file
-C) A configuration file
-D) A text file containing a sequence of commands
+- A) A compiled program
+- B) A system file
+- C) A configuration file
+- D) A text file containing a sequence of commands
 
 
 ---
@@ -1647,10 +1647,10 @@ D) A text file containing a sequence of commands
 
 What element creates a hyperlink?
 
-A) `<link>`
-B) `<a>`
-C) `<href>`
-D) `<url>`
+- A) `<link>`
+- B) `<a>`
+- C) `<href>`
+- D) `<url>`
 
 
 ---
@@ -1660,10 +1660,10 @@ D) `<url>`
 
 What is the purpose of the `<header>` element?
 
-A) To contain scripts
-B) To contain introductory content or navigation
-C) To define metadata
-D) To create the page title
+- A) To contain scripts
+- B) To contain introductory content or navigation
+- C) To define metadata
+- D) To create the page title
 
 
 ---
@@ -1673,10 +1673,10 @@ D) To create the page title
 
 Which command creates an empty file?
 
-A) `create file.txt`
-B) `new file.txt`
-C) `touch file.txt`
-D) `make file.txt`
+- A) `create file.txt`
+- B) `new file.txt`
+- C) `touch file.txt`
+- D) `make file.txt`
 
 
 ---
@@ -1686,10 +1686,10 @@ D) `make file.txt`
 
 What happens during Sprint Planning?
 
-A) Code review
-B) The team selects backlog items and creates a plan for the Sprint
-C) Product demonstration
-D) Process improvement discussion
+- A) Code review
+- B) The team selects backlog items and creates a plan for the Sprint
+- C) Product demonstration
+- D) Process improvement discussion
 
 
 ---
@@ -1699,10 +1699,10 @@ D) Process improvement discussion
 
 What element embeds video content?
 
-A) `<media>`
-B) `<movie>`
-C) `<vid>`
-D) `<video>`
+- A) `<media>`
+- B) `<movie>`
+- C) `<vid>`
+- D) `<video>`
 
 
 ---
@@ -1712,10 +1712,10 @@ D) `<video>`
 
 Which command discards changes in working directory?
 
-A) `git restore file.txt`
-B) `git discard file.txt`
-C) `git reset file.txt`
-D) `git delete file.txt`
+- A) `git restore file.txt`
+- B) `git discard file.txt`
+- C) `git reset file.txt`
+- D) `git delete file.txt`
 
 
 ---
@@ -1725,10 +1725,10 @@ D) `git delete file.txt`
 
 What attribute makes a form field required?
 
-A) `mandatory`
-B) `required`
-C) `validate`
-D) `must`
+- A) `mandatory`
+- B) `required`
+- C) `validate`
+- D) `must`
 
 
 ---
@@ -1738,10 +1738,10 @@ D) `must`
 
 What does `git checkout -b feature` do?
 
-A) Deletes the feature branch
-B) Merges feature branch
-C) Lists all feature branches
-D) Creates and switches to a new branch named "feature"
+- A) Deletes the feature branch
+- B) Merges feature branch
+- C) Lists all feature branches
+- D) Creates and switches to a new branch named "feature"
 
 
 ---
@@ -1751,10 +1751,10 @@ D) Creates and switches to a new branch named "feature"
 
 What are CSS custom properties?
 
-A) Browser settings
-B) Reusable values defined with `--` prefix
-C) User preferences
-D) Animation properties
+- A) Browser settings
+- B) Reusable values defined with `--` prefix
+- C) User preferences
+- D) Animation properties
 
 
 ---
@@ -1764,10 +1764,10 @@ D) Animation properties
 
 What does `align-items` control in Flexbox?
 
-A) Main axis alignment
-B) Alignment along the cross axis
-C) Item order
-D) Item spacing
+- A) Main axis alignment
+- B) Alignment along the cross axis
+- C) Item order
+- D) Item spacing
 
 
 ---
@@ -1777,10 +1777,10 @@ D) Item spacing
 
 What is the primary measure of progress in Agile?
 
-A) Lines of code
-B) Documents produced
-C) Meetings held
-D) Working software
+- A) Lines of code
+- B) Documents produced
+- C) Meetings held
+- D) Working software
 
 
 ---
@@ -1790,10 +1790,10 @@ D) Working software
 
 What are the three roles in Scrum?
 
-A) Manager, Developer, Tester
-B) Product Owner, Scrum Master, Development Team
-C) CEO, CTO, Developer
-D) Designer, Developer, QA
+- A) Manager, Developer, Tester
+- B) Product Owner, Scrum Master, Development Team
+- C) CEO, CTO, Developer
+- D) Designer, Developer, QA
 
 
 ---
@@ -1803,10 +1803,10 @@ D) Designer, Developer, QA
 
 What is the Definition of Done?
 
-A) A shared understanding of what complete means for a backlog item
-B) When a Sprint ends
-C) The project deadline
-D) The final release
+- A) A shared understanding of what complete means for a backlog item
+- B) When a Sprint ends
+- C) The project deadline
+- D) The final release
 
 
 ---
@@ -1816,10 +1816,10 @@ D) The final release
 
 Which command shows the last 10 lines of a file?
 
-A) `head`
-B) `last`
-C) `end`
-D) `tail`
+- A) `head`
+- B) `last`
+- C) `end`
+- D) `tail`
 
 
 ---
@@ -1829,10 +1829,10 @@ D) `tail`
 
 Which command stages all changes for commit?
 
-A) `git add .`
-B) `git stage .`
-C) `git commit -a`
-D) `git save .`
+- A) `git add .`
+- B) `git stage .`
+- C) `git commit -a`
+- D) `git save .`
 
 
 ---
@@ -1842,10 +1842,10 @@ D) `git save .`
 
 What attribute specifies image dimensions?
 
-A) `size`
-B) `dimension`
-C) `scale`
-D) `width` and `height`
+- A) `size`
+- B) `dimension`
+- C) `scale`
+- D) `width` and `height`
 
 
 ---
@@ -1855,10 +1855,10 @@ D) `width` and `height`
 
 What does `mkdir -p` do?
 
-A) Creates a private directory
-B) Creates a protected directory
-C) Creates parent directories as needed
-D) Creates a public directory
+- A) Creates a private directory
+- B) Creates a protected directory
+- C) Creates parent directories as needed
+- D) Creates a public directory
 
 
 ---
@@ -1868,10 +1868,10 @@ D) Creates a public directory
 
 What does `ls -la` show?
 
-A) Large files only
-B) Linked files only
-C) Long listing format including hidden files
-D) Latest files only
+- A) Large files only
+- B) Linked files only
+- C) Long listing format including hidden files
+- D) Latest files only
 
 
 ---
@@ -1881,10 +1881,10 @@ D) Latest files only
 
 Which command changes file ownership?
 
-A) `chmod`
-B) `owner`
-C) `own`
-D) `chown`
+- A) `chmod`
+- B) `owner`
+- C) `own`
+- D) `chown`
 
 
 ---
@@ -1894,10 +1894,10 @@ D) `chown`
 
 What input type creates a date picker?
 
-A) `type="date"`
-B) `type="calendar"`
-C) `type="picker"`
-D) `type="datetime"`
+- A) `type="date"`
+- B) `type="calendar"`
+- C) `type="picker"`
+- D) `type="datetime"`
 
 
 ---
@@ -1907,10 +1907,10 @@ D) `type="datetime"`
 
 Which command searches for files by name?
 
-A) `grep`
-B) `search`
-C) `locate`
-D) `find`
+- A) `grep`
+- B) `search`
+- C) `locate`
+- D) `find`
 
 
 ---
@@ -1920,10 +1920,10 @@ D) `find`
 
 What is a pseudo-class?
 
-A) A selector that targets elements in a specific state
-B) A fake class
-C) A CSS preprocessor
-D) A JavaScript class
+- A) A selector that targets elements in a specific state
+- B) A fake class
+- C) A CSS preprocessor
+- D) A JavaScript class
 
 
 ---
@@ -1933,10 +1933,10 @@ D) A JavaScript class
 
 Which command initializes a new Git repository?
 
-A) `git new`
-B) `git create`
-C) `git init`
-D) `git start`
+- A) `git new`
+- B) `git create`
+- C) `git init`
+- D) `git start`
 
 
 ---
@@ -1946,10 +1946,10 @@ D) `git start`
 
 What does `git checkout branch-name` do?
 
-A) Creates a new branch
-B) Deletes a branch
-C) Switches to an existing branch
-D) Renames a branch
+- A) Creates a new branch
+- B) Deletes a branch
+- C) Switches to an existing branch
+- D) Renames a branch
 
 
 ---
@@ -1959,7 +1959,7 @@ D) Renames a branch
 
 What is a commit hash?
 
-A) A password
-B) A branch name
-C) A unique SHA-1 identifier for each commit
-D) A tag
+- A) A password
+- B) A branch name
+- C) A unique SHA-1 identifier for each commit
+- D) A tag
