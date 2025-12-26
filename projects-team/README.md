@@ -600,19 +600,71 @@ All UI elements include data attributes for easy Angular migration:
 
 ---
 
+## Pre-Development Phase (Sprint 0)
+
+Before writing any code, teams must complete the **Project Charter** to ensure alignment on requirements, standards, and conventions.
+
+### Project Charter Template
+
+Use the [Project Charter Template](./project-charter-template.md) to document:
+
+1. **Requirements Clarification**
+   - Functional requirements questions
+   - Non-functional requirements questions
+   - User stories with acceptance criteria
+
+2. **Technical Standards**
+   - Coding conventions (Java, Angular, SQL)
+   - Project structure agreements
+   - API design standards
+   - Error handling strategy
+
+3. **Git Workflow**
+   - Branching strategy
+   - Commit message format
+   - Pull request process
+   - Code review guidelines
+
+4. **Definition of Done**
+   - Code complete criteria
+   - Testing requirements
+   - Documentation requirements
+
+5. **Team Agreements**
+   - Roles and responsibilities
+   - Meeting schedule
+   - Communication channels
+   - Conflict resolution
+
+### Sprint 0 Checklist
+
+Before starting Sprint 1:
+
+- [ ] Team formed and roles assigned
+- [ ] Project selected
+- [ ] All members read project requirements
+- [ ] Clarifying questions documented and answered
+- [ ] Coding conventions agreed upon
+- [ ] Git workflow established
+- [ ] Definition of Done defined
+- [ ] Project Charter completed and approved by instructor
+
+---
+
 ## Getting Started
 
 ### Week 1-2: UI Storyboard/Wireframe Development
 
 1. **Form your team** of 4 members
 2. **Choose a project** from the list above
-3. **Create a GitHub repository** with proper setup
-4. **Set up the project board** with issues for all 12+ UI features
-5. **Assign features** to team members (minimum 3 each)
-6. **Start Sprint 1** - Begin with setup and core structure
-7. **Daily standups** - Communicate progress and blockers
-8. **Complete UI Storyboard** - All pages by end of Week 2
-9. **UI Review/Demo** - Present wireframe walkthrough to facilitator/mentor
+3. **Complete Project Charter** - Use [project-charter-template.md](./project-charter-template.md)
+4. **Create a GitHub repository** with proper setup
+5. **Set up the project board** with issues for all 12+ UI features
+6. **Assign features** to team members (minimum 3 each)
+7. **Start Sprint 1** - Begin with setup and core structure
+8. **Daily standups** - Communicate progress and blockers
+9. **Complete UI Storyboard** - All pages by end of Week 2
+10. **UI Review/Demo** - Present wireframe walkthrough to facilitator/mentor
 
 ### Week 3-5: Java Backend (Building to Project 1)
 
