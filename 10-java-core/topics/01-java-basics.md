@@ -29,8 +29,9 @@ Java was designed with five primary goals:
 |---------|------|--------------|
 | Java 1.0 | 1996 | Initial release |
 | Java 5 | 2004 | [Generics](./02-object-oriented-programming.md#generics-java-5), [Annotations](./02-object-oriented-programming.md#annotations-java-5), enums, autoboxing |
-| Java 8 | 2014 | Lambdas, Stream API, default methods |
-| Java 11 | 2018 | LTS release, var keyword, HTTP client |
+| Java 8 | 2014 | Lambdas, Stream API, [Optional](./06-functional-programming.md#optional-class), [java.time](#date-and-time-api-java-8), [CompletableFuture](./09-multithreading.md#completablefuture-java-8) |
+| Java 10 | 2018 | [var keyword](#var-keyword-java-10) |
+| Java 11 | 2018 | LTS release, [String methods](#string-methods-java-11), HTTP client |
 | Java 15 | 2020 | [Text Blocks](#text-blocks-java-15) |
 | Java 16 | 2021 | [Records](./02-object-oriented-programming.md#records-java-16) |
 | Java 17 | 2021 | LTS release, sealed classes, pattern matching |
@@ -653,6 +654,78 @@ String noNewline = """
         No trailing newline""";
 ```
 
+#### String Methods (Java 11+)
+
+Modern String methods for common operations:
+
+```java
+// Blank check (Java 11+) - true if empty or only whitespace
+String blank = "   ";
+String empty = "";
+String text = "Hello";
+
+blank.isBlank();   // true
+empty.isBlank();   // true
+text.isBlank();    // false
+text.isEmpty();    // false (only checks length == 0)
+
+// Strip whitespace (Java 11+) - Unicode-aware
+String padded = "  Hello World  ";
+padded.strip();         // "Hello World" (both ends)
+padded.stripLeading();  // "Hello World  " (left only)
+padded.stripTrailing(); // "  Hello World" (right only)
+
+// Note: strip() vs trim()
+// strip() handles Unicode whitespace, trim() only ASCII
+String unicode = "\u2000Hello\u2000";  // Unicode spaces
+unicode.strip();  // "Hello" (works)
+unicode.trim();   // "\u2000Hello\u2000" (doesn't work)
+
+// Lines (Java 11+) - split by line terminators
+String multiline = "Line1\nLine2\nLine3";
+multiline.lines()
+    .forEach(System.out::println);
+// Line1
+// Line2
+// Line3
+
+// Repeat (Java 11+)
+String dash = "-";
+dash.repeat(10);  // "----------"
+
+"Ha".repeat(3);   // "HaHaHa"
+
+// Indent (Java 12+)
+String text2 = "Hello\nWorld";
+text2.indent(4);   // "    Hello\n    World\n"
+text2.indent(-2);  // Removes up to 2 spaces from each line
+
+// Transform (Java 12+)
+String result = "hello"
+    .transform(s -> s.toUpperCase())
+    .transform(s -> s + "!");  // "HELLO!"
+
+// Formatted (Java 15+) - instance method version of String.format
+String name = "John";
+int age = 30;
+String msg = "Name: %s, Age: %d".formatted(name, age);
+// "Name: John, Age: 30"
+```
+
+**String Methods Summary:**
+
+| Method | Version | Description |
+|--------|---------|-------------|
+| `isBlank()` | Java 11 | True if empty or whitespace only |
+| `strip()` | Java 11 | Remove leading/trailing whitespace (Unicode-aware) |
+| `stripLeading()` | Java 11 | Remove leading whitespace |
+| `stripTrailing()` | Java 11 | Remove trailing whitespace |
+| `lines()` | Java 11 | Stream of lines |
+| `repeat(n)` | Java 11 | Repeat string n times |
+| `indent(n)` | Java 12 | Adjust indentation |
+| `transform(fn)` | Java 12 | Apply function to string |
+| `formatted(args)` | Java 15 | Format with arguments |
+
 > **Deep Dive:** For more on Records (Java 16+), see [Object-Oriented Programming](./02-object-oriented-programming.md#records-java-16).
 
 ### Wrapper Classes
@@ -754,6 +827,99 @@ if (str != null) {
 // Java 8+ Optional (covered later)
 String safe = Optional.ofNullable(str).orElse("default");
 ```
+
+### var Keyword (Java 10+)
+
+Local variable type inference allows the compiler to infer the type.
+
+```java
+// Traditional declaration
+String message = "Hello";
+ArrayList<String> names = new ArrayList<String>();
+Map<String, List<Integer>> data = new HashMap<String, List<Integer>>();
+
+// With var - type is inferred
+var message = "Hello";                    // Inferred as String
+var names = new ArrayList<String>();      // Inferred as ArrayList<String>
+var data = new HashMap<String, List<Integer>>();  // Type inferred
+```
+
+#### Where var Can Be Used
+
+```java
+// Local variables with initializers
+var count = 10;                           // int
+var price = 19.99;                        // double
+var name = "John";                        // String
+var list = List.of(1, 2, 3);              // List<Integer>
+
+// Enhanced for loops
+var numbers = List.of(1, 2, 3, 4, 5);
+for (var num : numbers) {
+    System.out.println(num);
+}
+
+// Traditional for loops
+for (var i = 0; i < 10; i++) {
+    System.out.println(i);
+}
+
+// Try-with-resources
+try (var reader = new BufferedReader(new FileReader("file.txt"))) {
+    var line = reader.readLine();
+}
+```
+
+#### Where var Cannot Be Used
+
+```java
+// Cannot use without initializer
+// var x;                    // Error! No initializer
+
+// Cannot use with null
+// var nothing = null;       // Error! Cannot infer type
+
+// Cannot use for method parameters
+// public void process(var data) { }  // Error!
+
+// Cannot use for return types
+// public var getValue() { }  // Error!
+
+// Cannot use for class fields
+// private var name = "test"; // Error!
+
+// Cannot use with array initializers
+// var arr = {1, 2, 3};      // Error!
+var arr = new int[]{1, 2, 3}; // OK
+```
+
+#### Best Practices for var
+
+```java
+// GOOD: Type is obvious from right side
+var user = new User("John");
+var count = userService.getCount();
+var stream = list.stream();
+
+// AVOID: Type is not clear
+var result = process();        // What type is result?
+var x = getValue();            // Unclear
+
+// GOOD: With diamond operator
+var map = new HashMap<String, List<Integer>>();
+
+// GOOD: Long generic types
+var entries = map.entrySet().stream()
+    .filter(e -> e.getValue() > 0)
+    .collect(Collectors.toList());
+```
+
+| Use var When | Avoid var When |
+|--------------|----------------|
+| Type is obvious from initializer | Type is not clear from context |
+| Long generic types | Primitives with literals (debatable) |
+| Loop variables | When readability suffers |
+| Try-with-resources | Method parameters/returns |
 
 ### Best Practices
 
@@ -1618,6 +1784,196 @@ java -cp bin com.company.Main
 
 ---
 
+## Date and Time API (Java 8+)
+
+The `java.time` package provides a comprehensive date and time API, replacing the legacy `Date` and `Calendar` classes.
+
+### Core Classes
+
+```java
+import java.time.*;
+
+// Current date (no time)
+LocalDate today = LocalDate.now();                    // 2024-01-15
+LocalDate date = LocalDate.of(2024, 1, 15);          // 2024-01-15
+LocalDate parsed = LocalDate.parse("2024-01-15");    // From string
+
+// Current time (no date)
+LocalTime now = LocalTime.now();                      // 14:30:45.123
+LocalTime time = LocalTime.of(14, 30, 45);           // 14:30:45
+LocalTime parsed2 = LocalTime.parse("14:30:45");     // From string
+
+// Date and time combined
+LocalDateTime dateTime = LocalDateTime.now();         // 2024-01-15T14:30:45
+LocalDateTime dt = LocalDateTime.of(2024, 1, 15, 14, 30);
+LocalDateTime dt2 = LocalDateTime.of(date, time);    // Combine date and time
+
+// With timezone
+ZonedDateTime zoned = ZonedDateTime.now();           // With system timezone
+ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("America/New_York"));
+
+// Instant (machine timestamp)
+Instant instant = Instant.now();                      // UTC timestamp
+long epochSeconds = instant.getEpochSecond();
+```
+
+### Common Operations
+
+```java
+LocalDate date = LocalDate.now();
+
+// Getting components
+int year = date.getYear();           // 2024
+Month month = date.getMonth();       // JANUARY
+int monthValue = date.getMonthValue(); // 1
+int day = date.getDayOfMonth();      // 15
+DayOfWeek dow = date.getDayOfWeek(); // MONDAY
+
+// Adding/subtracting (returns new instance - immutable)
+LocalDate tomorrow = date.plusDays(1);
+LocalDate nextWeek = date.plusWeeks(1);
+LocalDate nextMonth = date.plusMonths(1);
+LocalDate lastYear = date.minusYears(1);
+
+// Time operations
+LocalTime time = LocalTime.now();
+LocalTime later = time.plusHours(2).plusMinutes(30);
+LocalTime earlier = time.minusMinutes(45);
+
+// DateTime operations
+LocalDateTime dt = LocalDateTime.now();
+LocalDateTime future = dt.plusDays(7).plusHours(3);
+```
+
+### Comparing Dates and Times
+
+```java
+LocalDate date1 = LocalDate.of(2024, 1, 15);
+LocalDate date2 = LocalDate.of(2024, 6, 20);
+
+boolean isBefore = date1.isBefore(date2);  // true
+boolean isAfter = date1.isAfter(date2);    // false
+boolean isEqual = date1.isEqual(date2);    // false
+
+// Comparison
+int comparison = date1.compareTo(date2);   // negative (date1 < date2)
+```
+
+### Period and Duration
+
+```java
+// Period: date-based amount (years, months, days)
+LocalDate start = LocalDate.of(2024, 1, 1);
+LocalDate end = LocalDate.of(2024, 6, 15);
+
+Period period = Period.between(start, end);
+int months = period.getMonths();  // 5
+int days = period.getDays();      // 14
+
+Period twoWeeks = Period.ofWeeks(2);
+Period custom = Period.of(1, 2, 3);  // 1 year, 2 months, 3 days
+
+// Duration: time-based amount (hours, minutes, seconds, nanos)
+LocalTime t1 = LocalTime.of(9, 0);
+LocalTime t2 = LocalTime.of(17, 30);
+
+Duration duration = Duration.between(t1, t2);
+long hours = duration.toHours();      // 8
+long minutes = duration.toMinutes();  // 510
+
+Duration twoHours = Duration.ofHours(2);
+Duration custom2 = Duration.ofMinutes(90);
+```
+
+### Formatting and Parsing
+
+```java
+import java.time.format.DateTimeFormatter;
+
+LocalDateTime now = LocalDateTime.now();
+
+// Built-in formatters
+String iso = now.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+// 2024-01-15T14:30:45
+
+// Custom patterns
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+String formatted = now.format(formatter);  // 15-01-2024 14:30
+
+DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+String formatted2 = now.format(formatter2);  // January 15, 2024
+
+// Parsing with formatter
+LocalDate parsed = LocalDate.parse("15-01-2024",
+    DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+```
+
+**Common format patterns:**
+
+| Pattern | Example | Description |
+|---------|---------|-------------|
+| `yyyy-MM-dd` | 2024-01-15 | ISO date |
+| `dd/MM/yyyy` | 15/01/2024 | European date |
+| `MM/dd/yyyy` | 01/15/2024 | US date |
+| `HH:mm:ss` | 14:30:45 | 24-hour time |
+| `hh:mm a` | 02:30 PM | 12-hour time |
+| `EEEE` | Monday | Full day name |
+| `MMM` | Jan | Short month |
+| `MMMM` | January | Full month |
+
+### Working with Timezones
+
+```java
+// Get available zone IDs
+Set<String> zones = ZoneId.getAvailableZoneIds();
+
+// Create ZonedDateTime
+ZonedDateTime nyTime = ZonedDateTime.now(ZoneId.of("America/New_York"));
+ZonedDateTime tokyoTime = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"));
+
+// Convert between zones
+ZonedDateTime converted = nyTime.withZoneSameInstant(ZoneId.of("Europe/London"));
+
+// UTC
+ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
+OffsetDateTime offset = OffsetDateTime.now(ZoneOffset.of("+05:30"));
+```
+
+### Legacy Interoperability
+
+```java
+import java.util.Date;
+import java.util.Calendar;
+
+// Convert legacy Date to Instant
+Date legacyDate = new Date();
+Instant instant = legacyDate.toInstant();
+LocalDateTime ldt = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+// Convert back to Date
+Date backToDate = Date.from(instant);
+
+// Convert Calendar to ZonedDateTime
+Calendar calendar = Calendar.getInstance();
+ZonedDateTime zdt = calendar.toInstant()
+    .atZone(calendar.getTimeZone().toZoneId());
+```
+
+### java.time Summary
+
+| Class | Description | Example |
+|-------|-------------|---------|
+| `LocalDate` | Date without time | 2024-01-15 |
+| `LocalTime` | Time without date | 14:30:45 |
+| `LocalDateTime` | Date and time | 2024-01-15T14:30:45 |
+| `ZonedDateTime` | Date, time, and timezone | 2024-01-15T14:30:45+05:30[Asia/Kolkata] |
+| `Instant` | Machine timestamp (UTC) | Epoch seconds |
+| `Period` | Date-based duration | 2 years, 3 months |
+| `Duration` | Time-based duration | 2 hours, 30 minutes |
+| `DateTimeFormatter` | Formatting/parsing | Custom patterns |
+
+---
+
 ## Summary
 
 | Concept | Key Points |
@@ -1626,6 +1982,10 @@ java -cp bin com.company.Main
 | JIT Compiler | Adaptive optimization, method inlining, platform-specific code generation |
 | Primitive Types | 8 types: byte, short, int, long, float, double, char, boolean |
 | Reference Types | Objects, strings, arrays - store addresses, can be null |
+| var Keyword (Java 10+) | Local variable type inference, cleaner code |
+| String Methods (Java 11+) | isBlank, strip, lines, repeat, formatted |
+| Text Blocks (Java 15+) | Multi-line strings with """ delimiters |
+| java.time (Java 8+) | LocalDate, LocalTime, LocalDateTime, ZonedDateTime, Period, Duration |
 | Control Flow | if/else, switch, for, while, do-while, break, continue |
 | Comments | //, /* */, /** */ for Javadoc documentation |
 | Packages | Organize classes, prevent conflicts, use reverse domain naming |

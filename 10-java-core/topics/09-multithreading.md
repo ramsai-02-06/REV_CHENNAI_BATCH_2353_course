@@ -1012,6 +1012,241 @@ public class FutureExample {
 
 ---
 
+## CompletableFuture (Java 8+)
+
+`CompletableFuture` provides a powerful way to write asynchronous, non-blocking code with a fluent API.
+
+### Creating CompletableFuture
+
+```java
+import java.util.concurrent.CompletableFuture;
+
+// Run async task with no return value
+CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
+    System.out.println("Running in: " + Thread.currentThread().getName());
+});
+
+// Run async task with return value
+CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+    return "Hello from async";
+});
+
+// Create completed future
+CompletableFuture<String> completed = CompletableFuture.completedFuture("Done");
+
+// Create with custom executor
+ExecutorService executor = Executors.newFixedThreadPool(4);
+CompletableFuture<String> customExecutor = CompletableFuture.supplyAsync(
+    () -> "Custom executor",
+    executor
+);
+```
+
+### Transforming Results
+
+```java
+CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "hello");
+
+// thenApply: Transform result (like map)
+CompletableFuture<String> upper = future.thenApply(s -> s.toUpperCase());
+// "HELLO"
+
+// thenApply chain
+CompletableFuture<Integer> length = future
+    .thenApply(String::toUpperCase)
+    .thenApply(String::length);
+// 5
+
+// thenCompose: Chain another CompletableFuture (like flatMap)
+CompletableFuture<String> composed = future.thenCompose(s ->
+    CompletableFuture.supplyAsync(() -> s + " world")
+);
+// "hello world"
+
+// thenCombine: Combine two futures
+CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> "Hello");
+CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> "World");
+
+CompletableFuture<String> combined = future1.thenCombine(future2,
+    (s1, s2) -> s1 + " " + s2);
+// "Hello World"
+```
+
+### Consuming Results
+
+```java
+CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "Result");
+
+// thenAccept: Consume result (no return)
+future.thenAccept(result -> System.out.println("Got: " + result));
+
+// thenRun: Run action after completion (no access to result)
+future.thenRun(() -> System.out.println("Completed!"));
+
+// Get result (blocking)
+String result = future.get();                    // May throw exceptions
+String result2 = future.get(5, TimeUnit.SECONDS); // With timeout
+String result3 = future.join();                   // Unchecked exception
+```
+
+### Error Handling
+
+```java
+CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+    if (true) throw new RuntimeException("Error!");
+    return "Success";
+});
+
+// exceptionally: Handle exception and provide fallback
+CompletableFuture<String> recovered = future.exceptionally(ex -> {
+    System.out.println("Error: " + ex.getMessage());
+    return "Fallback value";
+});
+
+// handle: Handle both success and failure
+CompletableFuture<String> handled = future.handle((result, ex) -> {
+    if (ex != null) {
+        return "Error: " + ex.getMessage();
+    }
+    return result.toUpperCase();
+});
+
+// whenComplete: Perform action on completion (doesn't transform)
+future.whenComplete((result, ex) -> {
+    if (ex != null) {
+        System.out.println("Failed: " + ex.getMessage());
+    } else {
+        System.out.println("Success: " + result);
+    }
+});
+```
+
+### Combining Multiple Futures
+
+```java
+CompletableFuture<String> f1 = CompletableFuture.supplyAsync(() -> "Task 1");
+CompletableFuture<String> f2 = CompletableFuture.supplyAsync(() -> "Task 2");
+CompletableFuture<String> f3 = CompletableFuture.supplyAsync(() -> "Task 3");
+
+// allOf: Wait for all to complete
+CompletableFuture<Void> all = CompletableFuture.allOf(f1, f2, f3);
+all.thenRun(() -> {
+    // All completed - get results
+    String r1 = f1.join();
+    String r2 = f2.join();
+    String r3 = f3.join();
+    System.out.println(r1 + ", " + r2 + ", " + r3);
+});
+
+// Collect all results
+CompletableFuture<List<String>> allResults = CompletableFuture.allOf(f1, f2, f3)
+    .thenApply(v -> Stream.of(f1, f2, f3)
+        .map(CompletableFuture::join)
+        .collect(Collectors.toList()));
+
+// anyOf: Complete when any one completes
+CompletableFuture<Object> any = CompletableFuture.anyOf(f1, f2, f3);
+any.thenAccept(result -> System.out.println("First: " + result));
+```
+
+### Async Variants
+
+```java
+// Sync version (runs in same thread or calling thread)
+future.thenApply(s -> s.toUpperCase());
+
+// Async version (runs in ForkJoinPool.commonPool())
+future.thenApplyAsync(s -> s.toUpperCase());
+
+// Async with custom executor
+future.thenApplyAsync(s -> s.toUpperCase(), customExecutor);
+
+// All transformation methods have async variants:
+// thenApplyAsync, thenAcceptAsync, thenRunAsync,
+// thenComposeAsync, thenCombineAsync, handleAsync, etc.
+```
+
+### Practical Example: Parallel API Calls
+
+```java
+public class AsyncApiExample {
+    private final HttpClient client = HttpClient.newHttpClient();
+
+    public CompletableFuture<String> fetchUser(Long userId) {
+        return CompletableFuture.supplyAsync(() -> {
+            // Simulate API call
+            return "{\"id\": " + userId + ", \"name\": \"User" + userId + "\"}";
+        });
+    }
+
+    public CompletableFuture<String> fetchOrders(Long userId) {
+        return CompletableFuture.supplyAsync(() -> {
+            // Simulate API call
+            return "[{\"orderId\": 1}, {\"orderId\": 2}]";
+        });
+    }
+
+    public CompletableFuture<String> getUserWithOrders(Long userId) {
+        CompletableFuture<String> userFuture = fetchUser(userId);
+        CompletableFuture<String> ordersFuture = fetchOrders(userId);
+
+        return userFuture.thenCombine(ordersFuture, (user, orders) -> {
+            return "{\"user\": " + user + ", \"orders\": " + orders + "}";
+        });
+    }
+
+    public static void main(String[] args) {
+        AsyncApiExample api = new AsyncApiExample();
+
+        api.getUserWithOrders(1L)
+            .thenAccept(System.out::println)
+            .exceptionally(ex -> {
+                System.err.println("Error: " + ex.getMessage());
+                return null;
+            })
+            .join();  // Wait for completion
+    }
+}
+```
+
+### Timeouts (Java 9+)
+
+```java
+CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+    try {
+        Thread.sleep(5000);  // Long running task
+    } catch (InterruptedException e) { }
+    return "Result";
+});
+
+// Complete with timeout
+CompletableFuture<String> withTimeout = future
+    .orTimeout(2, TimeUnit.SECONDS);  // Throws TimeoutException
+
+// Complete with default on timeout
+CompletableFuture<String> withDefault = future
+    .completeOnTimeout("Default", 2, TimeUnit.SECONDS);
+```
+
+### CompletableFuture Summary
+
+| Method | Description |
+|--------|-------------|
+| `supplyAsync` | Run task with return value |
+| `runAsync` | Run task without return value |
+| `thenApply` | Transform result |
+| `thenCompose` | Chain another CompletableFuture |
+| `thenCombine` | Combine two futures |
+| `thenAccept` | Consume result |
+| `exceptionally` | Handle exception with fallback |
+| `handle` | Handle success or failure |
+| `allOf` | Wait for all futures |
+| `anyOf` | Wait for any future |
+| `orTimeout` | Fail on timeout (Java 9+) |
+| `completeOnTimeout` | Default on timeout (Java 9+) |
+
+---
+
 ## Virtual Threads (Java 21+)
 
 Virtual threads are lightweight threads that dramatically reduce the cost of creating and managing threads, enabling high-throughput concurrent applications.
@@ -1252,6 +1487,7 @@ Thread.startVirtualThread(() -> {
 | Livelock | Threads actively responding but making no progress |
 | Producer-Consumer | Use wait/notify or BlockingQueue |
 | Thread Pools | ExecutorService for reusing threads |
+| CompletableFuture (Java 8+) | Async programming with fluent API, chaining, error handling |
 | Virtual Threads (Java 21+) | Lightweight threads for high-throughput I/O-bound applications |
 
 ## Next Topic
