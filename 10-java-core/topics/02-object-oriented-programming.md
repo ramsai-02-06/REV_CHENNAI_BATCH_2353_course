@@ -1588,6 +1588,191 @@ public class MixedPrecision {
 
 ---
 
+### Records (Java 16+)
+
+Records are immutable data carriers that reduce boilerplate code.
+
+#### Basic Record
+
+```java
+// Traditional class - lots of boilerplate
+public class PersonClass {
+    private final String name;
+    private final int age;
+
+    public PersonClass(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() { return name; }
+    public int getAge() { return age; }
+
+    @Override
+    public boolean equals(Object o) { /* ... */ }
+
+    @Override
+    public int hashCode() { /* ... */ }
+
+    @Override
+    public String toString() { /* ... */ }
+}
+
+// Record - same functionality in one line
+public record Person(String name, int age) {}
+```
+
+**What records auto-generate:**
+- Private final fields for each component
+- Public accessor methods (name(), age() - not getName())
+- Constructor with all components
+- equals(), hashCode(), and toString()
+
+#### Using Records
+
+```java
+public record Person(String name, int age) {}
+
+// Create instance
+Person person = new Person("John", 30);
+
+// Access components (no 'get' prefix)
+String name = person.name();  // "John"
+int age = person.age();       // 30
+
+// toString() is auto-generated
+System.out.println(person);   // Person[name=John, age=30]
+
+// equals() compares all components
+Person person2 = new Person("John", 30);
+System.out.println(person.equals(person2));  // true
+```
+
+#### Custom Constructor
+
+```java
+public record Person(String name, int age) {
+    // Compact constructor - for validation
+    public Person {
+        if (age < 0) {
+            throw new IllegalArgumentException("Age cannot be negative");
+        }
+        name = name.trim();  // Can modify before assignment
+    }
+}
+
+// Or explicit canonical constructor
+public record Employee(String name, String department) {
+    public Employee(String name, String department) {
+        this.name = name.toUpperCase();
+        this.department = department;
+    }
+}
+```
+
+#### Additional Constructors and Methods
+
+```java
+public record Rectangle(double width, double height) {
+
+    // Additional constructor
+    public Rectangle(double side) {
+        this(side, side);  // Must call canonical constructor
+    }
+
+    // Instance methods
+    public double area() {
+        return width * height;
+    }
+
+    public double perimeter() {
+        return 2 * (width + height);
+    }
+
+    // Static methods
+    public static Rectangle square(double side) {
+        return new Rectangle(side, side);
+    }
+}
+
+// Usage
+Rectangle rect = new Rectangle(5, 10);
+Rectangle square = new Rectangle(5);
+double area = rect.area();  // 50.0
+```
+
+#### Records with Interfaces
+
+```java
+public interface Printable {
+    void print();
+}
+
+public record Book(String title, String author) implements Printable {
+    @Override
+    public void print() {
+        System.out.println(title + " by " + author);
+    }
+}
+```
+
+#### Record Patterns (Java 21+)
+
+```java
+public record Point(int x, int y) {}
+
+// Pattern matching with records
+Object obj = new Point(3, 4);
+
+if (obj instanceof Point(int x, int y)) {
+    System.out.println("x = " + x + ", y = " + y);
+}
+
+// In switch expressions
+String describe(Object obj) {
+    return switch (obj) {
+        case Point(int x, int y) -> "Point at (" + x + ", " + y + ")";
+        case String s -> "String: " + s;
+        default -> "Unknown";
+    };
+}
+```
+
+#### Record Restrictions
+
+- Records are implicitly final (cannot be extended)
+- Cannot extend other classes (but can implement interfaces)
+- All fields are final (immutable)
+- Cannot declare instance fields outside components
+- Cannot have native methods
+
+```java
+// Records can implement interfaces
+public record Person(String name) implements Comparable<Person> {
+    @Override
+    public int compareTo(Person other) {
+        return this.name.compareTo(other.name);
+    }
+}
+
+// Static fields are allowed
+public record Config(String value) {
+    public static final Config DEFAULT = new Config("default");
+}
+```
+
+#### When to Use Records
+
+| Use Records | Use Classes |
+|-------------|-------------|
+| Immutable data carriers | Mutable state needed |
+| DTOs (Data Transfer Objects) | Inheritance required |
+| Value objects | Complex behavior |
+| API responses/requests | Entity with identity |
+| Configuration objects | Need custom equals/hashCode logic |
+
+---
+
 ### sealed Modifier (Java 17+)
 
 Restricts which classes can extend or implement.
@@ -1917,6 +2102,7 @@ cache.clear();
 | Abstraction | Abstract classes and interfaces hide complexity |
 | Interfaces | Contract, multiple inheritance, default/static methods (Java 8+) |
 | Marker Interfaces | Empty interfaces for type signaling (Serializable, Cloneable) |
+| Records (Java 16+) | Immutable data carriers, auto-generated methods |
 | Non-Access Modifiers | final, abstract, static, synchronized, volatile, transient, sealed |
 | equals/hashCode | Override together, important for collections |
 | Garbage Collection | Generational GC, G1/ZGC algorithms, memory management |

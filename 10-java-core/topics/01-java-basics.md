@@ -594,6 +594,65 @@ sbf.append(" string");
 - **StringBuilder**: Single-threaded, many modifications
 - **StringBuffer**: Multi-threaded, many modifications
 
+#### Text Blocks (Java 15+)
+
+Text blocks simplify multi-line strings with `"""` delimiters.
+
+```java
+// Traditional multi-line string
+String html = "<html>\n" +
+              "    <body>\n" +
+              "        <h1>Hello</h1>\n" +
+              "    </body>\n" +
+              "</html>";
+
+// Text block - cleaner and preserves formatting
+String htmlBlock = """
+        <html>
+            <body>
+                <h1>Hello</h1>
+            </body>
+        </html>
+        """;
+
+// JSON example
+String json = """
+        {
+            "name": "John",
+            "age": 30,
+            "city": "New York"
+        }
+        """;
+
+// SQL query
+String sql = """
+        SELECT id, name, email
+        FROM users
+        WHERE status = 'active'
+        ORDER BY name
+        """;
+```
+
+**Key features:**
+- Opening `"""` must be followed by newline
+- Closing `"""` position controls trailing newline
+- Incidental whitespace is stripped based on closing delimiter
+- Supports escape sequences and string interpolation
+
+```java
+// Escape sequences work
+String withQuotes = """
+        He said "Hello"
+        Line with \t tab
+        """;
+
+// No trailing newline (closing """ on last line)
+String noNewline = """
+        No trailing newline""";
+```
+
+> **Deep Dive:** For more on Records (Java 16+), see [Object-Oriented Programming](./02-object-oriented-programming.md#records-java-16).
+
 ### Wrapper Classes
 
 Wrapper classes provide object representation of primitives.
