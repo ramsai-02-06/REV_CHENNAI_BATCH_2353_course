@@ -1027,4 +1027,4 @@ public class FutureExample {
 
 ## Next Topic
 
-Continue to [Functional Programming](./06-functional-programming.md) to learn about functional interfaces, lambdas, and method references.
+This concludes the Java Core module. You now have a solid foundation in Java programming, from basics through advanced concepts like multithreading.

@@ -983,4 +983,4 @@ DoubleStream doubles = IntStream.range(1, 10)
 
 ## Next Topic
 
-Continue to [Design Patterns](./08-design-patterns.md) to learn about common design patterns in Java.
+Continue to [Multithreading](./08-multithreading.md) to learn about concurrent programming in Java.

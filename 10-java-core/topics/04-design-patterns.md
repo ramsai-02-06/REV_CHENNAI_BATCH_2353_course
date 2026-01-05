@@ -1093,4 +1093,4 @@ remote.pressUndo();    // Light is ON (undo off)
 
 ## Next Topic
 
-Continue to [Java 17 and 21 Features](./09-java-17-21-features.md) to learn about modern Java features.
+Continue to [Collections Framework](./05-collections-framework.md) to learn about Java's collection classes and data structures.

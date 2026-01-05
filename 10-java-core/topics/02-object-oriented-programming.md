@@ -1,200 +1,8 @@
 # Object-Oriented Programming
 
-## Introduction To OOP
-
 Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects" that contain data and code. Java is a pure OOP language where everything (except primitives) is an object.
 
-### Four Pillars of OOP
-
-```
-┌─────────────────────────────────────┐
-│         OOP Principles              │
-├─────────────────────────────────────┤
-│  1. Encapsulation                   │
-│     Hide internal details           │
-│                                     │
-│  2. Inheritance                     │
-│     Reuse and extend functionality  │
-│                                     │
-│  3. Polymorphism                    │
-│     One interface, many forms       │
-│                                     │
-│  4. Abstraction                     │
-│     Hide complexity, show essentials│
-└─────────────────────────────────────┘
-```
-
-#### 1. Encapsulation
-
-Bundling data and methods that operate on that data within a single unit (class), hiding internal details.
-
-```java
-public class BankAccount {
-    // Private data - hidden from outside
-    private double balance;
-
-    // Public methods - controlled access
-    public void deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
-        }
-    }
-
-    public boolean withdraw(double amount) {
-        if (amount > 0 && balance >= amount) {
-            balance -= amount;
-            return true;
-        }
-        return false;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-}
-```
-
-**Benefits:**
-- Data protection
-- Flexibility (change implementation without affecting users)
-- Maintainability
-
-#### 2. Inheritance
-
-Mechanism where a new class (child) inherits properties and behaviors from an existing class (parent).
-
-```java
-// Parent class
-public class Animal {
-    protected String name;
-
-    public void eat() {
-        System.out.println(name + " is eating");
-    }
-}
-
-// Child class
-public class Dog extends Animal {
-    public void bark() {
-        System.out.println(name + " is barking");
-    }
-}
-
-// Usage
-Dog dog = new Dog();
-dog.name = "Buddy";
-dog.eat();   // Inherited from Animal
-dog.bark();  // Defined in Dog
-```
-
-**Benefits:**
-- Code reuse
-- Hierarchical classification
-- Method overriding
-
-#### 3. Polymorphism
-
-Ability of objects to take many forms. Same interface, different implementations.
-
-```java
-// Method Overloading (Compile-time polymorphism)
-public class Calculator {
-    public int add(int a, int b) {
-        return a + b;
-    }
-
-    public double add(double a, double b) {
-        return a + b;
-    }
-
-    public int add(int a, int b, int c) {
-        return a + b + c;
-    }
-}
-
-// Method Overriding (Runtime polymorphism)
-public class Animal {
-    public void makeSound() {
-        System.out.println("Some sound");
-    }
-}
-
-public class Dog extends Animal {
-    @Override
-    public void makeSound() {
-        System.out.println("Bark!");
-    }
-}
-
-public class Cat extends Animal {
-    @Override
-    public void makeSound() {
-        System.out.println("Meow!");
-    }
-}
-
-// Usage
-Animal animal1 = new Dog();
-Animal animal2 = new Cat();
-animal1.makeSound();  // Bark!
-animal2.makeSound();  // Meow!
-```
-
-**Benefits:**
-- Flexibility
-- Extensibility
-- Code reusability
-
-#### 4. Abstraction
-
-Hiding complex implementation details, showing only essential features.
-
-```java
-// Abstract class
-public abstract class Shape {
-    // Abstract method - no implementation
-    public abstract double calculateArea();
-
-    // Concrete method
-    public void display() {
-        System.out.println("Area: " + calculateArea());
-    }
-}
-
-public class Circle extends Shape {
-    private double radius;
-
-    public Circle(double radius) {
-        this.radius = radius;
-    }
-
-    @Override
-    public double calculateArea() {
-        return Math.PI * radius * radius;
-    }
-}
-
-// Interface
-public interface Drawable {
-    void draw();  // Implicitly abstract
-}
-
-public class Rectangle implements Drawable {
-    @Override
-    public void draw() {
-        System.out.println("Drawing rectangle");
-    }
-}
-```
-
-**Benefits:**
-- Reduces complexity
-- Focuses on what object does, not how
-- Increases security
-
----
-
-## Classes Vs Objects
+## Classes And Objects
 
 Understanding the distinction between classes and objects is fundamental to OOP.
 
@@ -523,6 +331,226 @@ public class Person {
 
 ---
 
+## JVM Memory Architecture
+
+Now that we understand classes and objects, let's examine how Java manages them in memory.
+
+### Memory Areas Overview
+
+```
+┌───────────────────────────────────────────────────────────────────┐
+│                        JVM Memory Structure                        │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                    │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │                         HEAP MEMORY                          │  │
+│  │  (Shared among all threads - Objects and Instance Variables) │  │
+│  │                                                               │  │
+│  │  ┌─────────────────┐  ┌─────────────────────────────────┐   │  │
+│  │  │   Young Gen     │  │         Old Generation          │   │  │
+│  │  │  ┌─────────┐    │  │                                 │   │  │
+│  │  │  │  Eden   │    │  │   Long-lived objects            │   │  │
+│  │  │  │  Space  │    │  │                                 │   │  │
+│  │  │  ├─────────┤    │  │                                 │   │  │
+│  │  │  │   S0    │    │  │                                 │   │  │
+│  │  │  ├─────────┤    │  │                                 │   │  │
+│  │  │  │   S1    │    │  │                                 │   │  │
+│  │  │  └─────────┘    │  └─────────────────────────────────┘   │  │
+│  │  └─────────────────┘                                         │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                                                                    │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐            │
+│  │   Thread 1   │  │   Thread 2   │  │   Thread 3   │            │
+│  │    Stack     │  │    Stack     │  │    Stack     │            │
+│  │  ┌────────┐  │  │  ┌────────┐  │  │  ┌────────┐  │            │
+│  │  │ Frame  │  │  │  │ Frame  │  │  │  │ Frame  │  │            │
+│  │  │ Frame  │  │  │  │ Frame  │  │  │  │ Frame  │  │            │
+│  │  │ Frame  │  │  │  └────────┘  │  │  │ Frame  │  │            │
+│  │  └────────┘  │  │              │  │  │ Frame  │  │            │
+│  └──────────────┘  └──────────────┘  └──────────────┘            │
+│                                                                    │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │                       METASPACE                              │  │
+│  │     (Class metadata, method bytecode, constant pool)         │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────────────────┘
+```
+
+### Stack Memory
+
+The stack is a region of memory used for storing local variables and method call information. Each thread has its own private stack.
+
+| Property | Description |
+|----------|-------------|
+| **Thread-private** | Each thread has its own stack |
+| **LIFO structure** | Last In, First Out (push/pop operations) |
+| **Fixed size** | Size determined at thread creation |
+| **Fast access** | Direct memory access, no GC overhead |
+| **Stores** | Primitive values, object references, method frames |
+
+```java
+public class StackExample {
+    public void methodA() {
+        int x = 10;              // Primitive stored in stack
+        String name = "Hello";   // Reference stored in stack
+                                 // (String object in heap)
+        methodB(x);              // New stack frame created
+    }
+
+    public void methodB(int param) {
+        double result = param * 2.5;  // Stored in stack
+        int[] arr = new int[5];       // Reference in stack, array in heap
+    }
+}
+```
+
+### Heap Memory
+
+The heap is a shared memory region where all objects and their instance variables are stored.
+
+| Property | Description |
+|----------|-------------|
+| **Shared** | All threads share the same heap |
+| **Dynamic size** | Can grow/shrink at runtime |
+| **GC managed** | Garbage collector reclaims unused memory |
+| **Stores** | Objects, instance variables, arrays |
+
+```java
+public class HeapExample {
+    private String name;           // Instance variable - stored in heap with object
+    private int[] scores;
+
+    public HeapExample(String name) {
+        this.name = name;                    // String object in heap
+        this.scores = new int[]{90, 85, 88}; // Array object in heap
+    }
+}
+```
+
+### Stack vs Heap Comparison
+
+| Aspect | Stack | Heap |
+|--------|-------|------|
+| **Storage** | Primitives, references | Objects, instance variables |
+| **Scope** | Thread-private | Shared among threads |
+| **Size** | Fixed, smaller | Dynamic, larger |
+| **Speed** | Very fast | Slower (GC overhead) |
+| **Management** | Automatic (LIFO) | Garbage collected |
+| **Error** | StackOverflowError | OutOfMemoryError |
+
+### Memory Allocation Example
+
+```java
+public class MemoryDemo {
+    private int instanceVar = 10;        // Heap (with object)
+    private static int staticVar = 20;   // Metaspace
+
+    public void process() {
+        int localVar = 30;               // Stack
+        String localRef = new String("Hello");  // Reference: Stack, Object: Heap
+        calculate(localVar);             // New stack frame
+    }
+
+    public int calculate(int param) {    // param: Stack
+        int result = param * 2;          // result: Stack
+        return result;
+    }
+}
+```
+
+```
+STACK (Thread-1)                    HEAP
+┌─────────────────────┐            ┌─────────────────────────────┐
+│ process()           │            │   ┌─────────────────────┐   │
+│  ├─ this (ref) ────────────────► │   │   MemoryDemo object │   │
+│  ├─ localVar = 30   │            │   │  instanceVar = 10   │   │
+│  ├─ localRef (ref) ────────────► │   └─────────────────────┘   │
+├─────────────────────┤            │   String "Hello"            │
+│ calculate()         │            └─────────────────────────────┘
+│  ├─ param = 30      │
+│  ├─ result = 60     │            METASPACE
+└─────────────────────┘            ┌─────────────────────────────┐
+                                   │  staticVar = 20             │
+                                   │  Class metadata             │
+                                   └─────────────────────────────┘
+```
+
+---
+
+## Method Execution on the Stack
+
+When a method is called, a new stack frame is created. When the method returns, the frame is destroyed.
+
+### Stack Frame Lifecycle
+
+```java
+public class MethodStackDemo {
+    public static void main(String[] args) {
+        int result = methodA(5);
+    }
+
+    public static int methodA(int x) {
+        int y = methodB(x + 10);
+        return y * 2;
+    }
+
+    public static int methodB(int a) {
+        return a + 5;
+    }
+}
+```
+
+**Stack evolution:**
+
+```
+Step 1: main() called          Step 2: methodA() called
+┌──────────────────┐           ┌──────────────────┐
+│      main()      │           │    methodA()     │ ← Top
+│  args, result    │           │  x=5, y=?        │
+└──────────────────┘           ├──────────────────┤
+                               │      main()      │
+                               └──────────────────┘
+
+Step 3: methodB() called       Step 4: After returns
+┌──────────────────┐           ┌──────────────────┐
+│    methodB()     │ ← Top     │      main()      │ ← Top
+│  a=15            │           │  args, result=40 │
+├──────────────────┤           └──────────────────┘
+│    methodA()     │
+├──────────────────┤
+│      main()      │
+└──────────────────┘
+```
+
+### Recursion and Stack Frames
+
+```java
+public static int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+```
+
+**Stack during factorial(5):**
+
+```
+┌────────────────────────┐
+│ factorial(1) → returns 1│
+├────────────────────────┤
+│ factorial(2) → 2 * 1 = 2│
+├────────────────────────┤
+│ factorial(3) → 3 * 2 = 6│
+├────────────────────────┤
+│ factorial(4) → 4 * 6 = 24│
+├────────────────────────┤
+│ factorial(5) → 5 * 24 = 120│
+├────────────────────────┤
+│ main()                  │
+└────────────────────────┘
+```
+
+---
+
 ## Static Members
 
 Static members belong to the class itself, not to any specific object.
@@ -705,6 +733,74 @@ public class Database {
     }
 }
 ```
+
+---
+
+## OOP Principles Overview
+
+Now that we understand the building blocks (classes, objects, members, memory), let's explore the four pillars of OOP.
+
+```
+┌─────────────────────────────────────┐
+│         OOP Principles              │
+├─────────────────────────────────────┤
+│  1. Encapsulation                   │
+│     Hide internal details           │
+│                                     │
+│  2. Inheritance                     │
+│     Reuse and extend functionality  │
+│                                     │
+│  3. Polymorphism                    │
+│     One interface, many forms       │
+│                                     │
+│  4. Abstraction                     │
+│     Hide complexity, show essentials│
+└─────────────────────────────────────┘
+```
+
+---
+
+## Encapsulation
+
+Encapsulation bundles data and methods that operate on that data within a single unit (class), hiding internal details from the outside world.
+
+### Implementing Encapsulation
+
+```java
+public class BankAccount {
+    // Private data - hidden from outside
+    private double balance;
+    private String accountNumber;
+
+    // Public methods - controlled access
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public boolean withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+```
+
+### Benefits of Encapsulation
+
+| Benefit | Description |
+|---------|-------------|
+| **Data Protection** | Internal state cannot be directly modified |
+| **Flexibility** | Can change implementation without affecting users |
+| **Validation** | Control how data is accessed and modified |
+| **Maintainability** | Easier to modify and debug |
 
 ---
 
@@ -919,9 +1015,82 @@ public class Puppy extends Dog {
 
 ---
 
-## Interfaces And Abstract Classes
+## Polymorphism
 
-Both provide abstraction but with different purposes and capabilities.
+Polymorphism means "many forms" - the ability of objects to take different forms. It allows the same interface to be used for different underlying implementations.
+
+### Method Overloading (Compile-time Polymorphism)
+
+Same method name with different parameters in the same class.
+
+```java
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public double add(double a, double b) {
+        return a + b;
+    }
+
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+
+// Usage
+Calculator calc = new Calculator();
+calc.add(5, 3);        // Calls int version
+calc.add(5.0, 3.0);    // Calls double version
+calc.add(1, 2, 3);     // Calls three-parameter version
+```
+
+### Method Overriding (Runtime Polymorphism)
+
+Child class provides specific implementation of parent's method.
+
+```java
+public class Animal {
+    public void makeSound() {
+        System.out.println("Some sound");
+    }
+}
+
+public class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bark!");
+    }
+}
+
+public class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Meow!");
+    }
+}
+
+// Runtime polymorphism in action
+Animal animal1 = new Dog();
+Animal animal2 = new Cat();
+animal1.makeSound();  // Bark! (actual type determines behavior)
+animal2.makeSound();  // Meow!
+```
+
+### Override Rules
+
+| Rule | Description |
+|------|-------------|
+| **Same signature** | Method name and parameters must match |
+| **Return type** | Same or subtype (covariant return) |
+| **Access** | Cannot reduce visibility (can increase) |
+| **Cannot override** | final, static, or private methods |
+
+---
+
+## Abstraction
+
+Abstraction hides complex implementation details, showing only essential features to the user.
 
 ### Abstract Classes
 
@@ -929,22 +1098,15 @@ Cannot be instantiated, may contain abstract and concrete methods.
 
 ```java
 public abstract class Shape {
-    // Abstract method (no implementation)
+    protected String color;
+
+    // Abstract method - no implementation
     public abstract double calculateArea();
-    public abstract double calculatePerimeter();
 
     // Concrete method
     public void display() {
+        System.out.println("Color: " + color);
         System.out.println("Area: " + calculateArea());
-        System.out.println("Perimeter: " + calculatePerimeter());
-    }
-
-    // Fields allowed
-    protected String color;
-
-    // Constructor allowed
-    public Shape(String color) {
-        this.color = color;
     }
 }
 
@@ -952,7 +1114,7 @@ public class Circle extends Shape {
     private double radius;
 
     public Circle(String color, double radius) {
-        super(color);
+        this.color = color;
         this.radius = radius;
     }
 
@@ -960,28 +1122,20 @@ public class Circle extends Shape {
     public double calculateArea() {
         return Math.PI * radius * radius;
     }
-
-    @Override
-    public double calculatePerimeter() {
-        return 2 * Math.PI * radius;
-    }
 }
-
-// Usage
-// Shape shape = new Shape("red");  // ERROR: Cannot instantiate
-Shape circle = new Circle("red", 5.0);
-circle.display();
 ```
 
-### Interfaces
+---
 
-Contract that implementing classes must fulfill. All methods implicitly public and abstract (before Java 8).
+## Interfaces
+
+Interfaces define a contract that implementing classes must fulfill.
+
+### Basic Interface
 
 ```java
 public interface Drawable {
-    // Abstract method (implicitly public abstract)
-    void draw();
-
+    void draw();  // Implicitly public abstract
     void resize(int width, int height);
 }
 
@@ -996,24 +1150,28 @@ public class Rectangle implements Drawable {
         System.out.println("Resizing to " + width + "x" + height);
     }
 }
+```
 
-// Multiple interfaces
-public class Square implements Drawable, Comparable<Square> {
-    private int side;
+### Multiple Interface Implementation
 
+```java
+public interface Flyable {
+    void fly();
+}
+
+public interface Swimmable {
+    void swim();
+}
+
+public class Duck implements Flyable, Swimmable {
     @Override
-    public void draw() {
-        System.out.println("Drawing square");
+    public void fly() {
+        System.out.println("Duck flying");
     }
 
     @Override
-    public void resize(int width, int height) {
-        this.side = width;  // Square maintains aspect ratio
-    }
-
-    @Override
-    public int compareTo(Square other) {
-        return Integer.compare(this.side, other.side);
+    public void swim() {
+        System.out.println("Duck swimming");
     }
 }
 ```
@@ -1031,7 +1189,6 @@ public interface ModernInterface {
     // Default method (Java 8+)
     default void defaultMethod() {
         System.out.println("Default implementation");
-        privateHelper();  // Can call private methods
     }
 
     // Static method (Java 8+)
@@ -1043,31 +1200,7 @@ public interface ModernInterface {
     private void privateHelper() {
         System.out.println("Private helper method");
     }
-
-    // Private static method (Java 9+)
-    private static void privateStaticHelper() {
-        System.out.println("Private static helper");
-    }
 }
-
-public class Implementation implements ModernInterface {
-    @Override
-    public void abstractMethod() {
-        System.out.println("Implementation");
-    }
-
-    // Can optionally override default method
-    @Override
-    public void defaultMethod() {
-        System.out.println("Custom implementation");
-    }
-}
-
-// Usage
-Implementation obj = new Implementation();
-obj.abstractMethod();
-obj.defaultMethod();
-ModernInterface.staticMethod();  // Called on interface
 ```
 
 ### Abstract Class vs Interface
@@ -1078,91 +1211,61 @@ ModernInterface.staticMethod();  // Called on interface
 | Fields | Any | public static final only |
 | Constructor | Yes | No |
 | Multiple Inheritance | No | Yes |
-| Access Modifiers | Any | public only (methods) |
 | When to use | IS-A relationship | CAN-DO capability |
 
-```java
-// Abstract class for IS-A relationship
-public abstract class Animal {
-    protected String name;
+---
 
-    public Animal(String name) {
-        this.name = name;
-    }
+## Marker Interfaces
 
-    public abstract void makeSound();
+A marker interface is an empty interface (no methods) used to signal a capability or characteristic to the JVM or other code.
 
-    public void sleep() {
-        System.out.println(name + " is sleeping");
-    }
-}
-
-// Interfaces for capabilities
-public interface Swimmable {
-    void swim();
-}
-
-public interface Flyable {
-    void fly();
-}
-
-// Using both
-public class Duck extends Animal implements Swimmable, Flyable {
-    public Duck(String name) {
-        super(name);
-    }
-
-    @Override
-    public void makeSound() {
-        System.out.println("Quack!");
-    }
-
-    @Override
-    public void swim() {
-        System.out.println(name + " is swimming");
-    }
-
-    @Override
-    public void fly() {
-        System.out.println(name + " is flying");
-    }
-}
-```
-
-### Functional Interfaces
-
-Interface with exactly one abstract method (SAM - Single Abstract Method).
+### Common Marker Interfaces
 
 ```java
-@FunctionalInterface
-public interface Converter<F, T> {
-    T convert(F from);
-
-    // Can have default methods
-    default void log() {
-        System.out.println("Converting...");
-    }
-}
-
-// Usage with lambda
-Converter<String, Integer> converter = (s) -> Integer.parseInt(s);
-int number = converter.convert("123");
-```
-
-### Marker Interfaces
-
-Interface with no methods, used for type checking.
-
-```java
-public interface Serializable { }
-
+// java.io.Serializable - marks objects that can be serialized
 public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private int age;
 }
 
-// Java checks if object is instance of Serializable
+// java.lang.Cloneable - marks objects that can be cloned
+public class Document implements Cloneable {
+    private String content;
+
+    @Override
+    public Document clone() throws CloneNotSupportedException {
+        return (Document) super.clone();
+    }
+}
 ```
+
+### Purpose of Marker Interfaces
+
+| Interface | Purpose |
+|-----------|---------|
+| **Serializable** | Object can be converted to byte stream |
+| **Cloneable** | Object can be cloned using Object.clone() |
+| **Remote** | Object can be accessed remotely (RMI) |
+| **RandomAccess** | List supports fast random access |
+
+### Marker Interfaces vs Annotations
+
+Modern Java often uses annotations instead of marker interfaces:
+
+```java
+// Marker interface approach
+public class OldStyle implements Serializable { }
+
+// Annotation approach (modern)
+@Entity
+public class ModernStyle { }
+```
+
+**When to use marker interfaces:**
+- When you need to define a type that a class can implement
+- When you want to use `instanceof` checks
+- When the marker represents a permanent characteristic
 
 ---
 
@@ -2636,17 +2739,19 @@ jmap -dump:format=b,file=heap.hprof <pid>
 
 | Concept | Key Points |
 |---------|------------|
-| OOP Principles | Encapsulation, Inheritance, Polymorphism, Abstraction |
-| Classes vs Objects | Class is blueprint, Object is instance |
-| Class Members | Fields, methods, constructors, initializers |
+| Classes and Objects | Class is blueprint, Object is instance with actual data |
+| Class Members | Fields, methods, constructors, 'this' keyword, getters/setters |
+| JVM Memory | Stack (primitives, references), Heap (objects), Metaspace (class data) |
 | Static Members | Belong to class, shared among instances |
-| Inheritance | Code reuse, IS-A relationship, method overriding |
-| Abstract Classes | Cannot instantiate, may have abstract methods |
-| Interfaces | Contract, multiple inheritance, default methods (Java 8+) |
-| Non-Access Modifiers | final, abstract, static, synchronized, volatile, transient, native, strictfp, sealed |
+| OOP Principles | Encapsulation, Inheritance, Polymorphism, Abstraction |
+| Inheritance | Code reuse, IS-A relationship, 'extends' keyword |
+| Polymorphism | Overloading (compile-time), Overriding (runtime) |
+| Abstraction | Abstract classes and interfaces hide complexity |
+| Interfaces | Contract, multiple inheritance, default/static methods (Java 8+) |
+| Marker Interfaces | Empty interfaces for type signaling (Serializable, Cloneable) |
+| Non-Access Modifiers | final, abstract, static, synchronized, volatile, transient, sealed |
 | equals/hashCode | Override together, important for collections |
-| Garbage Collection | Generational GC, Minor/Major/Full GC, G1/ZGC algorithms |
-| GC Best Practices | Try-with-resources, avoid memory leaks, use weak references |
+| Garbage Collection | Generational GC, G1/ZGC algorithms, memory management |
 
 ## Next Topic
 

@@ -905,4 +905,4 @@ synchronized (syncList) {
 
 ## Next Topic
 
-Continue to [Multithreading](./05-multithreading.md) to learn about concurrent programming in Java.
+Continue to [Functional Programming](./06-functional-programming.md) to learn about functional interfaces, lambdas, and method references.

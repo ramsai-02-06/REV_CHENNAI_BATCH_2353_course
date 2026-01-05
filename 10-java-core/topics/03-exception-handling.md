@@ -1017,4 +1017,4 @@ for (int i = 0; i < array.length; i++) {
 
 ## Next Topic
 
-Continue to [Collections Framework](./04-collections-framework.md) to learn about Java's collection classes and data structures.
+Continue to [Design Patterns](./04-design-patterns.md) to learn about common design patterns in Java.
