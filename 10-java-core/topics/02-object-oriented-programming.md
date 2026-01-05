@@ -331,230 +331,6 @@ public class Person {
 
 ---
 
-## JVM Memory Architecture
-
-Now that we understand classes and objects, let's examine how Java manages them in memory.
-
-### Memory Areas Overview
-
-```
-┌───────────────────────────────────────────────────────────────────┐
-│                        JVM Memory Structure                        │
-├───────────────────────────────────────────────────────────────────┤
-│                                                                    │
-│  ┌─────────────────────────────────────────────────────────────┐  │
-│  │                         HEAP MEMORY                          │  │
-│  │  (Shared among all threads - Objects and Instance Variables) │  │
-│  │                                                               │  │
-│  │  ┌─────────────────┐  ┌─────────────────────────────────┐   │  │
-│  │  │   Young Gen     │  │         Old Generation          │   │  │
-│  │  │  ┌─────────┐    │  │                                 │   │  │
-│  │  │  │  Eden   │    │  │   Long-lived objects            │   │  │
-│  │  │  │  Space  │    │  │                                 │   │  │
-│  │  │  ├─────────┤    │  │                                 │   │  │
-│  │  │  │   S0    │    │  │                                 │   │  │
-│  │  │  ├─────────┤    │  │                                 │   │  │
-│  │  │  │   S1    │    │  │                                 │   │  │
-│  │  │  └─────────┘    │  └─────────────────────────────────┘   │  │
-│  │  └─────────────────┘                                         │  │
-│  └─────────────────────────────────────────────────────────────┘  │
-│                                                                    │
-│  ┌─────────────────────────────────────────────────────────────┐  │
-│  │                        STACK MEMORY                          │  │
-│  │        (Thread-private - Local Variables and References)     │  │
-│  │                                                               │  │
-│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐        │  │
-│  │  │   Thread 1   │  │   Thread 2   │  │   Thread 3   │        │  │
-│  │  │  ┌────────┐  │  │  ┌────────┐  │  │  ┌────────┐  │        │  │
-│  │  │  │ Frame  │  │  │  │ Frame  │  │  │  │ Frame  │  │        │  │
-│  │  │  │ Frame  │  │  │  │ Frame  │  │  │  │ Frame  │  │        │  │
-│  │  │  │ Frame  │  │  │  └────────┘  │  │  │ Frame  │  │        │  │
-│  │  │  └────────┘  │  │              │  │  │ Frame  │  │        │  │
-│  │  └──────────────┘  └──────────────┘  └──────────────┘        │  │
-│  └─────────────────────────────────────────────────────────────┘  │
-│                                                                    │
-│  ┌─────────────────────────────────────────────────────────────┐  │
-│  │                       METASPACE                              │  │
-│  │     (Class metadata, method bytecode, constant pool)         │  │
-│  └─────────────────────────────────────────────────────────────┘  │
-└───────────────────────────────────────────────────────────────────┘
-```
-
-### Stack Memory
-
-The stack is a region of memory used for storing local variables and method call information. Each thread has its own private stack.
-
-| Property | Description |
-|----------|-------------|
-| **Thread-private** | Each thread has its own stack |
-| **LIFO structure** | Last In, First Out (push/pop operations) |
-| **Fixed size** | Size determined at thread creation |
-| **Fast access** | Direct memory access, no GC overhead |
-| **Stores** | Primitive values, object references, method frames |
-
-```java
-public class StackExample {
-    public void methodA() {
-        int x = 10;              // Primitive stored in stack
-        String name = "Hello";   // Reference stored in stack
-                                 // (String object in heap)
-        methodB(x);              // New stack frame created
-    }
-
-    public void methodB(int param) {
-        double result = param * 2.5;  // Stored in stack
-        int[] arr = new int[5];       // Reference in stack, array in heap
-    }
-}
-```
-
-### Heap Memory
-
-The heap is a shared memory region where all objects and their instance variables are stored.
-
-| Property | Description |
-|----------|-------------|
-| **Shared** | All threads share the same heap |
-| **Dynamic size** | Can grow/shrink at runtime |
-| **GC managed** | Garbage collector reclaims unused memory |
-| **Stores** | Objects, instance variables, arrays |
-
-```java
-public class HeapExample {
-    private String name;           // Instance variable - stored in heap with object
-    private int[] scores;
-
-    public HeapExample(String name) {
-        this.name = name;                    // String object in heap
-        this.scores = new int[]{90, 85, 88}; // Array object in heap
-    }
-}
-```
-
-### Stack vs Heap Comparison
-
-| Aspect | Stack | Heap |
-|--------|-------|------|
-| **Storage** | Primitives, references | Objects, instance variables |
-| **Scope** | Thread-private | Shared among threads |
-| **Size** | Fixed, smaller | Dynamic, larger |
-| **Speed** | Very fast | Slower (GC overhead) |
-| **Management** | Automatic (LIFO) | Garbage collected |
-| **Error** | StackOverflowError | OutOfMemoryError |
-
-### Memory Allocation Example
-
-```java
-public class MemoryDemo {
-    private int instanceVar = 10;        // Heap (with object)
-    private static int staticVar = 20;   // Metaspace
-
-    public void process() {
-        int localVar = 30;               // Stack
-        String localRef = new String("Hello");  // Reference: Stack, Object: Heap
-        calculate(localVar);             // New stack frame
-    }
-
-    public int calculate(int param) {    // param: Stack
-        int result = param * 2;          // result: Stack
-        return result;
-    }
-}
-```
-
-```
-STACK (Thread-1)                    HEAP
-┌─────────────────────┐            ┌─────────────────────────────┐
-│ process()           │            │   ┌─────────────────────┐   │
-│  ├─ this (ref) ────────────────► │   │   MemoryDemo object │   │
-│  ├─ localVar = 30   │            │   │  instanceVar = 10   │   │
-│  ├─ localRef (ref) ────────────► │   └─────────────────────┘   │
-├─────────────────────┤            │   String "Hello"            │
-│ calculate()         │            └─────────────────────────────┘
-│  ├─ param = 30      │
-│  ├─ result = 60     │            METASPACE
-└─────────────────────┘            ┌─────────────────────────────┐
-                                   │  staticVar = 20             │
-                                   │  Class metadata             │
-                                   └─────────────────────────────┘
-```
-
----
-
-## Method Execution on the Stack
-
-When a method is called, a new stack frame is created. When the method returns, the frame is destroyed.
-
-### Stack Frame Lifecycle
-
-```java
-public class MethodStackDemo {
-    public static void main(String[] args) {
-        int result = methodA(5);
-    }
-
-    public static int methodA(int x) {
-        int y = methodB(x + 10);
-        return y * 2;
-    }
-
-    public static int methodB(int a) {
-        return a + 5;
-    }
-}
-```
-
-**Stack evolution:**
-
-```
-Step 1: main() called          Step 2: methodA() called
-┌──────────────────┐           ┌──────────────────┐
-│      main()      │           │    methodA()     │ ← Top
-│  args, result    │           │  x=5, y=?        │
-└──────────────────┘           ├──────────────────┤
-                               │      main()      │
-                               └──────────────────┘
-
-Step 3: methodB() called       Step 4: After returns
-┌──────────────────┐           ┌──────────────────┐
-│    methodB()     │ ← Top     │      main()      │ ← Top
-│  a=15            │           │  args, result=40 │
-├──────────────────┤           └──────────────────┘
-│    methodA()     │
-├──────────────────┤
-│      main()      │
-└──────────────────┘
-```
-
-### Recursion and Stack Frames
-
-```java
-public static int factorial(int n) {
-    if (n <= 1) return 1;
-    return n * factorial(n - 1);
-}
-```
-
-**Stack during factorial(5):**
-
-```
-┌────────────────────────┐
-│ factorial(1) → returns 1│
-├────────────────────────┤
-│ factorial(2) → 2 * 1 = 2│
-├────────────────────────┤
-│ factorial(3) → 3 * 2 = 6│
-├────────────────────────┤
-│ factorial(4) → 4 * 6 = 24│
-├────────────────────────┤
-│ factorial(5) → 5 * 24 = 120│
-├────────────────────────┤
-│ main()                  │
-└────────────────────────┘
-```
-
----
-
 ## Static Members
 
 Static members belong to the class itself, not to any specific object.
@@ -740,9 +516,233 @@ public class Database {
 
 ---
 
+## JVM Memory Architecture
+
+Now that we understand classes, objects, and static members, let's examine where they live in memory.
+
+### Memory Areas Overview
+
+```
+┌───────────────────────────────────────────────────────────────────┐
+│                        JVM Memory Structure                        │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                    │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │                         HEAP MEMORY                          │  │
+│  │  (Shared among all threads - Objects and Instance Variables) │  │
+│  │                                                               │  │
+│  │  ┌─────────────────┐  ┌─────────────────────────────────┐   │  │
+│  │  │   Young Gen     │  │         Old Generation          │   │  │
+│  │  │  ┌─────────┐    │  │                                 │   │  │
+│  │  │  │  Eden   │    │  │   Long-lived objects            │   │  │
+│  │  │  │  Space  │    │  │                                 │   │  │
+│  │  │  ├─────────┤    │  │                                 │   │  │
+│  │  │  │   S0    │    │  │                                 │   │  │
+│  │  │  ├─────────┤    │  │                                 │   │  │
+│  │  │  │   S1    │    │  │                                 │   │  │
+│  │  │  └─────────┘    │  └─────────────────────────────────┘   │  │
+│  │  └─────────────────┘                                         │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                                                                    │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │                        STACK MEMORY                          │  │
+│  │        (Thread-private - Local Variables and References)     │  │
+│  │                                                               │  │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐        │  │
+│  │  │   Thread 1   │  │   Thread 2   │  │   Thread 3   │        │  │
+│  │  │  ┌────────┐  │  │  ┌────────┐  │  │  ┌────────┐  │        │  │
+│  │  │  │ Frame  │  │  │  │ Frame  │  │  │  │ Frame  │  │        │  │
+│  │  │  │ Frame  │  │  │  │ Frame  │  │  │  │ Frame  │  │        │  │
+│  │  │  │ Frame  │  │  │  └────────┘  │  │  │ Frame  │  │        │  │
+│  │  │  └────────┘  │  │              │  │  │ Frame  │  │        │  │
+│  │  └──────────────┘  └──────────────┘  └──────────────┘        │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                                                                    │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │                       METASPACE                              │  │
+│  │   (Class metadata, static variables, method bytecode)        │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────────────────┘
+```
+
+### Stack Memory
+
+The stack is a region of memory used for storing local variables and method call information. Each thread has its own private stack.
+
+| Property | Description |
+|----------|-------------|
+| **Thread-private** | Each thread has its own stack |
+| **LIFO structure** | Last In, First Out (push/pop operations) |
+| **Fixed size** | Size determined at thread creation |
+| **Fast access** | Direct memory access, no GC overhead |
+| **Stores** | Primitive values, object references, method frames |
+
+```java
+public class StackExample {
+    public void methodA() {
+        int x = 10;              // Primitive stored in stack
+        String name = "Hello";   // Reference stored in stack
+                                 // (String object in heap)
+        methodB(x);              // New stack frame created
+    }
+
+    public void methodB(int param) {
+        double result = param * 2.5;  // Stored in stack
+        int[] arr = new int[5];       // Reference in stack, array in heap
+    }
+}
+```
+
+### Heap Memory
+
+The heap is a shared memory region where all objects and their instance variables are stored.
+
+| Property | Description |
+|----------|-------------|
+| **Shared** | All threads share the same heap |
+| **Dynamic size** | Can grow/shrink at runtime |
+| **GC managed** | Garbage collector reclaims unused memory |
+| **Stores** | Objects, instance variables, arrays |
+
+```java
+public class HeapExample {
+    private String name;           // Instance variable - stored in heap with object
+    private int[] scores;
+
+    public HeapExample(String name) {
+        this.name = name;                    // String object in heap
+        this.scores = new int[]{90, 85, 88}; // Array object in heap
+    }
+}
+```
+
+### Stack vs Heap Comparison
+
+| Aspect | Stack | Heap |
+|--------|-------|------|
+| **Storage** | Primitives, references | Objects, instance variables |
+| **Scope** | Thread-private | Shared among threads |
+| **Size** | Fixed, smaller | Dynamic, larger |
+| **Speed** | Very fast | Slower (GC overhead) |
+| **Management** | Automatic (LIFO) | Garbage collected |
+| **Error** | StackOverflowError | OutOfMemoryError |
+
+### Memory Allocation Example
+
+```java
+public class MemoryDemo {
+    private int instanceVar = 10;        // Heap (with object)
+    private static int staticVar = 20;   // Metaspace
+
+    public void process() {
+        int localVar = 30;               // Stack
+        String localRef = new String("Hello");  // Reference: Stack, Object: Heap
+        calculate(localVar);             // New stack frame
+    }
+
+    public int calculate(int param) {    // param: Stack
+        int result = param * 2;          // result: Stack
+        return result;
+    }
+}
+```
+
+```
+STACK (Thread-1)                    HEAP
+┌─────────────────────┐            ┌─────────────────────────────┐
+│ process()           │            │   ┌─────────────────────┐   │
+│  ├─ this (ref) ────────────────► │   │   MemoryDemo object │   │
+│  ├─ localVar = 30   │            │   │  instanceVar = 10   │   │
+│  ├─ localRef (ref) ────────────► │   └─────────────────────┘   │
+├─────────────────────┤            │   String "Hello"            │
+│ calculate()         │            └─────────────────────────────┘
+│  ├─ param = 30      │
+│  ├─ result = 60     │            METASPACE
+└─────────────────────┘            ┌─────────────────────────────┐
+                                   │  staticVar = 20             │
+                                   │  Class metadata             │
+                                   └─────────────────────────────┘
+```
+
+---
+
+## Method Execution on the Stack
+
+When a method is called, a new stack frame is created. When the method returns, the frame is destroyed.
+
+### Stack Frame Lifecycle
+
+```java
+public class MethodStackDemo {
+    public static void main(String[] args) {
+        int result = methodA(5);
+    }
+
+    public static int methodA(int x) {
+        int y = methodB(x + 10);
+        return y * 2;
+    }
+
+    public static int methodB(int a) {
+        return a + 5;
+    }
+}
+```
+
+**Stack evolution:**
+
+```
+Step 1: main() called          Step 2: methodA() called
+┌──────────────────┐           ┌──────────────────┐
+│      main()      │           │    methodA()     │ ← Top
+│  args, result    │           │  x=5, y=?        │
+└──────────────────┘           ├──────────────────┤
+                               │      main()      │
+                               └──────────────────┘
+
+Step 3: methodB() called       Step 4: After returns
+┌──────────────────┐           ┌──────────────────┐
+│    methodB()     │ ← Top     │      main()      │ ← Top
+│  a=15            │           │  args, result=40 │
+├──────────────────┤           └──────────────────┘
+│    methodA()     │
+├──────────────────┤
+│      main()      │
+└──────────────────┘
+```
+
+### Recursion and Stack Frames
+
+```java
+public static int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+```
+
+**Stack during factorial(5):**
+
+```
+┌────────────────────────┐
+│ factorial(1) → returns 1│
+├────────────────────────┤
+│ factorial(2) → 2 * 1 = 2│
+├────────────────────────┤
+│ factorial(3) → 3 * 2 = 6│
+├────────────────────────┤
+│ factorial(4) → 4 * 6 = 24│
+├────────────────────────┤
+│ factorial(5) → 5 * 24 = 120│
+├────────────────────────┤
+│ main()                  │
+└────────────────────────┘
+```
+
+---
+
 ## OOP Principles Overview
 
-Now that we understand the building blocks (classes, objects, members, memory), let's explore the four pillars of OOP.
+Now that we understand the building blocks (classes, objects, static members, and memory), let's explore the four pillars of OOP.
 
 ```
 ┌─────────────────────────────────────┐
