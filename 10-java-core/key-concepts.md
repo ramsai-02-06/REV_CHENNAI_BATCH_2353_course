@@ -1,8 +1,27 @@
 # Core Java Key Concepts for Application Developers
 
+## Table of Contents
+- [1. Java Fundamentals](#1-java-fundamentals)
+- [2. Object-Oriented Programming](#2-object-oriented-programming)
+- [3. Access Modifiers](#3-access-modifiers)
+- [4. Generics](#4-generics)
+- [5. Annotations](#5-annotations)
+- [6. Exception Handling](#6-exception-handling)
+- [7. Collections Framework](#7-collections-framework)
+- [8. Stream API](#8-stream-api)
+- [9. Functional Programming](#9-functional-programming)
+- [10. File I/O](#10-file-io)
+- [11. Multithreading](#11-multithreading)
+- [12. Modern Java Features](#12-modern-java-features)
+- [13. Design Patterns](#13-design-patterns)
+
+---
+
 ## Overview
 
 This document outlines the essential Java concepts every application developer must understand. Java is one of the most widely used programming languages for enterprise applications, providing a robust, object-oriented platform for building scalable software.
+
+> **Detailed Topics:** See [topics/](topics/) folder for in-depth coverage of each concept.
 
 ---
 
@@ -289,7 +308,138 @@ public class Circle extends Shape implements Drawable {
 
 ---
 
-## 4. Exception Handling
+## 4. Generics
+
+### Why It Matters
+- Type safety at compile time
+- Code reusability
+- Eliminates type casting
+
+> **Detailed Coverage:** See [topics/02-object-oriented-programming.md](topics/02-object-oriented-programming.md#generics)
+
+### Generic Classes
+```java
+public class Box<T> {
+    private T content;
+
+    public void set(T content) {
+        this.content = content;
+    }
+
+    public T get() {
+        return content;
+    }
+}
+
+// Usage
+Box<String> stringBox = new Box<>();
+stringBox.set("Hello");
+String value = stringBox.get();  // No casting needed
+
+Box<Integer> intBox = new Box<>();
+intBox.set(42);
+```
+
+### Generic Methods
+```java
+public class Util {
+    public static <T> T getFirst(List<T> list) {
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public static <T extends Comparable<T>> T findMax(List<T> list) {
+        return list.stream().max(Comparable::compareTo).orElse(null);
+    }
+}
+
+// Usage
+List<String> names = List.of("Alice", "Bob");
+String first = Util.getFirst(names);
+```
+
+### Bounded Type Parameters
+```java
+// Upper bound - T must extend Number
+public <T extends Number> double sum(List<T> numbers) {
+    return numbers.stream().mapToDouble(Number::doubleValue).sum();
+}
+
+// Multiple bounds
+public <T extends Comparable<T> & Serializable> void process(T item) {
+    // T must implement both Comparable and Serializable
+}
+```
+
+### Wildcards
+```java
+// Unbounded wildcard
+public void printList(List<?> list) {
+    list.forEach(System.out::println);
+}
+
+// Upper bounded - read only (Producer Extends)
+public double sumNumbers(List<? extends Number> numbers) {
+    return numbers.stream().mapToDouble(Number::doubleValue).sum();
+}
+
+// Lower bounded - write only (Consumer Super)
+public void addNumbers(List<? super Integer> list) {
+    list.add(1);
+    list.add(2);
+}
+```
+
+---
+
+## 5. Annotations
+
+### Why It Matters
+- Metadata for code
+- Framework configuration
+- Compile-time and runtime processing
+
+> **Detailed Coverage:** See [topics/02-object-oriented-programming.md](topics/02-object-oriented-programming.md#annotations)
+
+### Built-in Annotations
+```java
+@Override           // Method overrides parent
+@Deprecated         // Marks as deprecated
+@SuppressWarnings   // Suppress compiler warnings
+@FunctionalInterface // Single abstract method interface
+```
+
+### Custom Annotations
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface LogExecution {
+    String value() default "";
+    boolean enabled() default true;
+}
+
+// Usage
+public class Service {
+    @LogExecution(value = "Processing order", enabled = true)
+    public void processOrder(Order order) {
+        // method logic
+    }
+}
+```
+
+### Processing Annotations with Reflection
+```java
+Method[] methods = Service.class.getDeclaredMethods();
+for (Method method : methods) {
+    if (method.isAnnotationPresent(LogExecution.class)) {
+        LogExecution annotation = method.getAnnotation(LogExecution.class);
+        System.out.println("Log: " + annotation.value());
+    }
+}
+```
+
+---
+
+## 6. Exception Handling
 
 ### Why It Matters
 - Graceful error handling
@@ -397,7 +547,7 @@ public void withdraw(double amount) throws InsufficientFundsException {
 
 ---
 
-## 5. Collections Framework
+## 7. Collections Framework
 
 ### Why It Matters
 - Store and manipulate data
@@ -526,7 +676,7 @@ pq.poll();  // 1 (smallest first)
 
 ---
 
-## 6. Stream API
+## 8. Stream API
 
 ### Why It Matters
 - Functional programming in Java
@@ -610,7 +760,7 @@ IntSummaryStatistics stats = people.stream()
 
 ---
 
-## 7. Functional Programming
+## 9. Functional Programming
 
 ### Why It Matters
 - Cleaner code with lambdas
@@ -722,7 +872,79 @@ String result = findUser(1)
 
 ---
 
-## 8. Multithreading
+## 10. File I/O
+
+### Why It Matters
+- Read/write files
+- Configuration handling
+- Data persistence
+
+> **Detailed Coverage:** See [topics/08-file-io-serialization.md](topics/08-file-io-serialization.md)
+
+### Reading Files (NIO)
+```java
+// Read all lines
+List<String> lines = Files.readAllLines(Path.of("file.txt"));
+
+// Read as string
+String content = Files.readString(Path.of("file.txt"));
+
+// Buffered reading for large files
+try (BufferedReader reader = Files.newBufferedReader(Path.of("file.txt"))) {
+    String line;
+    while ((line = reader.readLine()) != null) {
+        System.out.println(line);
+    }
+}
+
+// Stream lines
+Files.lines(Path.of("file.txt"))
+    .filter(line -> !line.isEmpty())
+    .forEach(System.out::println);
+```
+
+### Writing Files (NIO)
+```java
+// Write string
+Files.writeString(Path.of("file.txt"), "Hello, World!");
+
+// Write lines
+List<String> lines = List.of("Line 1", "Line 2", "Line 3");
+Files.write(Path.of("file.txt"), lines);
+
+// Buffered writing
+try (BufferedWriter writer = Files.newBufferedWriter(Path.of("file.txt"))) {
+    writer.write("Hello");
+    writer.newLine();
+    writer.write("World");
+}
+```
+
+### Serialization
+```java
+// Serializable class
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String name;
+    private transient String password;  // Not serialized
+}
+
+// Serialize
+try (ObjectOutputStream oos = new ObjectOutputStream(
+        new FileOutputStream("user.ser"))) {
+    oos.writeObject(user);
+}
+
+// Deserialize
+try (ObjectInputStream ois = new ObjectInputStream(
+        new FileInputStream("user.ser"))) {
+    User user = (User) ois.readObject();
+}
+```
+
+---
+
+## 11. Multithreading
 
 ### Why It Matters
 - Concurrent execution
@@ -825,9 +1047,164 @@ executor.shutdown();
 executor.awaitTermination(5, TimeUnit.SECONDS);
 ```
 
+### CompletableFuture
+```java
+// Async execution
+CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+    return fetchData();
+});
+
+// Chain operations
+CompletableFuture<Integer> result = future
+    .thenApply(String::length)
+    .thenApply(len -> len * 2);
+
+// Combine futures
+CompletableFuture<String> combined = CompletableFuture
+    .supplyAsync(() -> "Hello")
+    .thenCombine(
+        CompletableFuture.supplyAsync(() -> "World"),
+        (a, b) -> a + " " + b
+    );
+
+// Error handling
+future.exceptionally(ex -> "Default value");
+
+// Wait for multiple
+CompletableFuture.allOf(future1, future2, future3).join();
+```
+
+### Virtual Threads (Java 21+)
+```java
+// Create virtual thread
+Thread vThread = Thread.ofVirtual().start(() -> {
+    System.out.println("Running in virtual thread");
+});
+
+// Virtual thread executor
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    for (int i = 0; i < 10000; i++) {
+        executor.submit(() -> {
+            // Each task runs in its own virtual thread
+            Thread.sleep(Duration.ofSeconds(1));
+            return "Done";
+        });
+    }
+}
+```
+
+> **Detailed Coverage:** See [topics/09-multithreading.md](topics/09-multithreading.md)
+
 ---
 
-## 9. Design Patterns
+## 12. Modern Java Features
+
+### Why It Matters
+- Cleaner, more concise code
+- Better performance
+- Improved developer productivity
+
+> **Detailed Coverage:** See [topics/01-java-basics.md](topics/01-java-basics.md) and [topics/02-object-oriented-programming.md](topics/02-object-oriented-programming.md)
+
+### Records (Java 16+)
+```java
+// Immutable data carrier
+public record Person(String name, int age) {}
+
+// Usage
+Person p = new Person("John", 30);
+String name = p.name();  // Accessor method
+int age = p.age();
+
+// Records are immutable, have equals/hashCode/toString
+System.out.println(p);  // Person[name=John, age=30]
+```
+
+### Text Blocks (Java 15+)
+```java
+// Multi-line strings
+String json = """
+    {
+        "name": "John",
+        "age": 30,
+        "city": "New York"
+    }
+    """;
+
+String html = """
+    <html>
+        <body>
+            <h1>Hello, World!</h1>
+        </body>
+    </html>
+    """;
+```
+
+### var Keyword (Java 10+)
+```java
+// Local variable type inference
+var list = new ArrayList<String>();  // Inferred as ArrayList<String>
+var map = new HashMap<String, Integer>();
+var stream = list.stream();
+
+// Works with loops
+for (var item : list) {
+    System.out.println(item);
+}
+
+// Cannot use with:
+// - Fields, parameters, return types
+// - null initialization
+// - lambda parameters (until Java 11)
+```
+
+### Sealed Classes (Java 17+)
+```java
+// Restrict which classes can extend
+public sealed class Shape permits Circle, Rectangle, Triangle {}
+
+public final class Circle extends Shape {}
+public final class Rectangle extends Shape {}
+public non-sealed class Triangle extends Shape {}  // Open for extension
+```
+
+### Pattern Matching (Java 16+)
+```java
+// instanceof with pattern
+if (obj instanceof String s) {
+    System.out.println(s.length());  // s is already cast
+}
+
+// Switch expressions with patterns (Java 21+)
+String result = switch (obj) {
+    case Integer i -> "Integer: " + i;
+    case String s -> "String: " + s;
+    case null -> "Null value";
+    default -> "Unknown type";
+};
+```
+
+### java.time API (Java 8+)
+```java
+// Date and time
+LocalDate date = LocalDate.now();
+LocalTime time = LocalTime.now();
+LocalDateTime dateTime = LocalDateTime.now();
+ZonedDateTime zoned = ZonedDateTime.now(ZoneId.of("America/New_York"));
+
+// Parsing and formatting
+LocalDate parsed = LocalDate.parse("2024-01-15");
+String formatted = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+// Calculations
+LocalDate nextWeek = date.plusWeeks(1);
+Period period = Period.between(date1, date2);
+Duration duration = Duration.between(time1, time2);
+```
+
+---
+
+## 13. Design Patterns
 
 ### Why It Matters
 - Proven solutions
@@ -1007,13 +1384,35 @@ By the end of this module, developers should be able to:
 - [ ] Write Java programs with proper structure
 - [ ] Apply OOP principles (encapsulation, inheritance, polymorphism, abstraction)
 - [ ] Use access modifiers correctly
+- [ ] Implement generic classes and methods
+- [ ] Create and process custom annotations
 - [ ] Handle exceptions appropriately
-- [ ] Work with collections (List, Set, Map)
+- [ ] Work with collections (List, Set, Map, Queue)
 - [ ] Use Stream API for data processing
-- [ ] Write functional code with lambdas
-- [ ] Create and manage threads
+- [ ] Write functional code with lambdas and Optional
+- [ ] Read and write files using NIO
+- [ ] Implement serialization/deserialization
+- [ ] Create and manage threads with ExecutorService
+- [ ] Use CompletableFuture for async programming
 - [ ] Apply common design patterns
-- [ ] Use modern Java features (records, sealed classes)
+- [ ] Use modern Java features (records, text blocks, var, sealed classes)
+
+---
+
+## Related Topic Files
+
+| Topic | File |
+|-------|------|
+| Java Basics | [topics/01-java-basics.md](topics/01-java-basics.md) |
+| Object-Oriented Programming | [topics/02-object-oriented-programming.md](topics/02-object-oriented-programming.md) |
+| Exception Handling | [topics/03-exception-handling.md](topics/03-exception-handling.md) |
+| Design Patterns | [topics/04-design-patterns.md](topics/04-design-patterns.md) |
+| Collections Framework | [topics/05-collections.md](topics/05-collections.md) |
+| Functional Programming | [topics/06-functional-programming.md](topics/06-functional-programming.md) |
+| Stream API | [topics/07-stream-api.md](topics/07-stream-api.md) |
+| File I/O & Serialization | [topics/08-file-io-serialization.md](topics/08-file-io-serialization.md) |
+| Multithreading | [topics/09-multithreading.md](topics/09-multithreading.md) |
+| JVM Internals | [topics/10-jvm-internals.md](topics/10-jvm-internals.md) |
 
 ---
 
@@ -1021,5 +1420,5 @@ By the end of this module, developers should be able to:
 
 After mastering these concepts, proceed to:
 - [Module 11: JDBC](../11-jdbc/) - Database connectivity
-- Practice building Java applications
-- Explore advanced Java features
+- Practice with [submissions/10-java-core/](../submissions/10-java-core/) exercises
+- Explore JVM internals in [topics/10-jvm-internals.md](topics/10-jvm-internals.md)
