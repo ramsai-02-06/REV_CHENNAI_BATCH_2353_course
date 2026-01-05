@@ -28,7 +28,7 @@ Java was designed with five primary goals:
 | Version | Year | Key Features |
 |---------|------|--------------|
 | Java 1.0 | 1996 | Initial release |
-| Java 5 | 2004 | [Generics](./02-object-oriented-programming.md#generics-java-5), annotations, enums, autoboxing |
+| Java 5 | 2004 | [Generics](./02-object-oriented-programming.md#generics-java-5), [Annotations](./02-object-oriented-programming.md#annotations-java-5), enums, autoboxing |
 | Java 8 | 2014 | Lambdas, Stream API, default methods |
 | Java 11 | 2018 | LTS release, var keyword, HTTP client |
 | Java 15 | 2020 | [Text Blocks](#text-blocks-java-15) |

@@ -1479,6 +1479,463 @@ public class Response<T> {
 
 ---
 
+## Annotations (Java 5+)
+
+Annotations provide metadata about code that can be used by the compiler, tools, or at runtime. They don't directly affect program execution but can influence how code is processed.
+
+### Built-in Annotations
+
+#### @Override
+
+Indicates a method overrides a superclass method. Compiler error if it doesn't actually override.
+
+```java
+public class Animal {
+    public void makeSound() {
+        System.out.println("Some sound");
+    }
+}
+
+public class Dog extends Animal {
+    @Override
+    public void makeSound() {  // Compiler verifies this overrides
+        System.out.println("Bark!");
+    }
+
+    // @Override
+    // public void makesound() { }  // Compile error - typo caught!
+}
+```
+
+#### @Deprecated
+
+Marks elements that should no longer be used.
+
+```java
+public class LegacyApi {
+    /**
+     * @deprecated Use {@link #newMethod()} instead
+     */
+    @Deprecated
+    public void oldMethod() {
+        // Old implementation
+    }
+
+    // Java 9+ with more info
+    @Deprecated(since = "2.0", forRemoval = true)
+    public void anotherOldMethod() {
+        // Will be removed in future version
+    }
+
+    public void newMethod() {
+        // New implementation
+    }
+}
+
+// Usage generates compiler warning
+LegacyApi api = new LegacyApi();
+api.oldMethod();  // Warning: 'oldMethod()' is deprecated
+```
+
+#### @SuppressWarnings
+
+Suppresses compiler warnings.
+
+```java
+public class WarningExamples {
+    @SuppressWarnings("unchecked")
+    public void uncheckedCast() {
+        List list = new ArrayList();
+        List<String> strings = list;  // Warning suppressed
+    }
+
+    @SuppressWarnings("deprecation")
+    public void useDeprecated() {
+        new LegacyApi().oldMethod();  // Warning suppressed
+    }
+
+    @SuppressWarnings({"unchecked", "deprecation"})
+    public void multipleWarnings() {
+        // Multiple warnings suppressed
+    }
+}
+```
+
+**Common warning types:**
+| Value | Suppresses |
+|-------|------------|
+| `"unchecked"` | Unchecked type operations |
+| `"deprecation"` | Use of deprecated code |
+| `"rawtypes"` | Raw type usage |
+| `"unused"` | Unused variables/methods |
+| `"serial"` | Missing serialVersionUID |
+| `"all"` | All warnings |
+
+#### @FunctionalInterface
+
+Marks interface as functional (single abstract method).
+
+```java
+@FunctionalInterface
+public interface Calculator {
+    int calculate(int a, int b);
+
+    // Default methods are allowed
+    default void printResult(int result) {
+        System.out.println("Result: " + result);
+    }
+
+    // Static methods are allowed
+    static Calculator add() {
+        return (a, b) -> a + b;
+    }
+
+    // Compile error if more than one abstract method
+    // int anotherMethod();  // Error!
+}
+
+// Usage with lambda
+Calculator multiply = (a, b) -> a * b;
+```
+
+#### @SafeVarargs
+
+Suppresses heap pollution warnings for varargs methods.
+
+```java
+public class VarargsExample {
+    @SafeVarargs
+    public final <T> void printAll(T... elements) {
+        for (T element : elements) {
+            System.out.println(element);
+        }
+    }
+
+    @SafeVarargs
+    private static <T> List<T> asList(T... elements) {
+        return Arrays.asList(elements);
+    }
+}
+```
+
+### Meta-Annotations
+
+Annotations that apply to other annotations.
+
+#### @Retention
+
+Specifies how long the annotation is retained.
+
+```java
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+// Only in source code, discarded by compiler
+@Retention(RetentionPolicy.SOURCE)
+public @interface SourceOnly { }
+
+// Kept in .class file, not available at runtime
+@Retention(RetentionPolicy.CLASS)
+public @interface ClassLevel { }
+
+// Available at runtime via reflection
+@Retention(RetentionPolicy.RUNTIME)
+public @interface RuntimeAvailable { }
+```
+
+| RetentionPolicy | Available in Source | In .class File | At Runtime |
+|-----------------|---------------------|----------------|------------|
+| SOURCE | Yes | No | No |
+| CLASS (default) | Yes | Yes | No |
+| RUNTIME | Yes | Yes | Yes |
+
+#### @Target
+
+Specifies where the annotation can be applied.
+
+```java
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
+
+@Target(ElementType.METHOD)
+public @interface MethodOnly { }
+
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+public @interface FieldOrParam { }
+
+@Target(ElementType.TYPE)  // Classes, interfaces, enums
+public @interface TypeLevel { }
+```
+
+| ElementType | Applies To |
+|-------------|------------|
+| TYPE | Class, interface, enum |
+| FIELD | Fields |
+| METHOD | Methods |
+| PARAMETER | Method parameters |
+| CONSTRUCTOR | Constructors |
+| LOCAL_VARIABLE | Local variables |
+| ANNOTATION_TYPE | Annotations |
+| PACKAGE | Package declaration |
+| TYPE_PARAMETER | Type parameters (Java 8+) |
+| TYPE_USE | Any type use (Java 8+) |
+
+#### @Documented
+
+Includes annotation in Javadoc.
+
+```java
+import java.lang.annotation.Documented;
+
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Author {
+    String name();
+}
+
+@Author(name = "John Doe")
+public class MyClass { }  // @Author appears in Javadoc
+```
+
+#### @Inherited
+
+Allows annotation to be inherited by subclasses.
+
+```java
+import java.lang.annotation.Inherited;
+
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Auditable { }
+
+@Auditable
+public class BaseEntity { }
+
+public class User extends BaseEntity { }  // Also has @Auditable
+```
+
+#### @Repeatable (Java 8+)
+
+Allows annotation to be applied multiple times.
+
+```java
+import java.lang.annotation.Repeatable;
+
+// Container annotation
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Schedules {
+    Schedule[] value();
+}
+
+// Repeatable annotation
+@Repeatable(Schedules.class)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Schedule {
+    String day();
+    String time();
+}
+
+// Usage - multiple @Schedule on same element
+@Schedule(day = "Monday", time = "9:00")
+@Schedule(day = "Wednesday", time = "14:00")
+@Schedule(day = "Friday", time = "9:00")
+public class WeeklyTask { }
+```
+
+### Creating Custom Annotations
+
+```java
+import java.lang.annotation.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Test {
+    // Elements (like methods, but define annotation attributes)
+    String description() default "";
+    int priority() default 1;
+    boolean enabled() default true;
+    String[] tags() default {};
+}
+
+// Usage
+public class TestClass {
+    @Test(description = "Tests user login", priority = 1, tags = {"auth", "critical"})
+    public void testLogin() { }
+
+    @Test(description = "Tests logout")  // Uses defaults
+    public void testLogout() { }
+
+    @Test  // All defaults
+    public void testBasic() { }
+}
+```
+
+#### Annotation Element Types
+
+Allowed types for annotation elements:
+- Primitives (int, boolean, etc.)
+- String
+- Class
+- Enum
+- Annotation
+- Arrays of the above
+
+```java
+public @interface ComplexAnnotation {
+    int count();
+    String name();
+    Class<?> type();
+    DayOfWeek day();           // Enum
+    Author author();           // Another annotation
+    String[] values();         // Array
+    Class<?>[] classes();      // Array of Class
+}
+```
+
+### Processing Annotations at Runtime
+
+```java
+import java.lang.reflect.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface RunTest { }
+
+public class TestRunner {
+    @RunTest
+    public void test1() { System.out.println("Test 1 passed"); }
+
+    public void notATest() { System.out.println("Not a test"); }
+
+    @RunTest
+    public void test2() { System.out.println("Test 2 passed"); }
+
+    public static void main(String[] args) throws Exception {
+        TestRunner runner = new TestRunner();
+        Class<?> clazz = runner.getClass();
+
+        for (Method method : clazz.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(RunTest.class)) {
+                System.out.println("Running: " + method.getName());
+                method.invoke(runner);
+            }
+        }
+    }
+}
+// Output:
+// Running: test1
+// Test 1 passed
+// Running: test2
+// Test 2 passed
+```
+
+### Reading Annotation Values
+
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Entity {
+    String table();
+    String schema() default "public";
+}
+
+@Entity(table = "users", schema = "app")
+public class User { }
+
+// Reading values
+public class AnnotationReader {
+    public static void main(String[] args) {
+        Class<User> clazz = User.class;
+
+        if (clazz.isAnnotationPresent(Entity.class)) {
+            Entity entity = clazz.getAnnotation(Entity.class);
+            System.out.println("Table: " + entity.table());   // users
+            System.out.println("Schema: " + entity.schema()); // app
+        }
+
+        // Get all annotations
+        Annotation[] annotations = clazz.getAnnotations();
+        for (Annotation ann : annotations) {
+            System.out.println(ann);
+        }
+    }
+}
+```
+
+### Common Framework Annotations
+
+| Framework | Annotation | Purpose |
+|-----------|------------|---------|
+| JUnit | @Test, @BeforeEach, @AfterEach | Testing |
+| Spring | @Component, @Service, @Autowired | Dependency injection |
+| JPA | @Entity, @Table, @Column | ORM mapping |
+| Jackson | @JsonProperty, @JsonIgnore | JSON serialization |
+| Lombok | @Getter, @Setter, @Data | Boilerplate reduction |
+| Validation | @NotNull, @Size, @Email | Bean validation |
+
+```java
+// JPA Example
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "user_name", nullable = false)
+    private String username;
+
+    @Email
+    @NotNull
+    private String email;
+}
+
+// Spring Example
+@Service
+public class UserService {
+    @Autowired
+    private UserRepository repository;
+
+    @Transactional
+    public User save(User user) {
+        return repository.save(user);
+    }
+}
+```
+
+### Annotation Best Practices
+
+1. **Use built-in annotations** - @Override, @Deprecated, @FunctionalInterface
+2. **Prefer RUNTIME retention** for custom annotations that need reflection
+3. **Always specify @Target** to restrict where annotation can be used
+4. **Provide sensible defaults** for optional elements
+5. **Document your annotations** with @Documented
+
+```java
+// Well-designed custom annotation
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE})
+public @interface Cacheable {
+    /**
+     * Cache key prefix
+     */
+    String key() default "";
+
+    /**
+     * Time to live in seconds
+     */
+    int ttl() default 3600;
+
+    /**
+     * Whether to cache null values
+     */
+    boolean cacheNull() default false;
+}
+```
+
+---
+
 ## Non-Access Modifiers
 
 Non-access modifiers provide additional properties to classes, methods, and fields beyond access control. They define behavior, state characteristics, and compile-time constraints.
@@ -2479,6 +2936,7 @@ cache.clear();
 | Interfaces | Contract, multiple inheritance, default/static methods (Java 8+) |
 | Marker Interfaces | Empty interfaces for type signaling (Serializable, Cloneable) |
 | Generics (Java 5+) | Type parameters, bounded types, wildcards, PECS principle |
+| Annotations (Java 5+) | Metadata, built-in annotations, custom annotations, reflection |
 | Records (Java 16+) | Immutable data carriers, auto-generated methods |
 | Non-Access Modifiers | final, abstract, static, synchronized, volatile, transient, sealed |
 | equals/hashCode | Override together, important for collections |
