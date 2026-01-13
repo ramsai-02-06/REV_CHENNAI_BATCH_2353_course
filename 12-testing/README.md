@@ -8,78 +8,50 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
-### 1. [Introduction to JUnit](./topics/01-introduction-to-junit.md)
-- What is JUnit?
-- JUnit 5 Architecture (Platform, Jupiter, Vintage)
-- Setting up JUnit with Maven and Gradle
-- Basic annotations (@Test, @BeforeEach, @AfterEach, @DisplayName)
-- Writing your first test
-- Test naming conventions and project structure
+### 1. [Introduction to Testing](./topics/01-introduction-to-testing.md)
+- Why testing matters
+- The testing pyramid
+- Types of tests (unit, integration, E2E)
+- What makes a good test
 
-### 2. [Unit Testing Introduction To JUnit](./topics/02-unit-testing-introduction-to-junit.md)
-- What is unit testing?
-- Unit vs Integration vs System testing
-- Writing effective unit tests
-- Test structure with Arrange-Act-Assert
-- Parameterized tests and nested tests
-- Test lifecycle hooks and best practices
+### 2. [JUnit Fundamentals](./topics/02-junit-fundamentals.md)
+- JUnit 5 setup (Maven/Gradle)
+- Core annotations (@Test, @BeforeEach, @AfterEach)
+- Test lifecycle and execution order
+- @DisplayName and @Disabled
 
-### 3. [Unit Testing Line Vs Branch Coverage](./topics/03-unit-testing-line-vs-branch-coverage.md)
-- Understanding code coverage metrics
-- Line coverage vs Branch coverage
-- Using JaCoCo for coverage analysis
-- Reading and interpreting coverage reports
-- Setting coverage goals and thresholds
-- Coverage in CI/CD pipelines
-
-### 4. [Unit Testing Arrange Act Assert](./topics/04-unit-testing-arrange-act-assert.md)
-- The AAA pattern explained
-- Arrange phase: Setting up test data
-- Act phase: Executing the behavior
-- Assert phase: Verifying outcomes
-- Complete examples with service layers
-- Common pitfalls and solutions
-
-### 5. [Unit Testing Assertion Types](./topics/05-unit-testing-assertion-types.md)
+### 3. [Writing Tests](./topics/03-writing-tests.md)
+- The AAA pattern (Arrange-Act-Assert)
 - Basic assertions (assertEquals, assertTrue, assertNull)
-- Reference assertions (assertSame, assertNotSame)
-- Collection assertions (assertArrayEquals, assertIterableEquals)
-- Exception assertions (assertThrows, assertDoesNotThrow)
-- Timeout assertions and grouped assertions (assertAll)
-- Best practices for writing assertions
+- Exception testing with assertThrows
+- Grouped assertions with assertAll
 
-### 6. [Unit Testing Stubs](./topics/06-unit-testing-stubs.md)
-- What is a stub?
-- Creating manual stubs
-- Types of stubs (hard-coded, configurable, state-based)
-- Stub vs Fake vs Dummy objects
-- Real-world stub examples
-- When to use stubs and best practices
+### 4. [Test Coverage](./topics/04-test-coverage.md)
+- Line coverage vs Branch coverage
+- JaCoCo setup and reports
+- Coverage targets and best practices
 
-### 7. [Introduction to Mockito](./topics/07-introduction-to-mockito.md)
-- What is Mockito and why use it?
-- Setting up Mockito
-- Creating mocks (@Mock, @InjectMocks, @ExtendWith)
-- Stubbing methods (when().thenReturn())
-- Argument matchers and exception stubbing
-- Verification and argument captors
+### 5. [Test Doubles](./topics/05-test-doubles.md)
+- Why isolate dependencies
+- Types: Dummy, Stub, Fake
+- Manual stub implementation
+- When to use each type
 
-### 8. [Mock vs Stub vs Spy](./topics/08-mock-vs-stub-vs-spy.md)
-- Understanding test doubles
-- The five types: Dummy, Stub, Mock, Spy, Fake
-- Mock vs Stub: Behavior vs State verification
-- When to use Spies (partial mocking)
-- Detailed comparison and decision tree
-- Common pitfalls and best practices
+### 6. [Mockito](./topics/06-mockito.md)
+- Creating mocks with @Mock
+- Stubbing with when().thenReturn()
+- Argument matchers
+- Verification with verify()
 
-### 9. [Test Driven Development](./topics/09-test-driven-development.md)
-- What is TDD?
+### 7. [Mock vs Stub vs Spy](./topics/07-mock-stub-spy.md)
+- Quick comparison table
+- When to use each type
+- Common mistakes to avoid
+
+### 8. [Test Driven Development](./topics/08-test-driven-development.md)
 - The Red-Green-Refactor cycle
-- TDD in action: Complete examples
-- The three laws of TDD
-- TDD best practices and common pitfalls
-- Practice katas (String Calculator, FizzBuzz)
-
+- TDD workflow and examples
+- Benefits and when to use TDD
 
 ## Key Concepts
 Refer to the curriculum and lecture notes for detailed explanations of each topic.
