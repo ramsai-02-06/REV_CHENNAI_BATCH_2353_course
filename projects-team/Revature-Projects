@@ -1,0 +1,470 @@
+P1-RevShop
+==========
+
+Application Overview
+
+RevShop is a secure console-based e-commerce application for both buyers and sellers. Buyers can browse products, manage shopping carts, place orders, and review purchases. Sellers can manage inventory, add products, view orders, and monitor stock levels. The application is designed with a modular architecture that can be extended to a microservices-based web application in future phases.
+
+Core Functional Requirements:
+--------
+As a Buyer, I should be able to:
+
+Register on the platform
+Login using email and password
+
+View product details including price, description, and user reviews
+Browse products by category or search by keywords
+Add or remove products from cart with quantity
+
+Checkout and enter shipping and billing information
+Receive in-app notifications when an order is placed
+View order history
+
+Review and rate products
+Save products as favorites
+Make payment using simulated payment methods
+-----
+As a Seller, I should be able to:
+
+Register as a seller with email, password, and business details
+Login using email and password
+
+Manage product inventory (add, update, delete)
+Add new products with price, description, and category
+View all placed orders for their products
+
+Receive in-app notifications when a user places an order
+
+Set discounted price along with maximum retail price (MRP)
+
+View product reviews and ratings
+Set inventory threshold values and get console alerts when stock is low
+
+Standard Functional Scope:
+
+Registered users should be able to log in, change password, and request forgotten password recovery (through security questions or password hint).
+
+P2-RevPlay
+===========
+
+Application Overview
+
+RevPlay is a console-based music streaming application that allows users to access a library of songs, artists, playlists, albums, and podcasts. Users can search for content, mark favorites, manage playlists, and simulate music playback. Musicians/artists can create profiles to showcase their music. The application is designed with a modular architecture that can be extended to a microservices-based web/mobile application in future phases.
+
+Core Functional Requirements
+
+As a User, I should be able to:
+
+Register and create an account
+Login to my account
+Search the library of songs, artists, playlists, podcasts, and albums by keywords
+Browse content by categories (genre, artist, album)
+Mark songs as favorites
+View my favorite songs list
+Simulate music player controls (play, pause, skip, repeat) - text-based simulation
+Create private or public playlists with name and description
+Add songs to my playlists
+Remove songs from my playlists
+View all my playlists
+Update playlist details (name, description, privacy settings)
+Delete playlists created by me
+View public playlists created by other users
+View recently played songs
+View listening history
+
+
+As a Musician/Artist, I should be able to:
+
+Register as an artist with email, password, and artist details
+Login to my account
+Create and manage my artist profile (bio, genre, social media links)
+Upload songs with details (title, album, genre, duration, release date)
+Create albums and add songs to albums
+View my uploaded songs and albums
+Update song/album information
+Delete my songs/albums
+View play count and statistics for my songs
+See which users have added my songs to favorites
+Standard Functional Scope
+
+Registered users (both listeners and artists) should be able to log in, change password, and request forgotten password recovery (through security questions or password hint).
+
+P3- RevWorkforce
+========
+
+Application Overview
+
+Rev Workforce is a console-based Human Resource Management (HRM) application designed to streamline employee management, leave tracking, and performance review processes. The system supports three user roles: Employees, Managers, and Admins, each with specific functionalities. The application is designed with a modular architecture that can be extended to a microservices-based web application in future phases.
+
+Core Functional Requirements
+
+As an Employee, I should be able to:
+
+Authentication & Profile:
+
+Login to my account using employee ID and password
+Edit basic profile information (phone number, address, emergency contact)
+View my reporting manager details
+
+Leave Management Module:
+
+View available leave balance (Casual, Sick, Paid leaves)
+Apply for leave with date range, leave type, and reason
+View all applied leaves with status (Pending/Approved/Rejected)
+View company holiday calendar
+View manager's name and contact while applying for leave
+Cancel pending leave applications
+Receive in-app notifications when leave is approved or rejected
+
+Performance Management Module:
+
+Create annual performance review document including:
+Key deliverables achieved
+Major accomplishments
+Areas of improvement
+Self-assessment rating
+Set goals and targets for the year with:
+Goal description
+Deadline
+Weightage/Priority (High/Medium/Low)
+Success metrics
+View goals progress and status
+Update goal progress periodically
+View manager's feedback on performance review
+Receive notifications when manager provides feedback
+
+Additional Features:
+
+View upcoming employee birthdays
+View work anniversaries of colleagues
+View company announcements
+Access employee directory
+As a Manager, I should be able to:
+
+Note: All managers are employees, so they have access to all employee features plus the following:
+
+Leave Management Module:
+
+View list of direct reportees (employees reporting to me)
+View leave applications from my team members
+Approve or reject leave requests with comments
+View team leave calendar
+View leave balance of team members
+Receive in-app notifications when team member applies for leave
+Performance Management Module:
+
+Review performance documents submitted by direct reportees
+Provide detailed feedback on employee performance reviews
+Rate employee performance (1-5 scale or rating system)
+Review employee goals and provide guidance
+Track goal completion status of team members
+Receive notifications when employee submits performance review
+Generate team performance summary reports
+
+Team Management:
+
+View team structure and hierarchy
+View team attendance summary
+Access team member profiles
+
+As an Admin, I should be able to:
+
+Employee Management:
+
+Add new employees with complete details:
+Personal information (name, email, phone, address, DOB)
+Employment details (employee ID, department, designation, joining date)
+Manager assignment
+Salary information
+Update employee information
+View all employee details
+Deactivate/reactivate employee accounts
+Assign/change reporting managers
+Search employees by name, ID, department, or designation
+
+Leave Management:
+
+Configure leave types and policies
+
+Assign leave quotas to employees:
+Casual Leave (CL)
+Sick Leave (SL)
+Paid Leave (PL)
+Privilege Leave
+Adjust leave balances manually if needed
+Revoke or cancel approved leaves (with manager approval)
+View all employee leave information and statistics
+Generate leave reports (department-wise, employee-wise)
+Set company holiday calendar
+
+System Configuration:
+
+Manage departments and designations
+Configure performance review cycles
+Set system-wide policies
+View system audit logs
+Standard Functional Scope
+
+Authentication & Security:
+
+All registered users can log in using employee ID/email and password
+Users can change their password (requires current password verification)
+Forgotten password recovery through security questions or password reset by admin
+Session management with automatic logout after inactivity
+
+Notification System:
+
+In-app notifications stored in database
+Display unread notification count on login
+
+Notification types:
+Leave approval/rejection
+Performance review feedback
+Birthday/anniversary reminders
+System announcements
+
+p4-RevConnect
+============
+
+Application Overview
+
+RevConnect is a console-based social media application that provides a platform for personal users, businesses, and content creators to connect and interact. Users can create posts, engage with content through likes and comments, build their network through connections and follows, and manage their profiles. The application is designed with a modular architecture that can be extended to a microservices-based web/mobile application in future phases.
+
+Core Functional Requirements
+
+As a Personal User, I should be able to:
+
+Authentication & Profile:
+
+Register and create an account with email and password
+Login to my account
+Create and edit basic profile with:
+Name
+Bio/About section
+Profile picture path (for future use)
+Location
+Website link (optional)
+View my profile and other users' profiles
+Search for users by name or username
+
+Post Management:
+
+Create text posts with optional hashtags
+View my posts and feed
+Edit posts created by me
+Delete posts created by me
+View posts from connections and followed accounts in feed
+
+Social Interactions:
+
+Like posts (own and others')
+Unlike posts
+Comment on posts
+View all comments on a post
+Delete my own comments
+Share/repost content (with attribution to original poster)
+
+Network Building:
+
+Send connection requests to other personal users
+Accept or reject incoming connection requests
+View pending connection requests
+View my connections list
+Remove connections
+Follow business accounts and creator accounts
+Unfollow accounts
+View followers list
+View following list
+
+Notifications:
+
+Receive in-app notifications for:
+Connection requests received
+Connection requests accepted
+New followers
+Likes on my posts
+Comments on my posts
+Shares of my posts
+Posts from followed business/creator accounts
+View unread notification count
+Mark notifications as read
+View notification history
+
+Feed & Discovery:
+
+View personalized feed with posts from:
+My connections
+Accounts I follow
+My own posts
+View trending posts/hashtags
+Search posts by hashtags
+Filter feed by post type or user type
+As a Creator/Business Account User, I should be able to:
+
+Note: Creator and Business accounts have all personal user features plus the following:
+
+Profile Management:
+
+Register as a creator or business account
+Create enhanced profile with:
+Business/Creator name
+Category/Industry
+Detailed bio
+Business address (for business accounts)
+Contact information
+Website and social media links
+Business hours (for business accounts)
+Add multiple external links for business endorsements/partnerships
+Showcase products/services (business accounts)
+
+Content Creation:
+
+Create promotional posts
+Add call-to-action buttons to posts (future: "Learn More", "Shop Now")
+Tag products/services in posts
+Schedule posts (store for future posting - simulated)
+View post analytics:
+Total likes
+Total comments
+Total shares
+Reach (number of unique viewers)
+
+Engagement:
+
+Like and comment on other users' posts
+View followers and follower demographics
+Respond to comments on business/creator posts
+Pin important posts to profile
+
+Business Features:
+
+Create business pages
+Post updates and announcements
+Share promotional content
+Interact with customers/followers
+Standard Functional Scope
+
+Authentication & Security:
+
+All registered users can log in using email/username and password
+Users can change their password (requires current password verification)
+Forgotten password recovery through security questions or password hint
+Account privacy settings (public/private profiles)
+
+Notification System:
+
+In-app notifications stored in database
+Display unread notification count on login
+Categorized notifications (connections, likes, comments, follows)
+Notification preferences (enable/disable specific notification types)
+
+Optional Features (Nice to Have):
+
+Chat/Messaging:
+
+Send direct messages to connections
+View message history
+Mark messages as read/unread
+Delete conversations
+Block users from messaging
+
+P5-RevPay
+========
+
+Application Overview
+
+
+RevPay is a console-based financial application that enables secure digital payments and money management for both personal and business users. Personal users can send/request money, manage payment methods, and track transactions. Business users gain additional capabilities including loan applications, payment acceptance, and invoice management. The application is designed with a modular architecture emphasizing security and transaction integrity, enabling future extension to a microservices-based web/mobile application.
+
+
+Core Functional Requirements
+
+As a Personal Account User, I should be able to:
+
+Register and create a personal account with full name, email, phone number, password, and security questions
+Login to my account using email/phone and password
+Send money to other users by username, email, phone number, or account ID with amount and optional note
+Request money from other users and view/manage incoming and outgoing money requests (accept/decline/cancel)
+Add and manage payment methods including credit/debit cards with encrypted storage and the ability to set default payment method
+View comprehensive transaction history with filtering by type, date range, amount, and status, plus search and export capabilities
+Manage wallet balance by adding money from cards or withdrawing to bank accounts (simulated)
+Receive in-app notifications for transactions, money requests, card changes, and low balance alerts
+ 
+
+As a Business Account User,
+
+I should be able to:
+
+Note: Business accounts have all personal account features plus the following:
+
+ 
+
+Register as a business account with business name, type, tax ID, address, and verification documents
+Add business payment methods including business credit/debit cards and bank accounts
+Accept payments from customers by generating payment requests/invoices and processing payments via multiple lookup methods
+Create and manage invoices with itemized details, customer information, payment terms, and track paid/unpaid status
+Apply for business loans with loan amount, purpose, financial information, and supporting documents, then track application status and manage repayments
+View business analytics including transaction summaries, revenue reports, outstanding invoices, payment trends, and top customers
+Send invoice notifications to customers (in-app) and manage payment acceptance
+ 
+
+Standard Functional Scope
+
+Authentication & Security:
+
+Login, password change with current password + PIN verification
+Forgotten password recovery through security questions
+Account lockout after failed attempts, session timeout
+Password hashing (bcrypt), card encryption (AES-256)
+Transaction PIN separate from login password
+Simulated two-factor authentication via security codes
+Notification System:
+
+In-app notifications for all transaction activities
+Notification preferences and read/unread status tracking
+Categorized by type (transactions, requests, alerts)
+
+P6-RevHire
+========
+
+Application Overview
+
+RevHire is a console-based job portal application that connects job seekers with employers. Job seekers can create profiles, build resumes, search for jobs, and apply to positions. Employers can post job openings, manage applications, and shortlist/reject candidates. The application is designed with a modular architecture that can be extended to a microservices-based web application in future phases.
+
+Core Functional Requirements
+
+As a Job Seeker, I should be able to:
+
+Register and create an account with personal details
+Login to my account
+Create and manage textual resume with structured sections (objective, education, experience, skills, projects)
+Search for jobs using filters (job role, location, experience years, company name, salary range, job type)
+Apply for jobs with one-click using saved resume and optional cover letter (unlimited applications)
+View all my applications with job details and status (Applied/Shortlisted/Rejected/Withdrawn)
+Withdraw applications from jobs with confirmation and optional reason
+Manage profile including education, work experience, skills, and certifications
+Receive in-app notifications for application status updates and job matches
+
+As an Employer, I should be able to:
+
+Register company and create account with company details (name, industry, size, description, website, location)
+Login using registered credentials
+Create job postings with comprehensive details (title, description, skills, experience, education, location, salary, job type, deadline)
+Manage job postings (view, edit, close/reopen, delete, view statistics)
+View applicant details for each job including profile, resume, and application date
+Shortlist or reject applications with bulk actions, comments, and status updates
+Search and filter applicants by experience, skills, education, and application date
+Manage company profile and update company information
+Standard Functional Scope
+
+Authentication & Account Management:
+
+Register (separate flows for job seekers and employers)
+Login using email and password
+Change password (requires current password)
+Forgotten password recovery through security questions
+Profile completion tracking
+
+Notification System:
+
+In-app notifications for application status changes, new applications, and job matches
