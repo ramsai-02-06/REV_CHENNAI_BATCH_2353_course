@@ -3,7 +3,32 @@ import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 
 public class CsvPublisherSubscriber {
-
+/*
+ * SUMMARY:
+ * 
+ * WHY SUBMISSIONPUBLISHER?
+ * ✓ Manages publisher-subscriber contract
+ * ✓ Thread-safe data emission
+ * ✓ Handles backpressure (subscriber says "slow down!")
+ * ✓ Automatic flow control
+ * 
+ * WHY THREAD?
+ * ✓ File I/O is blocking - we can't change that
+ * ✓ Don't block the caller's thread
+ * ✓ Subscriber can process while reading continues
+ * ✓ Enables true asynchronous behavior
+ * 
+ * WITHOUT THREAD:
+ * - Caller must wait for entire file to be read
+ * - No parallel processing
+ * - Defeats the purpose of reactive streams
+ * 
+ * WITH THREAD:
+ * - Caller returns immediately
+ * - Subscriber gets data as it's available
+ * - Main thread free for other work
+ * - True reactive behavior
+ */
     // Method that reads CSV file and emits each row (Publisher)
     public Flow.Publisher<String> readCsvFile(String filename) {
         return subscriber -> {
