@@ -1,11 +1,13 @@
 # Week 04 - Multiple Choice Questions
 
-This document contains 60 multiple choice questions covering the key concepts from Week 04 topics: Debugging and Reverse Engineering.
+This document contains 80 multiple choice questions covering the key concepts from Week 04 topics: Object-Oriented Programming, Collections Framework, Multithreading, Functional Programming, and Design Patterns.
 
 **Topic Distribution:**
-- Debugging Fundamentals: 25 questions
-- IntelliJ Debugging: 20 questions
-- Reverse Engineering: 15 questions
+- Object-Oriented Programming: 20 questions
+- Collections Framework: 20 questions
+- Multithreading: 15 questions
+- Functional Programming: 15 questions
+- Design Patterns: 10 questions
 
 ---
 
@@ -13,720 +15,985 @@ This document contains 60 multiple choice questions covering the key concepts fr
 
 ---
 
+## Object-Oriented Programming
+
 ### Question 1
-**[Debugging]**
+**[OOP]**
 
-What is debugging?
+What are the four pillars of Object-Oriented Programming?
 
-- A) Writing new code
-- B) The process of finding and fixing errors in code
-- C) Testing software performance
-- D) Deploying applications
+- A) Abstraction, Encapsulation, Polymorphism, Inheritance
+- B) Classes, Objects, Methods, Variables
+- C) Public, Private, Protected, Default
+- D) Compilation, Execution, Debugging, Testing
 
 ---
 
 ### Question 2
-**[Debugging]**
+**[OOP]**
 
-Which type of error is detected at compile time?
+What is encapsulation?
 
-- A) Logic error
-- B) Runtime error
-- C) Syntax error
-- D) Semantic error
+- A) Creating multiple copies of an object
+- B) Hiding internal details and providing access through methods
+- C) Inheriting properties from a parent class
+- D) Converting one data type to another
 
 ---
 
 ### Question 3
-**[IntelliJ]**
+**[OOP]**
 
-What is the keyboard shortcut to toggle a breakpoint in IntelliJ IDEA?
+What keyword is used to inherit from a class in Java?
 
-- A) F5
-- B) F8
-- C) Ctrl+F8
-- D) Shift+F9
+- A) implements
+- B) inherits
+- C) extends
+- D) super
 
 ---
 
 ### Question 4
-**[Debugging]**
+**[OOP]**
 
-What does a NullPointerException indicate?
+What is polymorphism?
 
-- A) Array is empty
-- B) Attempting to use a null reference
-- C) Division by zero
-- D) File not found
+- A) Having multiple constructors
+- B) Same interface, different implementations
+- C) Hiding internal details
+- D) Creating abstract classes
 
 ---
 
 ### Question 5
-**[IntelliJ]**
+**[OOP]**
 
-What does "Step Over" (F8) do in the debugger?
+Which access modifier allows access only within the same class?
 
-- A) Enters the called method
-- B) Executes current line without entering methods
-- C) Returns to the calling method
-- D) Resumes program execution
+- A) public
+- B) protected
+- C) default
+- D) private
 
 ---
 
 ### Question 6
-**[Reverse Engineering]**
+**[OOP]**
 
-What is reverse engineering in software development?
+What is the difference between method overloading and overriding?
 
-- A) Writing code from scratch
-- B) Analyzing software to understand without source code
-- C) Deploying software backward
-- D) Uninstalling software
+- A) Overloading changes return type, overriding changes parameters
+- B) Overloading is in same class with different parameters, overriding is in subclass with same signature
+- C) Overloading requires inheritance, overriding doesn't
+- D) There is no difference
 
 ---
 
 ### Question 7
-**[Debugging]**
+**[OOP]**
 
-Which panel in IntelliJ debugger shows the call stack?
+Which keyword prevents a method from being overridden?
 
-- A) Variables panel
-- B) Watches panel
-- C) Frames panel
-- D) Console panel
+- A) static
+- B) abstract
+- C) final
+- D) private
 
 ---
 
 ### Question 8
-**[IntelliJ]**
+**[OOP]**
 
-What is the shortcut to start debugging in IntelliJ?
+What is an abstract class?
 
-- A) F5
-- B) Shift+F10
-- C) Shift+F9
-- D) Ctrl+D
+- A) A class that cannot have methods
+- B) A class that cannot be instantiated and may have abstract methods
+- C) A class that can only have static methods
+- D) A class that can only have one instance
 
 ---
 
 ### Question 9
-**[Debugging]**
+**[OOP]**
 
-What is a conditional breakpoint?
+How many classes can a Java class extend?
 
-- A) A breakpoint that works only on Mondays
-- B) A breakpoint that pauses only when a condition is true
-- C) A breakpoint that requires user confirmation
-- D) A breakpoint for if statements only
+- A) Unlimited
+- B) Two
+- C) One
+- D) Zero
 
 ---
 
 ### Question 10
-**[Reverse Engineering]**
+**[OOP]**
 
-Which tool is used to decompile Java class files?
+What does the 'super' keyword refer to?
 
-- A) javac
-- B) JD-GUI
-- C) jar
-- D) javadoc
+- A) The current class
+- B) The parent class
+- C) The child class
+- D) A static class
 
 ---
 
 ### Question 11
-**[Debugging]**
+**[OOP]**
 
-What does "Step Into" (F7) do?
+What is the purpose of an interface in Java?
 
-- A) Skips the current method
-- B) Enters the method being called
-- C) Exits the current method
-- D) Restarts debugging
+- A) To provide implementation for all methods
+- B) To define a contract of methods that implementing classes must provide
+- C) To create objects directly
+- D) To store data
 
 ---
 
 ### Question 12
-**[Debugging]**
+**[OOP]**
 
-What is a watchpoint?
+Which is true about interfaces in Java 8+?
 
-- A) A breakpoint on a method
-- B) A breakpoint that triggers when a variable is modified
-- C) A timer for debugging
-- D) A logging statement
+- A) They can only have abstract methods
+- B) They can have default and static methods with implementations
+- C) They can have instance variables
+- D) They can have constructors
 
 ---
 
 ### Question 13
-**[IntelliJ]**
+**[OOP]**
 
-What is the Evaluate Expression feature used for?
+What does == compare for objects?
 
-- A) Writing new code
-- B) Executing Java expressions during debugging
-- C) Compiling code
-- D) Running tests
+- A) Content/values
+- B) Memory addresses (references)
+- C) Hash codes
+- D) Class types
 
 ---
 
 ### Question 14
-**[Reverse Engineering]**
+**[OOP]**
 
-What command shows Java bytecode?
+Which method must be overridden together with equals()?
 
-- A) java -c
-- B) javac -b
-- C) javap -c
-- D) jar -c
+- A) toString()
+- B) clone()
+- C) hashCode()
+- D) finalize()
 
 ---
 
 ### Question 15
-**[Debugging]**
+**[OOP]**
 
-What is a stack trace?
+What is a marker interface?
 
-- A) A list of all variables
-- B) The sequence of method calls leading to an error
-- C) Memory allocation details
-- D) Performance metrics
+- A) An interface with many methods
+- B) An interface with no methods that marks a capability
+- C) An interface that marks errors
+- D) An interface for logging
 
 ---
 
 ### Question 16
-**[Debugging]**
+**[OOP]**
 
-What type of bug produces wrong output but no error message?
+What is the protected access modifier visibility?
 
-- A) Syntax error
-- B) Runtime error
-- C) Logic error
-- D) Compilation error
+- A) Same class only
+- B) Same class and package
+- C) Same class, package, and subclasses
+- D) Everywhere
 
 ---
 
 ### Question 17
-**[IntelliJ]**
+**[OOP]**
 
-What does "Step Out" (Shift+F8) do?
+What is constructor chaining?
 
-- A) Enters a method
-- B) Completes current method and returns to caller
-- C) Stops debugging
-- D) Skips all breakpoints
+- A) Creating multiple objects
+- B) Calling one constructor from another
+- C) Inheriting constructors
+- D) Static constructor calls
 
 ---
 
 ### Question 18
-**[Reverse Engineering]**
+**[OOP]**
 
-What is static analysis?
+What is the purpose of the 'this' keyword?
 
-- A) Analyzing code while it runs
-- B) Analyzing code without executing it
-- C) Analyzing only static methods
-- D) Analyzing database tables
+- A) Reference to parent class
+- B) Reference to current object instance
+- C) Reference to static context
+- D) Reference to child class
 
 ---
 
 ### Question 19
-**[Debugging]**
+**[OOP]**
 
-Which exception occurs when accessing an invalid array index?
+Which statement about static methods is true?
 
-- A) NullPointerException
-- B) ArrayIndexOutOfBoundsException
-- C) ClassCastException
-- D) ArithmeticException
+- A) They can access instance variables directly
+- B) They belong to the class, not instances
+- C) They can be overridden
+- D) They must be called on objects
 
 ---
 
 ### Question 20
-**[IntelliJ]**
+**[OOP]**
 
-What does the Variables panel show during debugging?
+What happens during garbage collection?
 
-- A) Source code
-- B) Current variable values in scope
-- C) Breakpoint list
-- D) Console output
+- A) Variables are initialized
+- B) Unreferenced objects are removed from memory
+- C) Classes are loaded
+- D) Methods are compiled
 
 ---
 
+## Collections Framework
+
 ### Question 21
-**[Debugging]**
+**[Collections]**
 
-What is "rubber duck debugging"?
+Which interface is at the top of the Collections hierarchy?
 
-- A) Using a rubber duck as a computer
-- B) Explaining code to find bugs through verbalization
-- C) A type of unit test
-- D) Debugging in water
+- A) List
+- B) Collection
+- C) Iterable
+- D) Set
 
 ---
 
 ### Question 22
-**[Reverse Engineering]**
+**[Collections]**
 
-What does a decompiler do?
+What is the main difference between ArrayList and LinkedList?
 
-- A) Compiles Java code
-- B) Converts bytecode back to source code
-- C) Encrypts source code
-- D) Runs Java programs
+- A) ArrayList uses linked nodes, LinkedList uses array
+- B) ArrayList provides O(1) random access, LinkedList provides O(1) insertion at ends
+- C) ArrayList is thread-safe, LinkedList is not
+- D) ArrayList stores unique elements only
 
 ---
 
 ### Question 23
-**[IntelliJ]**
+**[Collections]**
 
-What is the shortcut for "Run to Cursor"?
+Which collection does NOT allow duplicate elements?
 
-- A) F9
-- B) Alt+F9
-- C) F7
-- D) Ctrl+F9
+- A) ArrayList
+- B) LinkedList
+- C) HashSet
+- D) Vector
 
 ---
 
 ### Question 24
-**[Debugging]**
+**[Collections]**
 
-What is the first step in the debugging process?
+What is the time complexity of get() in ArrayList?
 
-- A) Fix the bug
-- B) Write tests
-- C) Reproduce the bug
-- D) Deploy the fix
+- A) O(n)
+- B) O(log n)
+- C) O(1)
+- D) O(n log n)
 
 ---
 
 ### Question 25
-**[Debugging]**
+**[Collections]**
 
-What does the Resume button (F9) do?
+Which Map implementation maintains insertion order?
 
-- A) Restarts the application
-- B) Continues execution until next breakpoint
-- C) Stops debugging
-- D) Steps to next line
+- A) HashMap
+- B) TreeMap
+- C) LinkedHashMap
+- D) Hashtable
 
 ---
 
 ### Question 26
-**[Reverse Engineering]**
+**[Collections]**
 
-What is the purpose of the javap command?
+What is the difference between HashMap and Hashtable?
 
-- A) Compile Java code
-- B) Disassemble class files
-- C) Package JAR files
-- D) Run Java programs
+- A) HashMap is synchronized, Hashtable is not
+- B) Hashtable is synchronized, HashMap is not
+- C) HashMap doesn't allow null, Hashtable does
+- D) There is no difference
 
 ---
 
 ### Question 27
-**[Debugging]**
+**[Collections]**
 
-What is a memory leak?
+Which Set implementation maintains sorted order?
 
-- A) RAM physically damaged
-- B) Objects not released, causing growing memory usage
-- C) Slow CPU performance
-- D) Network data loss
+- A) HashSet
+- B) LinkedHashSet
+- C) TreeSet
+- D) EnumSet
 
 ---
 
 ### Question 28
-**[IntelliJ]**
+**[Collections]**
 
-How do you view all breakpoints in IntelliJ?
+What does HashMap use internally to store entries?
 
-- A) View > Breakpoints
-- B) Ctrl+Shift+F8
-- C) F8
-- D) Alt+B
+- A) Linked list only
+- B) Array of buckets with linked lists (or trees)
+- C) Single array
+- D) Stack
 
 ---
 
 ### Question 29
-**[Debugging]**
+**[Collections]**
 
-What does "divide and conquer" debugging involve?
+Which collection should be used for FIFO processing?
 
-- A) Splitting code into multiple files
-- B) Systematically narrowing down the problem area
-- C) Hiring multiple developers
-- D) Running tests in parallel
+- A) Stack
+- B) ArrayList
+- C) Queue
+- D) Set
 
 ---
 
 ### Question 30
-**[Reverse Engineering]**
+**[Collections]**
 
-What is dynamic analysis?
+What happens when you add a duplicate to a HashSet?
 
-- A) Analyzing code structure
-- B) Observing software behavior during execution
-- C) Analyzing only dynamic variables
-- D) Code review
+- A) Exception is thrown
+- B) The set remains unchanged
+- C) Both elements are kept
+- D) The old element is replaced
 
 ---
 
 ### Question 31
-**[IntelliJ]**
+**[Collections]**
 
-What is "Force Step Into" used for?
+Which interface does HashMap NOT implement?
 
-- A) Skipping methods
-- B) Entering even library/framework methods
-- C) Forcing compilation
-- D) Stopping execution
+- A) Map
+- B) Serializable
+- C) List
+- D) Cloneable
 
 ---
 
 ### Question 32
-**[Debugging]**
+**[Collections]**
 
-What causes a StackOverflowError?
+What is the load factor in HashMap?
 
-- A) Array too large
-- B) Infinite recursion or very deep call stack
-- C) Null pointer
-- D) Division by zero
+- A) Maximum number of elements
+- B) Threshold for resizing (default 0.75)
+- C) Initial capacity
+- D) Number of buckets
 
 ---
 
 ### Question 33
-**[Debugging]**
+**[Collections]**
 
-What information does a heap dump contain?
+Which is true about TreeMap?
 
-- A) Thread states
-- B) All objects in memory at a point in time
-- C) CPU usage
-- D) Network connections
+- A) Elements are in random order
+- B) Null keys are allowed
+- C) Keys are stored in sorted order
+- D) It is synchronized
 
 ---
 
 ### Question 34
-**[IntelliJ]**
+**[Collections]**
 
-What does the Watches panel allow you to do?
+What type of Iterator does ArrayList return?
 
-- A) Watch videos
-- B) Track custom expressions across debugging
-- C) Monitor CPU usage
-- D) View log files
+- A) Enumeration
+- B) Fail-fast Iterator
+- C) Fail-safe Iterator
+- D) Static Iterator
 
 ---
 
 ### Question 35
-**[Reverse Engineering]**
+**[Collections]**
 
-What is CFR?
+Which method removes and returns the first element from a LinkedList?
 
-- A) A Java compiler
-- B) A Java decompiler
-- C) A testing framework
-- D) A build tool
+- A) getFirst()
+- B) removeFirst()
+- C) popFirst()
+- D) deleteFirst()
 
 ---
 
 ### Question 36
-**[Debugging]**
+**[Collections]**
 
-What is the purpose of logging?
+What is ConcurrentHashMap used for?
 
-- A) Storing user passwords
-- B) Recording application events for debugging
-- C) Encrypting data
-- D) Compiling code
+- A) Single-threaded applications
+- B) Thread-safe operations without blocking entire map
+- C) Storing primitive types only
+- D) Maintaining sorted order
 
 ---
 
 ### Question 37
-**[IntelliJ]**
+**[Collections]**
 
-What does "Smart Step Into" allow?
+Which collection class is synchronized?
 
-- A) Skip all methods
-- B) Choose which method to enter in chained calls
-- C) Step faster
-- D) Auto-fix bugs
+- A) ArrayList
+- B) HashMap
+- C) Vector
+- D) HashSet
 
 ---
 
 ### Question 38
-**[Debugging]**
+**[Collections]**
 
-What is a deadlock?
+What is the difference between Iterator and ListIterator?
 
-- A) A locked file
-- B) Threads waiting for each other indefinitely
-- C) A crashed application
-- D) A syntax error
+- A) No difference
+- B) ListIterator can traverse both directions
+- C) Iterator is faster
+- D) ListIterator works with all collections
 
 ---
 
 ### Question 39
-**[Reverse Engineering]**
+**[Collections]**
 
-What file extension do compiled Java classes have?
+Which method is used to sort a List?
 
-- A) .java
-- B) .class
-- C) .jar
-- D) .jvm
+- A) list.order()
+- B) Collections.sort(list)
+- C) list.arrange()
+- D) Arrays.sort(list)
 
 ---
 
 ### Question 40
-**[Debugging]**
+**[Collections]**
 
-What tool is used for memory analysis?
+What does Collections.unmodifiableList() return?
 
-- A) javac
-- B) Eclipse MAT
-- C) git
-- D) maven
+- A) A copy of the list
+- B) A read-only view of the list
+- C) A synchronized list
+- D) A sorted list
 
 ---
 
+## Multithreading
+
 ### Question 41
-**[IntelliJ]**
+**[Multithreading]**
 
-What is the shortcut for Evaluate Expression?
+How do you create a thread by implementing an interface?
 
-- A) F8
-- B) Alt+F8
-- C) Ctrl+E
-- D) Shift+E
+- A) Extend Thread class
+- B) Implement Runnable interface
+- C) Implement Threadable interface
+- D) Extend Runnable class
 
 ---
 
 ### Question 42
-**[Debugging]**
+**[Multithreading]**
 
-What does profiling measure?
+What is the difference between start() and run()?
 
-- A) Code style
-- B) Application performance (CPU, memory usage)
-- C) Code coverage
-- D) Security vulnerabilities
+- A) No difference
+- B) start() creates new thread and calls run(), run() executes in current thread
+- C) run() creates new thread, start() doesn't
+- D) start() is deprecated
 
 ---
 
 ### Question 43
-**[Reverse Engineering]**
+**[Multithreading]**
 
-What is contained in META-INF/MANIFEST.MF?
+Which method makes a thread wait for another thread to complete?
 
-- A) Source code
-- B) JAR metadata like main class and version
-- C) Database schema
-- D) Test results
+- A) wait()
+- B) sleep()
+- C) join()
+- D) stop()
 
 ---
 
 ### Question 44
-**[Debugging]**
+**[Multithreading]**
 
-What is an exception breakpoint?
+What does the synchronized keyword do?
 
-- A) A breakpoint that throws exceptions
-- B) A breakpoint that triggers when a specific exception is thrown
-- C) A broken breakpoint
-- D) A breakpoint in catch blocks only
+- A) Makes a method faster
+- B) Ensures only one thread can access the block at a time
+- C) Creates a new thread
+- D) Stops a thread
 
 ---
 
 ### Question 45
-**[IntelliJ]**
+**[Multithreading]**
 
-How do you modify a variable value during debugging?
+What is a race condition?
 
-- A) Edit the source code
-- B) Right-click in Variables panel > Set Value
-- C) Use the Console
-- D) Press F5
+- A) Two threads racing to complete first
+- B) Multiple threads accessing shared data leading to unexpected results
+- C) A thread running faster than expected
+- D) A thread timing out
 
 ---
 
 ### Question 46
-**[Debugging]**
+**[Multithreading]**
 
-What is the purpose of a thread dump?
+What is a deadlock?
 
-- A) Delete threads
-- B) Show all threads and their current state
-- C) Create new threads
-- D) Measure thread speed
+- A) A thread that has stopped
+- B) Two or more threads blocked forever waiting for each other
+- C) A thread that runs too fast
+- D) A thread without a lock
 
 ---
 
 ### Question 47
-**[Reverse Engineering]**
+**[Multithreading]**
 
-What is bytecode?
+What is the difference between wait() and sleep()?
 
-- A) Source code in bytes
-- B) Intermediate code executed by the JVM
-- C) Encrypted code
-- D) Machine code
+- A) No difference
+- B) wait() releases the lock, sleep() does not
+- C) sleep() releases the lock, wait() does not
+- D) Both release the lock
 
 ---
 
 ### Question 48
-**[Debugging]**
+**[Multithreading]**
 
-Which log level is most verbose?
+Which class provides thread pool functionality?
 
-- A) ERROR
-- B) WARN
-- C) INFO
-- D) TRACE
+- A) Thread
+- B) Runnable
+- C) ExecutorService
+- D) Callable
 
 ---
 
 ### Question 49
-**[IntelliJ]**
+**[Multithreading]**
 
-What does "Drop Frame" do?
+What does Callable interface return?
 
-- A) Removes a breakpoint
-- B) Re-executes the current method from the start
-- C) Deletes a variable
-- D) Closes the debug window
+- A) void
+- B) A Future object containing the result
+- C) Boolean only
+- D) Thread object
 
 ---
 
 ### Question 50
-**[Reverse Engineering]**
+**[Multithreading]**
 
-What is VisualVM used for?
+What are the thread states in Java?
 
-- A) Writing code
-- B) Monitoring and profiling Java applications
-- C) Compiling code
-- D) Version control
+- A) START, RUN, STOP
+- B) NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED
+- C) BEGIN, MIDDLE, END
+- D) CREATED, RUNNING, COMPLETED
 
 ---
 
 ### Question 51
-**[Debugging]**
+**[Multithreading]**
 
-What causes ConcurrentModificationException?
+What does volatile keyword do?
 
-- A) Too many threads
-- B) Modifying a collection while iterating over it
-- C) Concurrent database access
-- D) Null pointer
+- A) Makes a variable constant
+- B) Ensures visibility of changes across threads
+- C) Creates a lock
+- D) Stops a thread
 
 ---
 
 ### Question 52
-**[IntelliJ]**
+**[Multithreading]**
 
-What does "Mute Breakpoints" do?
+What is the purpose of notify()?
 
-- A) Permanently deletes breakpoints
-- B) Temporarily disables all breakpoints
-- C) Silences console output
-- D) Hides the debug window
+- A) Stop all threads
+- B) Wake up one waiting thread
+- C) Create a new thread
+- D) Pause a thread
 
 ---
 
 ### Question 53
-**[Debugging]**
+**[Multithreading]**
 
-What is the benefit of conditional breakpoints?
+Which method returns the current thread?
 
-- A) They are faster
-- B) They pause only when specific conditions are met
-- C) They fix bugs automatically
-- D) They work without a debugger
+- A) Thread.getThread()
+- B) Thread.currentThread()
+- C) Thread.this()
+- D) Thread.active()
 
 ---
 
 ### Question 54
-**[Reverse Engineering]**
+**[Multithreading]**
 
-What is the purpose of reverse engineering for learning?
+What is a daemon thread?
 
-- A) Copying code illegally
-- B) Understanding how software works internally
-- C) Breaking software
-- D) Selling code
+- A) A high-priority thread
+- B) A background thread that doesn't prevent JVM exit
+- C) A thread that never stops
+- D) A synchronized thread
 
 ---
 
 ### Question 55
-**[Debugging]**
+**[Multithreading]**
 
-What does print statement debugging involve?
+Which is NOT a valid way to prevent deadlock?
 
-- A) Printing source code
-- B) Adding output statements to trace execution
-- C) Printing to a physical printer
-- D) Using print preview
+- A) Lock ordering
+- B) Lock timeout
+- C) Avoiding nested locks
+- D) Using more threads
 
 ---
 
+## Functional Programming
+
 ### Question 56
-**[IntelliJ]**
+**[Functional]**
 
-What does the Stream Debugger visualize?
+What is a lambda expression?
 
-- A) Network streams
-- B) Java Stream operations step by step
-- C) File streams
-- D) Video streams
+- A) A regular method
+- B) A concise way to represent an anonymous function
+- C) A type of loop
+- D) A class definition
 
 ---
 
 ### Question 57
-**[Debugging]**
+**[Functional]**
 
-What is a regression bug?
+What is a functional interface?
 
-- A) A new feature
-- B) A bug that reappears after being fixed
-- C) A performance improvement
-- D) A syntax error
+- A) Any interface
+- B) An interface with exactly one abstract method
+- C) An interface with no methods
+- D) An interface with only static methods
 
 ---
 
 ### Question 58
-**[Reverse Engineering]**
+**[Functional]**
 
-Which tool is built into IntelliJ for decompilation?
+Which functional interface takes a value and returns a boolean?
 
-- A) JD-GUI
-- B) CFR
-- C) Fernflower
-- D) Procyon
+- A) Function
+- B) Consumer
+- C) Predicate
+- D) Supplier
 
 ---
 
 ### Question 59
-**[Debugging]**
+**[Functional]**
 
-What is the main disadvantage of print debugging?
+What does Consumer functional interface do?
 
-- A) It's too fast
-- B) It clutters code and must be removed
-- C) It doesn't work
-- D) It's too accurate
+- A) Returns a value
+- B) Takes a value and returns nothing
+- C) Takes nothing and returns a value
+- D) Takes two values and returns one
 
 ---
 
 ### Question 60
-**[IntelliJ]**
+**[Functional]**
 
-What shortcut stops the debugger?
+What is Optional used for?
 
-- A) F9
-- B) Shift+F9
-- C) Ctrl+F2
-- D) F8
+- A) Making code optional
+- B) Avoiding NullPointerException by wrapping potentially null values
+- C) Creating optional methods
+- D) Optional imports
+
+---
+
+### Question 61
+**[Functional]**
+
+Which method creates an Optional that may be null?
+
+- A) Optional.of()
+- B) Optional.empty()
+- C) Optional.ofNullable()
+- D) Optional.create()
+
+---
+
+### Question 62
+**[Functional]**
+
+What is a method reference?
+
+- A) A reference to a class
+- B) A shorthand for a lambda that calls an existing method
+- C) A pointer to memory
+- D) A variable reference
+
+---
+
+### Question 63
+**[Functional]**
+
+What is the syntax for a static method reference?
+
+- A) object::method
+- B) ClassName::staticMethod
+- C) method::static
+- D) ::method
+
+---
+
+### Question 64
+**[Functional]**
+
+Which is the correct lambda syntax for no parameters?
+
+- A) -> expression
+- B) () -> expression
+- C) {} -> expression
+- D) [] -> expression
+
+---
+
+### Question 65
+**[Functional]**
+
+What does Function<T, R> interface represent?
+
+- A) Takes T, returns R
+- B) Takes nothing, returns R
+- C) Takes T, returns nothing
+- D) Takes R, returns T
+
+---
+
+### Question 66
+**[Functional]**
+
+What is orElse() used for with Optional?
+
+- A) Throwing an exception
+- B) Providing a default value if empty
+- C) Checking if present
+- D) Mapping to another type
+
+---
+
+### Question 67
+**[Functional]**
+
+What does Supplier functional interface do?
+
+- A) Takes a value
+- B) Returns a value without taking any input
+- C) Modifies a value
+- D) Compares values
+
+---
+
+### Question 68
+**[Functional]**
+
+Which annotation marks a functional interface?
+
+- A) @Function
+- B) @Lambda
+- C) @FunctionalInterface
+- D) @Interface
+
+---
+
+### Question 69
+**[Functional]**
+
+What type of method reference is String::length?
+
+- A) Static method reference
+- B) Instance method reference on arbitrary object
+- C) Constructor reference
+- D) Bound method reference
+
+---
+
+### Question 70
+**[Functional]**
+
+What does BiFunction take and return?
+
+- A) One input, one output
+- B) Two inputs, one output
+- C) No inputs, two outputs
+- D) Two inputs, no output
+
+---
+
+## Design Patterns
+
+### Question 71
+**[Design Patterns]**
+
+What does SOLID's 'S' stand for?
+
+- A) Simple Responsibility
+- B) Single Responsibility
+- C) Structured Responsibility
+- D) Shared Responsibility
+
+---
+
+### Question 72
+**[Design Patterns]**
+
+What is the Singleton pattern?
+
+- A) A class with one method
+- B) A class that can have only one instance
+- C) A class with a single parent
+- D) A class with no constructor
+
+---
+
+### Question 73
+**[Design Patterns]**
+
+What is the Factory pattern used for?
+
+- A) Creating objects without exposing instantiation logic
+- B) Making copies of objects
+- C) Destroying objects
+- D) Sorting objects
+
+---
+
+### Question 74
+**[Design Patterns]**
+
+What is the Strategy pattern?
+
+- A) A pattern for creating objects
+- B) A pattern that defines interchangeable algorithms
+- C) A pattern for logging
+- D) A pattern for database access
+
+---
+
+### Question 75
+**[Design Patterns]**
+
+What is the Observer pattern?
+
+- A) A pattern for watching code
+- B) A pattern where objects are notified of state changes
+- C) A pattern for debugging
+- D) A pattern for security
+
+---
+
+### Question 76
+**[Design Patterns]**
+
+What does Open/Closed principle mean?
+
+- A) Classes should be open or closed
+- B) Open for extension, closed for modification
+- C) Methods should be public
+- D) Files should be open
+
+---
+
+### Question 77
+**[Design Patterns]**
+
+Which is the best way to implement Singleton in Java?
+
+- A) Public constructor
+- B) Enum
+- C) Static method only
+- D) Abstract class
+
+---
+
+### Question 78
+**[Design Patterns]**
+
+What relationship does composition represent?
+
+- A) IS-A
+- B) HAS-A
+- C) USES-A
+- D) LIKE-A
+
+---
+
+### Question 79
+**[Design Patterns]**
+
+What is Dependency Inversion principle?
+
+- A) Dependencies should be inverted in order
+- B) Depend on abstractions, not concretions
+- C) Invert method calls
+- D) Reverse inheritance
+
+---
+
+### Question 80
+**[Design Patterns]**
+
+What is the difference between inheritance and composition?
+
+- A) No difference
+- B) Inheritance is IS-A (tightly coupled), composition is HAS-A (loosely coupled)
+- C) Composition is IS-A, inheritance is HAS-A
+- D) Inheritance is for interfaces only
+
+---
+
+## End of Questions
+
+**Total: 80 Questions**
+- Object-Oriented Programming: 20
+- Collections Framework: 20
+- Multithreading: 15
+- Functional Programming: 15
+- Design Patterns: 10
+
+---
+
+*Proceed to `mcq-answers.md` for answers and explanations.*

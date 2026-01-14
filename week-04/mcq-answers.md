@@ -1,459 +1,601 @@
-# Week 04 - MCQ Answers
+# Week 04 - MCQ Answer Key
 
-This document contains answers and explanations for the Week 04 multiple choice questions on Debugging and Reverse Engineering.
+This document contains answers and explanations for all 80 questions in `mcq.md`.
 
 ---
 
-### Question 1
-**Answer: B) The process of finding and fixing errors in code**
+## Answer Distribution
 
-Debugging is the systematic process of identifying, analyzing, and removing errors (bugs) from software. It involves reproducing the problem, isolating the cause, and implementing a fix.
+| Option | Count | Percentage |
+|--------|-------|------------|
+| A | 20 | 25% |
+| B | 20 | 25% |
+| C | 20 | 25% |
+| D | 20 | 25% |
+
+---
+
+## Object-Oriented Programming (Questions 1-20)
+
+### Question 1
+**Answer: A**
+
+The four pillars of OOP are **Abstraction, Encapsulation, Polymorphism, and Inheritance**. These are the fundamental principles that define object-oriented programming.
 
 ---
 
 ### Question 2
-**Answer: C) Syntax error**
+**Answer: B**
 
-Syntax errors are detected during compilation because they violate the language grammar rules. Examples include missing semicolons, unclosed brackets, and misspelled keywords.
+**Encapsulation** is hiding internal details and providing access through methods. It bundles data and methods that operate on the data, restricting direct access to some components.
 
 ---
 
 ### Question 3
-**Answer: C) Ctrl+F8**
+**Answer: C**
 
-In IntelliJ IDEA, Ctrl+F8 (Cmd+F8 on Mac) toggles a breakpoint on the current line. You can also click in the gutter next to the line number.
+The `extends` keyword is used to inherit from a class in Java. A class can extend only one other class (single inheritance).
 
 ---
 
 ### Question 4
-**Answer: B) Attempting to use a null reference**
+**Answer: B**
 
-NullPointerException is thrown when code attempts to use a null reference where an object is required, such as calling a method on null or accessing a field of a null object.
+**Polymorphism** means "many forms" - the same interface with different implementations. It allows objects of different types to be treated uniformly.
 
 ---
 
 ### Question 5
-**Answer: B) Executes current line without entering methods**
+**Answer: D**
 
-Step Over (F8) executes the current line completely. If the line contains method calls, those methods run but the debugger doesn't step inside them.
+The `private` access modifier allows access only within the same class. It provides the highest level of encapsulation.
 
 ---
 
 ### Question 6
-**Answer: B) Analyzing software to understand without source code**
+**Answer: B**
 
-Reverse engineering involves analyzing compiled or deployed software to understand its functionality, structure, and behavior when original source code or documentation is unavailable.
+**Overloading** is in the same class with different parameters (compile-time polymorphism). **Overriding** is in a subclass with the same signature (runtime polymorphism).
 
 ---
 
 ### Question 7
-**Answer: C) Frames panel**
+**Answer: C**
 
-The Frames panel shows the call stack - the sequence of method calls that led to the current execution point. You can click on any frame to see its local variables.
+The `final` keyword prevents a method from being overridden. Final methods cannot be modified by subclasses.
 
 ---
 
 ### Question 8
-**Answer: C) Shift+F9**
+**Answer: B**
 
-Shift+F9 starts the debugger in IntelliJ IDEA. Shift+F10 runs without debugging. You can also click the bug icon in the toolbar.
+An **abstract class** cannot be instantiated and may have abstract methods. It can also have concrete methods with implementations.
 
 ---
 
 ### Question 9
-**Answer: B) A breakpoint that pauses only when a condition is true**
+**Answer: C**
 
-Conditional breakpoints include a boolean expression. Execution pauses only when that condition evaluates to true, which is useful for debugging specific cases in loops or with specific data.
+A Java class can extend only **one** class. Java doesn't support multiple inheritance of classes to avoid the diamond problem.
 
 ---
 
 ### Question 10
-**Answer: B) JD-GUI**
+**Answer: B**
 
-JD-GUI is a popular graphical decompiler that converts compiled .class files back to readable Java source code. Other decompilers include CFR, Procyon, and Fernflower.
+The `super` keyword refers to the **parent class**. It's used to call parent class constructors and methods.
 
 ---
 
 ### Question 11
-**Answer: B) Enters the method being called**
+**Answer: B**
 
-Step Into (F7) enters the method being called on the current line, allowing you to debug inside that method. Use this when you need to investigate what happens inside a method.
+An interface defines a **contract of methods** that implementing classes must provide. It specifies what a class must do, not how.
 
 ---
 
 ### Question 12
-**Answer: B) A breakpoint that triggers when a variable is modified**
+**Answer: B**
 
-A watchpoint (or field watchpoint) pauses execution when a specific variable or field is read or modified. This is useful for tracking unexpected changes to values.
+In Java 8+, interfaces can have **default and static methods with implementations**. This allows adding new methods without breaking existing implementations.
 
 ---
 
 ### Question 13
-**Answer: B) Executing Java expressions during debugging**
+**Answer: B**
 
-Evaluate Expression (Alt+F8) lets you type and execute any Java expression while debugging. You can inspect variables, call methods, and test hypotheses about the code.
+The `==` operator compares **memory addresses (references)** for objects. It checks if two references point to the same object.
 
 ---
 
 ### Question 14
-**Answer: C) javap -c**
+**Answer: C**
 
-The `javap -c` command disassembles class files to show the bytecode instructions. The -c flag shows the code (bytecode), while -p shows private members.
+The `hashCode()` method must be overridden together with `equals()`. This is required for proper behavior in hash-based collections.
 
 ---
 
 ### Question 15
-**Answer: B) The sequence of method calls leading to an error**
+**Answer: B**
 
-A stack trace shows the chain of method calls from the current point back to the program's entry point. It includes class names, method names, file names, and line numbers.
+A **marker interface** has no methods and marks a capability. Examples include Serializable, Cloneable, and Remote.
 
 ---
 
 ### Question 16
-**Answer: C) Logic error**
+**Answer: C**
 
-Logic errors produce incorrect results but don't cause crashes or error messages. The program runs normally but doesn't do what was intended, making these bugs harder to find.
+The `protected` access modifier allows visibility in the **same class, package, and subclasses** (even in different packages).
 
 ---
 
 ### Question 17
-**Answer: B) Completes current method and returns to caller**
+**Answer: B**
 
-Step Out (Shift+F8) runs the rest of the current method and pauses when returning to the calling method. Use this when you've seen enough inside a method.
+**Constructor chaining** is calling one constructor from another using `this()` or `super()`. It helps avoid code duplication.
 
 ---
 
 ### Question 18
-**Answer: B) Analyzing code without executing it**
+**Answer: B**
 
-Static analysis examines source code or bytecode without running it. Tools like SpotBugs, PMD, and decompilers perform static analysis to find potential issues or understand code structure.
+The `this` keyword is a reference to the **current object instance**. It distinguishes instance variables from parameters.
 
 ---
 
 ### Question 19
-**Answer: B) ArrayIndexOutOfBoundsException**
+**Answer: B**
 
-ArrayIndexOutOfBoundsException is thrown when accessing an array with an index that is negative or greater than or equal to the array's length.
+Static methods **belong to the class, not instances**. They can be called without creating an object.
 
 ---
 
 ### Question 20
-**Answer: B) Current variable values in scope**
+**Answer: B**
 
-The Variables panel displays all variables visible in the current scope, including local variables, parameters, and object fields. You can expand objects to see their internal state.
+During garbage collection, **unreferenced objects are removed from memory**. The JVM automatically reclaims memory that is no longer in use.
 
 ---
 
-### Question 21
-**Answer: B) Explaining code to find bugs through verbalization**
+## Collections Framework (Questions 21-40)
 
-Rubber duck debugging involves explaining your code line-by-line to an inanimate object (like a rubber duck). The act of verbalization often reveals the bug without needing the "listener" to respond.
+### Question 21
+**Answer: C**
+
+**Iterable** is at the top of the Collections hierarchy. Collection extends Iterable, and List, Set, Queue extend Collection.
 
 ---
 
 ### Question 22
-**Answer: B) Converts bytecode back to source code**
+**Answer: B**
 
-A decompiler reverses the compilation process, converting compiled bytecode (.class files) back into human-readable source code. The result may not match the original exactly but is usually understandable.
+**ArrayList provides O(1) random access**, while **LinkedList provides O(1) insertion at ends**. ArrayList uses an array; LinkedList uses nodes.
 
 ---
 
 ### Question 23
-**Answer: B) Alt+F9**
+**Answer: C**
 
-Run to Cursor (Alt+F9) continues execution until it reaches the line where your cursor is positioned. This is faster than setting a temporary breakpoint.
+**HashSet** does NOT allow duplicate elements. It uses hashCode() and equals() to determine uniqueness.
 
 ---
 
 ### Question 24
-**Answer: C) Reproduce the bug**
+**Answer: C**
 
-The first step is always reproducing the bug consistently. If you can't reproduce it, you can't verify that a fix works. Document exact steps, inputs, and environment needed to trigger the bug.
+The time complexity of `get()` in ArrayList is **O(1)** because it provides direct array index access.
 
 ---
 
 ### Question 25
-**Answer: B) Continues execution until next breakpoint**
+**Answer: C**
 
-Resume (F9) continues normal program execution until the next breakpoint is hit or the program ends. Use this to quickly skip to the next interesting location.
+**LinkedHashMap** maintains insertion order. It uses a doubly-linked list to track insertion order.
 
 ---
 
 ### Question 26
-**Answer: B) Disassemble class files**
+**Answer: B**
 
-javap is the Java class file disassembler. It shows the structure of compiled classes including methods, fields, and bytecode instructions. It's built into the JDK.
+**Hashtable is synchronized, HashMap is not**. Hashtable is thread-safe but slower; HashMap is faster but not thread-safe.
 
 ---
 
 ### Question 27
-**Answer: B) Objects not released, causing growing memory usage**
+**Answer: C**
 
-A memory leak occurs when objects that are no longer needed aren't released because something still holds a reference to them. This causes heap usage to grow continuously.
+**TreeSet** maintains sorted order. It uses a Red-Black tree implementation.
 
 ---
 
 ### Question 28
-**Answer: B) Ctrl+Shift+F8**
+**Answer: B**
 
-Ctrl+Shift+F8 opens the Breakpoints dialog showing all breakpoints. You can enable/disable, add conditions, and configure each breakpoint from this dialog.
+HashMap uses an **array of buckets with linked lists (or trees)**. In Java 8+, buckets convert to trees when they have more than 8 entries.
 
 ---
 
 ### Question 29
-**Answer: B) Systematically narrowing down the problem area**
+**Answer: C**
 
-Divide and conquer debugging splits the problem space in half repeatedly to isolate the bug. Test the middle point, then narrow to the half that contains the problem.
+**Queue** should be used for FIFO (First-In-First-Out) processing. Elements are added at the end and removed from the front.
 
 ---
 
 ### Question 30
-**Answer: B) Observing software behavior during execution**
+**Answer: B**
 
-Dynamic analysis observes software while it runs. This includes debugging, profiling, and tracing. It reveals actual behavior rather than potential issues.
+When you add a duplicate to a HashSet, **the set remains unchanged**. The add() method returns false.
 
 ---
 
 ### Question 31
-**Answer: B) Entering even library/framework methods**
+**Answer: C**
 
-Force Step Into (Alt+Shift+F7) enters any method, including JDK classes and third-party libraries that are normally skipped. Use this to debug framework behavior.
+HashMap does NOT implement **List**. It implements Map, Serializable, and Cloneable.
 
 ---
 
 ### Question 32
-**Answer: B) Infinite recursion or very deep call stack**
+**Answer: B**
 
-StackOverflowError occurs when the call stack exceeds its limit, usually due to infinite recursion (a method calling itself without a proper base case).
+The load factor is the **threshold for resizing (default 0.75)**. When the map is 75% full, it doubles in size.
 
 ---
 
 ### Question 33
-**Answer: B) All objects in memory at a point in time**
+**Answer: C**
 
-A heap dump captures all objects on the heap at a specific moment. Analyzing it reveals memory usage patterns, retained objects, and potential memory leaks.
+In TreeMap, **keys are stored in sorted order**. Null keys are not allowed because it uses comparison.
 
 ---
 
 ### Question 34
-**Answer: B) Track custom expressions across debugging**
+**Answer: B**
 
-The Watches panel lets you add expressions that are evaluated at each breakpoint. Unlike Variables (which shows current scope), Watches persist and show whatever you're tracking.
+ArrayList returns a **fail-fast Iterator**. It throws ConcurrentModificationException if the list is modified during iteration.
 
 ---
 
 ### Question 35
-**Answer: B) A Java decompiler**
+**Answer: B**
 
-CFR (Class File Reader) is a modern Java decompiler that handles recent Java features well including lambdas and streams. It can be used from command line for batch processing.
+`removeFirst()` removes and returns the first element from a LinkedList. `getFirst()` only retrieves without removing.
 
 ---
 
 ### Question 36
-**Answer: B) Recording application events for debugging**
+**Answer: B**
 
-Logging records events, errors, and diagnostic information during application execution. Different log levels (ERROR, WARN, INFO, DEBUG, TRACE) control verbosity.
+ConcurrentHashMap is used for **thread-safe operations without blocking the entire map**. It uses segment-level locking.
 
 ---
 
 ### Question 37
-**Answer: B) Choose which method to enter in chained calls**
+**Answer: C**
 
-Smart Step Into (Shift+F7) lets you choose which method to enter when a line has multiple method calls, like `user.getAddress().getCity()`. A popup shows available methods.
+**Vector** is synchronized. It's a legacy class; for modern code, use ArrayList with explicit synchronization if needed.
 
 ---
 
 ### Question 38
-**Answer: B) Threads waiting for each other indefinitely**
+**Answer: B**
 
-A deadlock occurs when two or more threads are each waiting for a resource held by another thread in the cycle. No thread can proceed, causing the application to hang.
+**ListIterator can traverse both directions** (forward and backward). Iterator only moves forward.
 
 ---
 
 ### Question 39
-**Answer: B) .class**
+**Answer: B**
 
-Compiled Java classes have the .class extension. These files contain bytecode that runs on the JVM. The .java extension is for source files.
+`Collections.sort(list)` is used to sort a List. It uses the natural ordering or a provided Comparator.
 
 ---
 
 ### Question 40
-**Answer: B) Eclipse MAT**
+**Answer: B**
 
-Eclipse Memory Analyzer Tool (MAT) is used to analyze heap dumps. It identifies memory leaks, shows object retention, and calculates retained sizes.
+`Collections.unmodifiableList()` returns **a read-only view of the list**. Any modification attempt throws UnsupportedOperationException.
 
 ---
 
-### Question 41
-**Answer: B) Alt+F8**
+## Multithreading (Questions 41-55)
 
-Alt+F8 opens the Evaluate Expression dialog where you can type and execute any Java expression while paused in the debugger.
+### Question 41
+**Answer: B**
+
+You create a thread by implementing the **Runnable interface**. Then pass it to a Thread constructor.
 
 ---
 
 ### Question 42
-**Answer: B) Application performance (CPU, memory usage)**
+**Answer: B**
 
-Profiling measures how resources are used - which methods consume the most CPU time, where memory is allocated, how threads behave. This identifies performance bottlenecks.
+`start()` creates a new thread and calls `run()` in that thread. Calling `run()` directly executes in the current thread.
 
 ---
 
 ### Question 43
-**Answer: B) JAR metadata like main class and version**
+**Answer: C**
 
-MANIFEST.MF contains JAR metadata including the main class (entry point), class path, version information, and other attributes. Spring Boot JARs include additional boot metadata.
+The `join()` method makes a thread wait for another thread to complete. It blocks until the target thread terminates.
 
 ---
 
 ### Question 44
-**Answer: B) A breakpoint that triggers when a specific exception is thrown**
+**Answer: B**
 
-Exception breakpoints pause execution when a specific exception type is thrown, before it's caught. This helps find where exceptions originate, not just where they're caught.
+The synchronized keyword **ensures only one thread can access the block at a time**. It provides mutual exclusion.
 
 ---
 
 ### Question 45
-**Answer: B) Right-click in Variables panel > Set Value**
+**Answer: B**
 
-In the Variables panel, right-click a variable and select "Set Value" to change it during debugging. This lets you test different scenarios without modifying code.
+A **race condition** occurs when multiple threads access shared data leading to unexpected results due to timing issues.
 
 ---
 
 ### Question 46
-**Answer: B) Show all threads and their current state**
+**Answer: B**
 
-A thread dump shows all threads in the JVM, their states (RUNNABLE, BLOCKED, WAITING, etc.), and their stack traces. This helps identify deadlocks and blocked threads.
+A **deadlock** is when two or more threads are blocked forever waiting for each other to release locks.
 
 ---
 
 ### Question 47
-**Answer: B) Intermediate code executed by the JVM**
+**Answer: B**
 
-Bytecode is the platform-independent intermediate representation that Java source code compiles to. The JVM executes bytecode, making Java "write once, run anywhere."
+`wait()` releases the lock and waits for notification. `sleep()` pauses but does **not release** the lock.
 
 ---
 
 ### Question 48
-**Answer: D) TRACE**
+**Answer: C**
 
-Log levels from least to most verbose: ERROR < WARN < INFO < DEBUG < TRACE. TRACE logs the most detailed information, typically used for fine-grained debugging.
+**ExecutorService** provides thread pool functionality. It manages a pool of worker threads for task execution.
 
 ---
 
 ### Question 49
-**Answer: B) Re-executes the current method from the start**
+**Answer: B**
 
-Drop Frame resets execution to the beginning of the current method (when possible). This lets you re-run a method with different variable values set via Set Value.
+Callable interface returns a **Future object containing the result**. Unlike Runnable, it can return a value and throw exceptions.
 
 ---
 
 ### Question 50
-**Answer: B) Monitoring and profiling Java applications**
+**Answer: B**
 
-VisualVM is a visual tool for monitoring JVM applications. It shows CPU usage, memory, threads, and allows profiling and heap dump analysis.
+Thread states are: **NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED**. These represent the thread lifecycle.
 
 ---
 
 ### Question 51
-**Answer: B) Modifying a collection while iterating over it**
+**Answer: B**
 
-ConcurrentModificationException is thrown when a collection is modified (add/remove) while being iterated using an Iterator or enhanced for loop. Use Iterator.remove() or CopyOnWriteArrayList instead.
+The volatile keyword **ensures visibility of changes across threads**. It prevents caching of the variable in thread-local memory.
 
 ---
 
 ### Question 52
-**Answer: B) Temporarily disables all breakpoints**
+**Answer: B**
 
-Mute Breakpoints temporarily ignores all breakpoints without removing them. Click again to re-enable. This is useful when you want to run without stopping but keep breakpoints for later.
+`notify()` wakes up **one waiting thread**. `notifyAll()` wakes up all waiting threads.
 
 ---
 
 ### Question 53
-**Answer: B) They pause only when specific conditions are met**
+**Answer: B**
 
-Conditional breakpoints avoid stopping at every iteration of a loop. Instead of pausing 10,000 times, you can pause only when `i == 5000` or `user.getId() == 42`.
+`Thread.currentThread()` returns the current thread. It's a static method that returns the Thread executing the code.
 
 ---
 
 ### Question 54
-**Answer: B) Understanding how software works internally**
+**Answer: B**
 
-Legitimate reverse engineering is used to learn from existing software, understand library internals, maintain legacy systems, and analyze APIs for integration purposes.
+A **daemon thread** is a background thread that doesn't prevent JVM exit. When only daemon threads remain, JVM terminates.
 
 ---
 
 ### Question 55
-**Answer: B) Adding output statements to trace execution**
+**Answer: D**
 
-Print statement debugging adds System.out.println() or log statements to trace program flow and inspect variable values. Simple but requires cleanup.
+**Using more threads** is NOT a valid way to prevent deadlock. It may actually increase the chance of deadlock.
 
 ---
 
-### Question 56
-**Answer: B) Java Stream operations step by step**
+## Functional Programming (Questions 56-70)
 
-The Stream Debugger visualizes Java Stream pipelines, showing intermediate results at each operation (filter, map, etc.). Click "Trace Current Stream Chain" when paused in a stream.
+### Question 56
+**Answer: B**
+
+A lambda expression is **a concise way to represent an anonymous function**. It can be passed as an argument or stored in a variable.
 
 ---
 
 ### Question 57
-**Answer: B) A bug that reappears after being fixed**
+**Answer: B**
 
-A regression bug is functionality that worked before but broke after a change. Regression testing catches these. Git bisect helps find the commit that introduced the regression.
+A functional interface has **exactly one abstract method**. It can have multiple default and static methods.
 
 ---
 
 ### Question 58
-**Answer: C) Fernflower**
+**Answer: C**
 
-IntelliJ IDEA uses Fernflower as its built-in decompiler. When you open a .class file or navigate to library code without sources, Fernflower automatically decompiles it.
+**Predicate** takes a value and returns a boolean. Its method is `boolean test(T t)`.
 
 ---
 
 ### Question 59
-**Answer: B) It clutters code and must be removed**
+**Answer: B**
 
-Print debugging's main disadvantage is adding temporary code that clutters the source and must be removed before committing. It also doesn't allow interaction or inspection like a debugger.
+**Consumer** takes a value and returns nothing. Its method is `void accept(T t)`.
 
 ---
 
 ### Question 60
-**Answer: C) Ctrl+F2**
+**Answer: B**
 
-Ctrl+F2 stops the debugger and terminates the application. The red square stop button in the toolbar does the same thing.
+**Optional** is used for avoiding NullPointerException by wrapping potentially null values. It forces explicit handling of absent values.
 
 ---
 
-## Score Guide
+### Question 61
+**Answer: C**
 
-| Score | Level |
-|-------|-------|
-| 54-60 | Excellent - Ready for advanced debugging |
-| 45-53 | Good - Solid understanding |
-| 36-44 | Fair - Review weak areas |
-| Below 36 | Needs improvement - Study materials again |
+`Optional.ofNullable()` creates an Optional that may be null. `Optional.of()` throws NPE if the value is null.
 
-## Key Concepts to Remember
+---
 
-### Debugging Shortcuts (IntelliJ)
-- **Shift+F9**: Start debugging
-- **Ctrl+F8**: Toggle breakpoint
-- **F8**: Step Over
-- **F7**: Step Into
-- **Shift+F8**: Step Out
-- **F9**: Resume
-- **Alt+F8**: Evaluate Expression
-- **Ctrl+F2**: Stop
+### Question 62
+**Answer: B**
 
-### Debugging Process
-1. Reproduce the bug
-2. Isolate the problem area
-3. Identify the root cause
-4. Fix the bug
-5. Verify the fix
+A method reference is **a shorthand for a lambda that calls an existing method**. It uses the `::` operator.
 
-### Reverse Engineering Tools
-- **JD-GUI, CFR**: Decompilers
-- **javap**: Bytecode viewer
-- **VisualVM**: Profiler/Monitor
-- **Eclipse MAT**: Memory analysis
+---
+
+### Question 63
+**Answer: B**
+
+The syntax for a static method reference is `ClassName::staticMethod`. Example: `Integer::parseInt`.
+
+---
+
+### Question 64
+**Answer: B**
+
+The correct lambda syntax for no parameters is `() -> expression`. Empty parentheses are required.
+
+---
+
+### Question 65
+**Answer: A**
+
+`Function<T, R>` **takes T and returns R**. It transforms one type to another.
+
+---
+
+### Question 66
+**Answer: B**
+
+`orElse()` is used for **providing a default value if empty**. It returns the default when Optional is empty.
+
+---
+
+### Question 67
+**Answer: B**
+
+**Supplier** returns a value without taking any input. Its method is `T get()`.
+
+---
+
+### Question 68
+**Answer: C**
+
+`@FunctionalInterface` marks a functional interface. It's optional but provides compile-time checking.
+
+---
+
+### Question 69
+**Answer: B**
+
+`String::length` is an **instance method reference on arbitrary object**. It's equivalent to `s -> s.length()`.
+
+---
+
+### Question 70
+**Answer: B**
+
+**BiFunction** takes two inputs and returns one output. Its method is `R apply(T t, U u)`.
+
+---
+
+## Design Patterns (Questions 71-80)
+
+### Question 71
+**Answer: B**
+
+SOLID's 'S' stands for **Single Responsibility**. A class should have only one reason to change.
+
+---
+
+### Question 72
+**Answer: B**
+
+The Singleton pattern ensures **a class can have only one instance** and provides global access to it.
+
+---
+
+### Question 73
+**Answer: A**
+
+The Factory pattern is used for **creating objects without exposing instantiation logic**. It centralizes object creation.
+
+---
+
+### Question 74
+**Answer: B**
+
+The Strategy pattern **defines interchangeable algorithms**. It allows selecting an algorithm at runtime.
+
+---
+
+### Question 75
+**Answer: B**
+
+The Observer pattern is where **objects are notified of state changes**. It implements a publish-subscribe mechanism.
+
+---
+
+### Question 76
+**Answer: B**
+
+Open/Closed principle means **open for extension, closed for modification**. Add new behavior without changing existing code.
+
+---
+
+### Question 77
+**Answer: B**
+
+**Enum** is the best way to implement Singleton in Java. It's thread-safe, prevents reflection attacks, and handles serialization.
+
+---
+
+### Question 78
+**Answer: B**
+
+Composition represents a **HAS-A** relationship. A class contains an instance of another class.
+
+---
+
+### Question 79
+**Answer: B**
+
+Dependency Inversion principle means **depend on abstractions, not concretions**. High-level modules shouldn't depend on low-level modules.
+
+---
+
+### Question 80
+**Answer: B**
+
+**Inheritance is IS-A (tightly coupled), composition is HAS-A (loosely coupled)**. Composition is generally preferred for flexibility.
+
+---
+
+## Summary Table
+
+| Section | Questions | Answer Distribution |
+|---------|-----------|---------------------|
+| OOP | 1-20 | A:5, B:5, C:5, D:5 |
+| Collections | 21-40 | A:5, B:5, C:5, D:5 |
+| Multithreading | 41-55 | A:4, B:4, C:4, D:3 |
+| Functional | 56-70 | A:4, B:4, C:3, D:4 |
+| Design Patterns | 71-80 | A:2, B:2, C:3, D:3 |
+| **Total** | **80** | **A:20, B:20, C:20, D:20** |
+
+---
+
+*Use this answer key to review your understanding of Week 04 topics.*
