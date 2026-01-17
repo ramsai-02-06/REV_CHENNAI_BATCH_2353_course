@@ -63,6 +63,16 @@ By the end of this module, you will understand and be able to apply the key conc
 - AOP Proxies (JDK Dynamic Proxy vs CGLIB)
 - Practical AOP examples
 
+### 7. [Common Pitfalls and Troubleshooting](./topics/07-common-pitfalls.md)
+- NoSuchBeanDefinitionException and solutions
+- NoUniqueBeanDefinitionException (@Qualifier, @Primary)
+- Circular dependency detection and resolution
+- Component scan misconfiguration
+- Bean scope misunderstandings
+- Field injection issues
+- @Transactional pitfalls
+- Debugging tips and tools
+
 
 ## Key Concepts
 Refer to the curriculum and lecture notes for detailed explanations of each topic.

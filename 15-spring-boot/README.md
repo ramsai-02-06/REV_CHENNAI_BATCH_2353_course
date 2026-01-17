@@ -50,6 +50,26 @@ By the end of this module, you will understand and be able to apply the key conc
 - Custom properties and @ConfigurationProperties
 - Property precedence and externalized configuration
 
+### 7. [Spring Profiles](./topics/07-spring-profiles.md)
+- What are Spring Profiles and why use them
+- Creating profile-specific configuration files
+- Activating profiles (properties, command line, environment variables)
+- @Profile annotation for conditional beans
+- Profile expressions (!, &, |)
+- Profile groups (Spring Boot 2.4+)
+- Best practices for environment management
+
+### 8. [Testing Basics](./topics/08-testing-basics.md)
+- Testing pyramid: unit, integration, end-to-end
+- spring-boot-starter-test dependencies
+- Unit testing with Mockito (@Mock, @InjectMocks)
+- @SpringBootTest for integration tests
+- @WebMvcTest for controller testing with MockMvc
+- @DataJpaTest for repository testing
+- @MockBean for replacing beans
+- AssertJ fluent assertions
+- Testing best practices
+
 
 ## Key Concepts
 Refer to the curriculum and lecture notes for detailed explanations of each topic.
@@ -72,4 +92,4 @@ Make sure you are comfortable with all topics listed above before proceeding to 
 Continue to the next module in the curriculum sequence.
 
 ---
-**Time Estimate:** 3 days | **Difficulty:** Intermediate | **Prerequisites:** Previous modules
+**Time Estimate:** 4 days | **Difficulty:** Intermediate | **Prerequisites:** Module 14 (Spring Framework)
