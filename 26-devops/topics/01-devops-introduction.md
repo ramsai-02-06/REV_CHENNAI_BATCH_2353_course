@@ -2,571 +2,385 @@
 
 ## What is DevOps?
 
-DevOps is a set of practices, cultural philosophies, and tools that combines software development (Dev) and IT operations (Ops) to shorten the systems development life cycle while delivering features, fixes, and updates frequently in close alignment with business objectives.
+DevOps combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle while delivering features and updates frequently.
 
-### Core Philosophy
+### Core Principles
 
-DevOps breaks down the traditional silos between development and operations teams, fostering a culture of collaboration, shared responsibility, and continuous improvement.
-
-**Key Principles:**
-- **Collaboration**: Dev and Ops teams work together throughout the entire lifecycle
-- **Automation**: Automate repetitive tasks to increase efficiency and reduce errors
-- **Continuous Improvement**: Regularly assess and optimize processes
-- **Customer-Centric**: Focus on delivering value to end users
-- **Fast Feedback**: Quick feedback loops enable rapid iteration
-
-### DevOps vs Traditional Approaches
-
-| Aspect | Traditional | DevOps |
-|--------|-------------|--------|
-| Team Structure | Siloed teams | Cross-functional teams |
-| Deployment Frequency | Weeks/Months | Hours/Days |
-| Change Failure Rate | Higher | Lower |
-| Mean Time to Recovery | Hours/Days | Minutes/Hours |
-| Manual Processes | Many | Automated |
-| Feedback Cycle | Slow | Fast |
-
----
-
-## DevOps Culture and Practices
-
-### The Three Ways of DevOps
-
-#### 1. Systems Thinking (Flow)
-Focus on the performance of the entire system, not individual components or teams.
-
-**Practices:**
-- Optimize the entire value stream from development to production
-- Make work visible through Kanban boards and dashboards
-- Limit work in progress (WIP)
-- Reduce batch sizes and intervals of work
-- Build systems and organizations that are safe to change
-
-#### 2. Amplify Feedback Loops
-Create short feedback loops at all stages of the process.
-
-**Practices:**
-- Continuous integration and automated testing
-- Monitoring and logging in production
-- User feedback and A/B testing
-- Post-incident reviews and blameless postmortems
-- Peer reviews and pair programming
-
-#### 3. Culture of Continual Experimentation and Learning
-Foster a culture that encourages innovation and learning from failures.
-
-**Practices:**
-- Allocate time for experimentation
-- Reward innovation and calculated risk-taking
-- Share knowledge across teams
-- Convert local discoveries into global improvements
-- Build resilience through chaos engineering
-
-### Key DevOps Practices
-
-#### 1. Version Control
-All code, configuration, and infrastructure definitions should be in version control.
-
-```bash
-# Initialize a git repository
-git init
-
-# Track all changes
-git add .
-git commit -m "Initial commit"
-
-# Use branches for features
-git checkout -b feature/new-api-endpoint
+```
+Traditional                     DevOps
+───────────                     ──────
+Dev and Ops separate    →       Unified teams
+Manual deployments      →       Automated pipelines
+Deploy monthly          →       Deploy daily/hourly
+Fix issues slowly       →       Fast feedback loops
 ```
 
-#### 2. Continuous Integration (CI)
-Developers integrate code into a shared repository frequently, with automated builds and tests.
-
-**Benefits:**
-- Early detection of integration issues
-- Reduced debugging time
-- Faster development cycle
-- Better code quality
-
-#### 3. Continuous Delivery (CD)
-Ensure that code is always in a deployable state and can be released to production at any time.
-
-**Benefits:**
-- Reduced deployment risk
-- Faster time to market
-- Better product quality
-- Higher productivity
-
-#### 4. Infrastructure as Code (IaC)
-Manage and provision infrastructure through code rather than manual processes.
-
-**Benefits:**
-- Consistency across environments
-- Version control for infrastructure
-- Repeatability and automation
-- Documentation through code
-
-#### 5. Monitoring and Logging
-Continuous monitoring of applications and infrastructure to detect and resolve issues quickly.
-
-**Key Metrics:**
-- Application performance metrics
-- Infrastructure health metrics
-- Business metrics
-- Security metrics
-
-#### 6. Communication and Collaboration
-Tools and practices that facilitate team communication and collaboration.
-
-**Practices:**
-- ChatOps (Slack, Teams)
-- Collaborative documentation (Wikis, Confluence)
-- Shared dashboards and visibility
-- Regular stand-ups and retrospectives
+**Key Principles:**
+- **Collaboration**: Dev and Ops work together
+- **Automation**: Automate builds, tests, deployments
+- **Continuous Improvement**: Iterate and improve processes
+- **Fast Feedback**: Quick detection and resolution of issues
 
 ---
 
 ## CI/CD Pipeline
 
-A CI/CD pipeline automates the process of building, testing, and deploying applications.
+CI/CD automates the process of building, testing, and deploying applications.
 
-### Pipeline Stages
+### Pipeline Overview
 
 ```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│    Source    │────▶│    Build     │────▶│     Test     │────▶│    Deploy    │
-│   Control    │     │   & Package  │     │  & Validate  │     │ to Staging   │
-└──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
-                                                                         │
-                                                                         ▼
-                                                                ┌──────────────┐
-                                                                │    Deploy    │
-                                                                │ to Production│
-                                                                └──────────────┘
+┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│  Source  │───▶│  Build   │───▶│   Test   │───▶│  Deploy  │
+│   Code   │    │          │    │          │    │          │
+└──────────┘    └──────────┘    └──────────┘    └──────────┘
+     │               │               │               │
+   GitHub       CodeBuild       Automated        CodeDeploy
+   Push          Compile         Tests           to EC2/S3
 ```
 
-### 1. Source Control Stage
+### Continuous Integration (CI)
 
-Code is committed to a version control system, triggering the pipeline.
+Developers frequently merge code into a shared repository with automated builds and tests.
+
+**Benefits:**
+- Early detection of bugs
+- Reduced integration problems
+- Faster development cycle
+
+### Continuous Delivery/Deployment (CD)
+
+Code is automatically deployed to staging/production after passing tests.
+
+**Continuous Delivery**: Deploy manually with one click
+**Continuous Deployment**: Fully automated deployment
+
+---
+
+## AWS CI/CD Services
+
+AWS provides managed services for the entire CI/CD pipeline.
+
+### Service Overview
+
+| Service | Purpose | Comparison |
+|---------|---------|------------|
+| **CodeCommit** | Git repository hosting | Like GitHub |
+| **CodeBuild** | Build and test | Like Jenkins |
+| **CodeDeploy** | Deployment automation | Deploy to EC2, Lambda |
+| **CodePipeline** | Pipeline orchestration | Connects all services |
+
+### How They Work Together
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     AWS CodePipeline                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│   ┌──────────┐    ┌──────────┐    ┌──────────┐             │
+│   │CodeCommit│───▶│CodeBuild │───▶│CodeDeploy│             │
+│   │ (Source) │    │ (Build)  │    │ (Deploy) │             │
+│   └──────────┘    └──────────┘    └──────────┘             │
+│        │               │               │                    │
+│     Git push       Build JAR      Deploy to                │
+│     triggers       Run tests      EC2/S3                   │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Pipeline Stages Explained
+
+### 1. Source Stage
+
+Code changes trigger the pipeline.
+
+**Supported Sources:**
+- AWS CodeCommit
+- GitHub
+- Bitbucket
+- S3 bucket
 
 ```yaml
-# Example: Trigger on push to specific branches
-trigger:
-  branches:
-    include:
-      - main
-      - develop
-      - feature/*
+# Example: GitHub webhook triggers pipeline
+Source:
+  Provider: GitHub
+  Repository: my-app
+  Branch: main
 ```
 
 ### 2. Build Stage
 
-Source code is compiled, dependencies are resolved, and artifacts are created.
+Compile code, run tests, create artifacts.
 
 ```yaml
-# Example Cloud Build configuration
-steps:
-  - name: 'gcr.io/cloud-builders/mvn'
-    args: ['clean', 'package']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/myapp:$SHORT_SHA', '.']
+# buildspec.yml for CodeBuild
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  build:
+    commands:
+      - mvn clean package
+artifacts:
+  files:
+    - target/*.jar
 ```
 
 ### 3. Test Stage
 
-Automated tests are executed to validate code quality and functionality.
+Run automated tests to validate code.
 
 **Test Types:**
-- **Unit Tests**: Test individual components
+- **Unit Tests**: Test individual methods
 - **Integration Tests**: Test component interactions
-- **Security Tests**: Scan for vulnerabilities
-- **Performance Tests**: Validate performance requirements
-
-```yaml
-# Example test stage
-steps:
-  - name: 'gcr.io/cloud-builders/mvn'
-    args: ['test']
-  - name: 'gcr.io/cloud-builders/mvn'
-    args: ['verify']
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'test:integration']
-```
+- **Security Scans**: Check for vulnerabilities
 
 ### 4. Deploy Stage
 
-Artifacts are deployed to target environments (staging, production).
+Deploy artifacts to target environment.
 
-```yaml
-# Example deployment stage
-steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'myapp'
-      - '--image=gcr.io/$PROJECT_ID/myapp:$SHORT_SHA'
-      - '--region=us-central1'
-      - '--platform=managed'
+**Deployment Targets:**
+- EC2 instances
+- S3 buckets (static websites)
+- Elastic Beanstalk
+- ECS/EKS containers
+- Lambda functions
+
+---
+
+## Simple Pipeline Example
+
+### Spring Boot App Pipeline
+
+```
+Developer pushes code to GitHub
+        │
+        ▼
+┌─────────────────┐
+│ CodePipeline    │
+│ detects change  │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ CodeBuild       │
+│ - mvn test      │
+│ - mvn package   │
+│ - Create JAR    │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ CodeDeploy      │
+│ - Stop old app  │
+│ - Deploy JAR    │
+│ - Start new app │
+└─────────────────┘
 ```
 
-### Pipeline Best Practices
-
-1. **Keep It Fast**: Optimize pipeline to complete in under 10 minutes
-2. **Fail Fast**: Run quick tests first, expensive tests later
-3. **Make It Visible**: Dashboard showing pipeline status
-4. **Version Everything**: Pipeline configuration should be versioned
-5. **Secure Secrets**: Never hardcode credentials
-6. **Idempotent Operations**: Pipeline should be repeatable
-7. **Rollback Strategy**: Always have a way to roll back
-
-### Example: Complete CI/CD Pipeline
+### buildspec.yml (CodeBuild)
 
 ```yaml
-# cloudbuild.yaml - Complete CI/CD pipeline
-steps:
-  # Step 1: Run unit tests
-  - name: 'gcr.io/cloud-builders/mvn'
-    id: 'run-tests'
-    args: ['test']
+version: 0.2
 
-  # Step 2: Build application
-  - name: 'gcr.io/cloud-builders/mvn'
-    id: 'build-app'
-    args: ['clean', 'package', '-DskipTests']
-    waitFor: ['run-tests']
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
 
-  # Step 3: Build Docker image
-  - name: 'gcr.io/cloud-builders/docker'
-    id: 'build-image'
-    args: [
-      'build',
-      '-t', 'gcr.io/$PROJECT_ID/myapp:$SHORT_SHA',
-      '-t', 'gcr.io/$PROJECT_ID/myapp:latest',
-      '.'
-    ]
-    waitFor: ['build-app']
+  pre_build:
+    commands:
+      - echo "Running tests..."
+      - mvn test
 
-  # Step 4: Push to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    id: 'push-image'
-    args: ['push', '--all-tags', 'gcr.io/$PROJECT_ID/myapp']
-    waitFor: ['build-image']
+  build:
+    commands:
+      - echo "Building application..."
+      - mvn clean package -DskipTests
 
-  # Step 5: Deploy to staging
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'deploy-staging'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'myapp-staging'
-      - '--image=gcr.io/$PROJECT_ID/myapp:$SHORT_SHA'
-      - '--region=us-central1'
-      - '--platform=managed'
-    waitFor: ['push-image']
+artifacts:
+  files:
+    - target/*.jar
+    - scripts/*
+  discard-paths: no
+```
 
-  # Step 6: Run integration tests on staging
-  - name: 'gcr.io/cloud-builders/curl'
-    id: 'test-staging'
-    args: ['-f', 'https://myapp-staging.example.com/health']
-    waitFor: ['deploy-staging']
+### appspec.yml (CodeDeploy)
 
-  # Step 7: Deploy to production (only on main branch)
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'deploy-production'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'myapp-production'
-      - '--image=gcr.io/$PROJECT_ID/myapp:$SHORT_SHA'
-      - '--region=us-central1'
-      - '--platform=managed'
-    waitFor: ['test-staging']
+```yaml
+version: 0.0
+os: linux
 
-# Specify images to be pushed to registry
-images:
-  - 'gcr.io/$PROJECT_ID/myapp:$SHORT_SHA'
-  - 'gcr.io/$PROJECT_ID/myapp:latest'
+files:
+  - source: target/app.jar
+    destination: /opt/myapp/
 
-# Build configuration
-options:
-  machineType: 'N1_HIGHCPU_8'
-  logging: CLOUD_LOGGING_ONLY
+hooks:
+  ApplicationStop:
+    - location: scripts/stop.sh
+      timeout: 60
 
-timeout: '1200s'
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 60
 ```
 
 ---
 
-## Infrastructure as Code (IaC)
+## DevOps Best Practices
 
-Infrastructure as Code is the practice of managing and provisioning infrastructure through machine-readable definition files.
+### 1. Version Control Everything
 
-### Benefits of IaC
-
-1. **Version Control**: Track infrastructure changes like application code
-2. **Consistency**: Same configuration across all environments
-3. **Automation**: Eliminate manual configuration errors
-4. **Documentation**: Code serves as documentation
-5. **Disaster Recovery**: Quickly rebuild infrastructure
-6. **Scalability**: Easily replicate environments
-
-### IaC Tools
-
-| Tool | Type | Use Case |
-|------|------|----------|
-| Terraform | Declarative | Multi-cloud infrastructure |
-| CloudFormation | Declarative | AWS-specific |
-| Ansible | Imperative | Configuration management |
-| Puppet | Declarative | Configuration management |
-| Chef | Imperative | Configuration management |
-| Pulumi | Imperative | Infrastructure using code |
-
-### Terraform Example
-
-```hcl
-# main.tf - Provision GCP resources
-provider "google" {
-  project = "my-project-id"
-  region  = "us-central1"
-}
-
-# Create VPC network
-resource "google_compute_network" "vpc" {
-  name                    = "my-vpc"
-  auto_create_subnetworks = false
-}
-
-# Create subnet
-resource "google_compute_subnetwork" "subnet" {
-  name          = "my-subnet"
-  ip_cidr_range = "10.0.0.0/24"
-  region        = "us-central1"
-  network       = google_compute_network.vpc.id
-}
-
-# Create GKE cluster
-resource "google_container_cluster" "primary" {
-  name     = "my-gke-cluster"
-  location = "us-central1"
-
-  # We can't create a cluster with no node pool
-  remove_default_node_pool = true
-  initial_node_count       = 1
-
-  network    = google_compute_network.vpc.name
-  subnetwork = google_compute_subnetwork.subnet.name
-}
-
-# Create managed node pool
-resource "google_container_node_pool" "primary_nodes" {
-  name       = "my-node-pool"
-  location   = "us-central1"
-  cluster    = google_container_cluster.primary.name
-  node_count = 3
-
-  node_config {
-    machine_type = "e2-medium"
-    disk_size_gb = 100
-
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform"
-    ]
-
-    labels = {
-      env = "production"
-    }
-
-    tags = ["gke-node", "production"]
-  }
-
-  autoscaling {
-    min_node_count = 1
-    max_node_count = 5
-  }
-
-  management {
-    auto_repair  = true
-    auto_upgrade = true
-  }
-}
-
-# Output cluster endpoint
-output "kubernetes_cluster_endpoint" {
-  value       = google_container_cluster.primary.endpoint
-  description = "GKE Cluster Endpoint"
-}
+```
+Repository should contain:
+├── src/                    # Application code
+├── buildspec.yml           # Build configuration
+├── appspec.yml            # Deployment configuration
+├── scripts/               # Deployment scripts
+│   ├── start.sh
+│   └── stop.sh
+└── tests/                 # Automated tests
 ```
 
-### Using Terraform
+### 2. Automate Everything
+
+| Manual Process | Automated Alternative |
+|----------------|----------------------|
+| Build locally | CodeBuild |
+| Copy files to server | CodeDeploy |
+| Run tests manually | Pipeline test stage |
+| Deploy on Friday evening | Continuous deployment |
+
+### 3. Fail Fast
+
+Run quick checks first, expensive ones later:
+
+```
+1. Lint/syntax check (seconds)
+2. Unit tests (minutes)
+3. Build artifact (minutes)
+4. Integration tests (longer)
+5. Deploy to staging
+6. Deploy to production
+```
+
+### 4. Keep Pipelines Fast
+
+Target: Complete pipeline in under 10 minutes.
+
+**Tips:**
+- Cache dependencies
+- Run tests in parallel
+- Use appropriate instance sizes
+- Skip unnecessary steps
+
+### 5. Secure Your Pipeline
+
+- Never hardcode credentials
+- Use IAM roles for services
+- Encrypt artifacts
+- Scan for vulnerabilities
+
+---
+
+## Environment Strategy
+
+### Multiple Environments
+
+```
+┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│ Development  │───▶│   Staging    │───▶│  Production  │
+│              │    │              │    │              │
+│ - Latest code│    │ - Test env   │    │ - Live users │
+│ - Unstable   │    │ - QA testing │    │ - Stable     │
+└──────────────┘    └──────────────┘    └──────────────┘
+```
+
+### Branch Strategy
+
+```
+main (production)
+  │
+  └── develop (staging)
+        │
+        ├── feature/user-auth
+        │
+        └── feature/payment
+```
+
+**Pipeline triggers:**
+- `feature/*` → Build and test only
+- `develop` → Deploy to staging
+- `main` → Deploy to production
+
+---
+
+## Monitoring and Feedback
+
+### Pipeline Monitoring
+
+```
+CloudWatch Metrics:
+├── Build success/failure rate
+├── Build duration
+├── Deploy success rate
+└── Pipeline execution time
+```
+
+### Notifications
+
+```yaml
+# SNS notification on failure
+Pipeline:
+  Notifications:
+    - Event: FAILED
+      Target: sns-topic-arn
+      Message: "Pipeline failed!"
+```
+
+### Rollback Strategy
+
+Always have a way to roll back:
 
 ```bash
-# Initialize Terraform
-terraform init
-
-# Preview changes
-terraform plan
-
-# Apply changes
-terraform apply
-
-# Show current state
-terraform show
-
-# Destroy infrastructure
-terraform destroy
-```
-
-### Deployment Descriptor Example
-
-```yaml
-# deployment.yaml - Kubernetes deployment configuration
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: myapp
-  labels:
-    app: myapp
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: myapp
-  template:
-    metadata:
-      labels:
-        app: myapp
-    spec:
-      containers:
-      - name: myapp
-        image: gcr.io/my-project/myapp:v1.2.3
-        ports:
-        - containerPort: 8080
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: url
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 5
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: myapp-service
-spec:
-  selector:
-    app: myapp
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  type: LoadBalancer
-```
-
-### Configuration Management with Ansible
-
-```yaml
-# playbook.yml - Configure web servers
----
-- name: Configure web servers
-  hosts: webservers
-  become: yes
-
-  vars:
-    app_user: webapp
-    app_dir: /opt/webapp
-
-  tasks:
-    - name: Install required packages
-      apt:
-        name:
-          - nginx
-          - python3
-          - python3-pip
-        state: present
-        update_cache: yes
-
-    - name: Create application user
-      user:
-        name: "{{ app_user }}"
-        system: yes
-        shell: /bin/bash
-
-    - name: Create application directory
-      file:
-        path: "{{ app_dir }}"
-        state: directory
-        owner: "{{ app_user }}"
-        group: "{{ app_user }}"
-        mode: '0755'
-
-    - name: Copy application files
-      synchronize:
-        src: ./app/
-        dest: "{{ app_dir }}"
-        delete: yes
-      notify: restart application
-
-    - name: Install Python dependencies
-      pip:
-        requirements: "{{ app_dir }}/requirements.txt"
-        virtualenv: "{{ app_dir }}/venv"
-
-    - name: Configure Nginx
-      template:
-        src: nginx.conf.j2
-        dest: /etc/nginx/sites-available/webapp
-      notify: reload nginx
-
-    - name: Enable Nginx site
-      file:
-        src: /etc/nginx/sites-available/webapp
-        dest: /etc/nginx/sites-enabled/webapp
-        state: link
-      notify: reload nginx
-
-  handlers:
-    - name: restart application
-      systemd:
-        name: webapp
-        state: restarted
-
-    - name: reload nginx
-      systemd:
-        name: nginx
-        state: reloaded
+# Manual rollback with CodeDeploy
+aws deploy create-deployment \
+  --application-name MyApp \
+  --deployment-group-name Production \
+  --revision revisionType=S3,... \
+  --description "Rollback to previous version"
 ```
 
 ---
 
 ## Summary
 
-| Concept | Key Points |
-|---------|------------|
-| DevOps | Culture of collaboration between Dev and Ops teams |
-| CI/CD | Automated pipeline: Source → Build → Test → Deploy |
-| Infrastructure as Code | Manage infrastructure through version-controlled code |
-| Key Practices | Automation, monitoring, continuous improvement |
+| Concept | Description |
+|---------|-------------|
+| **DevOps** | Culture of Dev + Ops collaboration |
+| **CI** | Continuous Integration - automated build/test |
+| **CD** | Continuous Delivery/Deployment |
+| **Pipeline** | Automated workflow: Source → Build → Test → Deploy |
+
+### AWS CI/CD Stack
+
+| Service | Role |
+|---------|------|
+| CodeCommit | Source code repository |
+| CodeBuild | Build and test |
+| CodeDeploy | Deploy to servers |
+| CodePipeline | Orchestrate the pipeline |
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `buildspec.yml` | CodeBuild instructions |
+| `appspec.yml` | CodeDeploy instructions |
 
 ## Next Topic
 
-Continue to [GCP DevOps Tools](./02-gcp-devops-tools.md) to learn about Google Cloud Platform's DevOps offerings.
+Continue to [AWS CI/CD Tools](./02-aws-cicd-tools.md) to learn about AWS DevOps services in detail.

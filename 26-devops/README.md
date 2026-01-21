@@ -1,78 +1,147 @@
 # DevOps and CI/CD
 
 ## Overview
-DevOps practices and CI/CD pipelines for automated build, test, and deployment of applications.
+
+DevOps practices and CI/CD pipelines for automated build, test, and deployment using AWS services.
 
 ## Learning Objectives
-By the end of this module, you will understand and be able to apply the key concepts and practices of DevOps and CI/CD.
+
+By the end of this module, you will be able to:
+- Understand DevOps principles and CI/CD concepts
+- Set up AWS CI/CD services (CodeBuild, CodeDeploy, CodePipeline)
+- Create automated build and test pipelines
+- Deploy applications to EC2 using CodeDeploy
+- Configure complete CI/CD workflows
+
+---
 
 ## Topics Covered
 
 ### 1. [DevOps Introduction](./topics/01-devops-introduction.md)
-- DevOps Overview
-- DevOps Culture and Practices
-- CI/CD Pipeline
-- Infrastructure as Code
+Core DevOps concepts and principles.
 
-### 2. [GCP DevOps Tools](./topics/02-gcp-devops-tools.md)
-- Introduction to DevOps in GCP
-- Git Repositories in GCP
-- Cloud Source Repositories
+- What is DevOps
+- CI/CD pipeline overview
+- AWS CI/CD services introduction
+- Best practices
 
-### 3. [Cloud Build](./topics/03-cloud-build.md)
-- GCP Cloud Build
-- Build Configuration
-- Build Triggers
-- Automated Builds
-- Container Building
+### 2. [AWS CI/CD Tools](./topics/02-aws-cicd-tools.md)
+Overview of AWS developer tools.
 
-### 4. [Cloud Deploy](./topics/04-cloud-deploy.md)
-- GCP Cloud Deploy
-- Deployment Pipelines
-- Delivery Pipelines
-- Rollout Management
-- Automated Deployment
+- CodeCommit (Git repositories)
+- CodeBuild (Build and test)
+- CodeDeploy (Deployment automation)
+- CodePipeline (Orchestration)
 
-### 5. [Build Pipelines](./topics/05-build-pipelines.md)
-- GCP Cloud Build Pipelines
-- Pipeline as Code
-- Multi-Stage Pipelines
-- Testing in Pipelines
-- Deployment Automation
+### 3. [CodeBuild](./topics/03-codebuild.md)
+Deep dive into AWS CodeBuild.
 
-## Detailed Topic Files
+- buildspec.yml configuration
+- Build phases and artifacts
+- Environment variables
+- Caching and optimization
+- Docker builds
 
-Each topic includes comprehensive explanations, YAML configuration examples, and practical use cases:
+### 4. [CodePipeline](./topics/04-codepipeline.md)
+Creating complete CI/CD pipelines.
 
-1. **[DevOps Introduction](./topics/01-devops-introduction.md)** - Learn DevOps fundamentals, culture, CI/CD concepts, and Infrastructure as Code with complete Terraform and Kubernetes examples.
-
-2. **[GCP DevOps Tools](./topics/02-gcp-devops-tools.md)** - Explore Google Cloud's DevOps ecosystem, Cloud Source Repositories, Git integration, and repository management.
-
-3. **[Cloud Build](./topics/03-cloud-build.md)** - Master Cloud Build for continuous integration with detailed build configurations, triggers, and containerization strategies.
-
-4. **[Cloud Deploy](./topics/04-cloud-deploy.md)** - Implement continuous delivery with deployment pipelines, progressive delivery patterns, and rollout management.
-
-5. **[Build Pipelines](./topics/05-build-pipelines.md)** - Create advanced multi-stage pipelines with testing integration and deployment automation.
-
-## Key Concepts
-Refer to the detailed topic files linked above for comprehensive explanations, code examples, and YAML configurations.
-
-## Exercises
-See the [exercises](./exercises/) directory for hands-on practice problems and solutions.
-
-## Code Examples
-Check the module materials and exercises for practical code examples.
-
-## Additional Resources
-- Official documentation
-- Online tutorials and courses
-- Community forums and discussions
-
-## Assessment
-Make sure you are comfortable with all topics listed above before proceeding to the next module.
-
-## Next Steps
-Continue to the next module in the curriculum sequence.
+- Pipeline structure
+- Multi-stage deployments
+- Manual approvals
+- Notifications
+- Troubleshooting
 
 ---
-**Time Estimate:** 3 days | **Difficulty:** Intermediate | **Prerequisites:** Previous modules
+
+## Topic Flow
+
+```
+┌─────────────────────┐
+│ 1. DevOps Intro     │  Concepts, CI/CD basics
+└──────────┬──────────┘
+           ▼
+┌─────────────────────┐
+│ 2. AWS CI/CD Tools  │  Service overview
+└──────────┬──────────┘
+           ▼
+┌─────────────────────┐
+│ 3. CodeBuild        │  Build configuration
+└──────────┬──────────┘
+           ▼
+┌─────────────────────┐
+│ 4. CodePipeline     │  Complete pipelines
+└─────────────────────┘
+```
+
+---
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      CodePipeline                            │
+├──────────────┬──────────────┬──────────────┬───────────────┤
+│   Source     │    Build     │    Test      │    Deploy     │
+├──────────────┼──────────────┼──────────────┼───────────────┤
+│   GitHub     │  CodeBuild   │  CodeBuild   │  CodeDeploy   │
+│              │  (compile)   │  (test)      │  (EC2/S3)     │
+└──────────────┴──────────────┴──────────────┴───────────────┘
+```
+
+---
+
+## Key Files
+
+| File | Service | Purpose |
+|------|---------|---------|
+| `buildspec.yml` | CodeBuild | Build instructions |
+| `appspec.yml` | CodeDeploy | Deployment instructions |
+
+### buildspec.yml Example
+
+```yaml
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  build:
+    commands:
+      - mvn test
+      - mvn package
+artifacts:
+  files:
+    - target/*.jar
+```
+
+### appspec.yml Example
+
+```yaml
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /opt/myapp
+hooks:
+  ApplicationStart:
+    - location: scripts/start.sh
+```
+
+---
+
+## Prerequisites
+
+- AWS account
+- Basic Git knowledge
+- Spring Boot or Angular application
+- EC2 instance (from AWS module)
+
+## Additional Resources
+
+- [AWS CodePipeline Documentation](https://docs.aws.amazon.com/codepipeline/)
+- [AWS CodeBuild Documentation](https://docs.aws.amazon.com/codebuild/)
+- [AWS CodeDeploy Documentation](https://docs.aws.amazon.com/codedeploy/)
+
+---
+
+**Duration:** 2 days | **Difficulty:** Intermediate | **Prerequisites:** AWS Fundamentals module
