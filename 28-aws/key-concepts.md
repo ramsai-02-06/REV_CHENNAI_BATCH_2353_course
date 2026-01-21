@@ -2,7 +2,7 @@
 
 ## Overview
 
-Essential AWS concepts for deploying a monolithic Spring Boot application to EC2 with RDS.
+Essential AWS concepts for deploying a full-stack application: Angular on S3, Spring Boot on EC2, MySQL on RDS.
 
 ---
 
@@ -23,6 +23,7 @@ You maintain    →        AWS maintains
 
 | Service | Free Allowance |
 |---------|----------------|
+| S3 | 5 GB storage, 20K GET requests |
 | EC2 | 750 hrs/month t2.micro |
 | RDS | 750 hrs/month db.t3.micro |
 | EBS | 30 GB storage |
@@ -178,6 +179,78 @@ journalctl -u myapp -f         # Logs
 
 ---
 
+## 6. S3 Static Website Hosting
+
+### Why S3 for Angular?
+
+| Feature | Benefit |
+|---------|---------|
+| No server | No EC2 needed for frontend |
+| Auto-scaling | Handles any traffic |
+| Cost-effective | Pay for storage/requests |
+| High availability | 99.99% uptime |
+
+### Setup Steps
+
+```
+1. Create S3 bucket (globally unique name)
+2. Unblock public access
+3. Enable static website hosting
+4. Set index.html and error document
+5. Add bucket policy for public read
+6. Upload Angular dist files
+```
+
+### Bucket Policy
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": "*",
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::BUCKET-NAME/*"
+  }]
+}
+```
+
+### Angular Routing Fix
+
+Set **error document** to `index.html` so Angular router handles all routes.
+
+### Deploy Commands
+
+```bash
+# Build Angular
+ng build --configuration=production
+
+# Upload to S3
+aws s3 sync dist/app-name/ s3://bucket-name/ --delete
+```
+
+### Website URL
+
+```
+http://bucket-name.s3-website-us-east-1.amazonaws.com
+```
+
+### CORS (Spring Boot)
+
+```java
+@Configuration
+public class CorsConfig implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+            .allowedOrigins("http://bucket.s3-website-us-east-1.amazonaws.com")
+            .allowedMethods("GET", "POST", "PUT", "DELETE");
+    }
+}
+```
+
+---
+
 ## Quick Reference
 
 ### AWS CLI Setup
@@ -193,6 +266,11 @@ aws configure
 ### Common Commands
 
 ```bash
+# S3
+aws s3 ls
+aws s3 sync dist/ s3://bucket-name/ --delete
+aws s3 rm s3://bucket-name/ --recursive
+
 # EC2
 aws ec2 describe-instances
 aws ec2 start-instances --instance-ids i-xxx
@@ -217,21 +295,19 @@ ssh -i key.pem ec2-user@$IP "sudo systemctl restart myapp"
 ## Architecture Diagram
 
 ```
-┌────────────────────────────────────────────────┐
-│                    AWS VPC                      │
-│                                                 │
-│   ┌─────────────────┐    ┌─────────────────┐  │
-│   │      EC2        │    │      RDS        │  │
-│   │  ┌───────────┐  │    │  ┌───────────┐  │  │
-│   │  │Spring Boot│  │───▶│  │   MySQL   │  │  │
-│   │  │   :8080   │  │3306│  │   :3306   │  │  │
-│   │  └───────────┘  │    │  └───────────┘  │  │
-│   │   my-app-sg     │    │   my-db-sg      │  │
-│   └────────┬────────┘    └─────────────────┘  │
-│            │                                   │
-└────────────┼───────────────────────────────────┘
-             │
-        Internet (HTTP :8080)
+Browser
+   │
+   ├──────────────────────────────────────────────────────┐
+   │                                                      │
+   ▼                                                      ▼
+┌─────────────┐                           ┌────────────────────────────────┐
+│     S3      │                           │           AWS VPC              │
+│ ┌─────────┐ │    API calls (:8080)      │                                │
+│ │ Angular │ │──────────────────────────▶│   ┌──────────┐   ┌──────────┐ │
+│ └─────────┘ │                           │   │   EC2    │──▶│   RDS    │ │
+└─────────────┘                           │   │  :8080   │   │  :3306   │ │
+                                          │   └──────────┘   └──────────┘ │
+                                          └────────────────────────────────┘
 ```
 
 ---
@@ -258,12 +334,21 @@ ssh -i key.pem ec2-user@$IP "sudo systemctl restart myapp"
 - [ ] Configure security group (allow EC2)
 - [ ] Test connection from EC2
 
-### Deployment
+### Backend Deployment
 - [ ] Build JAR locally
 - [ ] Transfer to EC2
 - [ ] Create environment file
 - [ ] Create systemd service
 - [ ] Start and verify
+
+### Frontend Deployment (S3)
+- [ ] Build Angular for production
+- [ ] Create S3 bucket
+- [ ] Enable static website hosting
+- [ ] Set error document to index.html
+- [ ] Add bucket policy
+- [ ] Upload dist files
+- [ ] Configure CORS on backend
 
 ---
 
@@ -276,3 +361,6 @@ ssh -i key.pem ec2-user@$IP "sudo systemctl restart myapp"
 | App not accessible | Security group allows port 8080 |
 | App crashes | Check logs: `journalctl -u myapp` |
 | Wrong Java version | Install Java 17: `sudo yum install java-17-amazon-corretto` |
+| S3 403 Forbidden | Bucket policy allows public read, public access unblocked |
+| Angular routes 404 | Error document set to index.html |
+| CORS errors | Configure CORS on Spring Boot backend |

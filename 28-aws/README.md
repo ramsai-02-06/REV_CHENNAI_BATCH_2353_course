@@ -2,7 +2,7 @@
 
 ## Overview
 
-This module covers AWS essentials for deploying a monolithic Spring Boot application to EC2 with RDS. Focus is on free tier services and practical deployment skills.
+This module covers AWS essentials for deploying a full-stack application: Angular frontend on S3, Spring Boot backend on EC2, and MySQL database on RDS. Focus is on free tier services and practical deployment skills.
 
 ## Learning Objectives
 
@@ -11,7 +11,8 @@ By the end of this module, you will be able to:
 - Launch and manage EC2 instances
 - Create and configure RDS databases
 - Understand VPC networking and security groups
-- Deploy a Spring Boot application to AWS
+- Deploy a Spring Boot application to EC2
+- Host an Angular application on S3
 
 ---
 
@@ -53,13 +54,22 @@ Understand VPC and secure your resources.
 - Troubleshooting connectivity
 
 ### 5. [Deploying Spring Boot](./topics/05-deploying-spring-boot.md)
-Deploy your application to production.
+Deploy your backend to EC2.
 
 - Building and packaging JAR
 - Transferring files to EC2
 - Environment variables for configuration
 - Running as a systemd service
 - Updating and monitoring
+
+### 6. [Deploying Angular to S3](./topics/06-deploying-angular-s3.md)
+Host your frontend on S3.
+
+- Building Angular for production
+- Creating S3 bucket with static website hosting
+- Bucket policy for public access
+- Handling Angular routing
+- CORS configuration for API calls
 
 ---
 
@@ -83,7 +93,11 @@ Deploy your application to production.
 └──────────┬──────────┘
            ▼
 ┌─────────────────────┐
-│ 5. Deploy App       │  Spring Boot on EC2
+│ 5. Deploy Backend   │  Spring Boot on EC2
+└──────────┬──────────┘
+           ▼
+┌─────────────────────┐
+│ 6. Deploy Frontend  │  Angular on S3
 └─────────────────────┘
 ```
 
@@ -92,27 +106,32 @@ Deploy your application to production.
 ## Architecture
 
 ```
-                    Internet
-                        │
-                        ▼
-              ┌─────────────────┐
-              │ Internet Gateway│
-              └────────┬────────┘
-                       │
-         ┌─────────────┴─────────────┐
-         │           VPC             │
-         │                           │
-         │  ┌─────────────────────┐  │
-         │  │     EC2 (t2.micro)  │  │
-         │  │   Spring Boot :8080 │  │
-         │  └──────────┬──────────┘  │
-         │             │ port 3306   │
-         │             ▼             │
-         │  ┌─────────────────────┐  │
-         │  │   RDS (db.t3.micro) │  │
-         │  │       MySQL         │  │
-         │  └─────────────────────┘  │
-         └───────────────────────────┘
+                         Internet
+                             │
+           ┌─────────────────┼─────────────────┐
+           │                 │                 │
+           ▼                 │                 ▼
+   ┌───────────────┐         │         ┌─────────────────┐
+   │      S3       │         │         │ Internet Gateway│
+   │ ┌───────────┐ │         │         └────────┬────────┘
+   │ │  Angular  │ │         │                  │
+   │ │  (static) │ │─────────┼─────────────────▶│
+   │ └───────────┘ │  API    │    ┌─────────────┴─────────────┐
+   └───────────────┘  calls  │    │           VPC             │
+                             │    │                           │
+                             │    │  ┌─────────────────────┐  │
+                        User │    │  │     EC2 (t2.micro)  │  │
+                             │    │  │   Spring Boot :8080 │  │
+                             │    │  └──────────┬──────────┘  │
+                             │    │             │ port 3306   │
+                             │    │             ▼             │
+                             │    │  ┌─────────────────────┐  │
+                             │    │  │   RDS (db.t3.micro) │  │
+                             │    │  │       MySQL         │  │
+                             │    │  └─────────────────────┘  │
+                             │    └───────────────────────────┘
+                             │
+                         Browser
 ```
 
 ---
@@ -121,6 +140,7 @@ Deploy your application to production.
 
 | Concept | Description |
 |---------|-------------|
+| **S3** | Simple Storage Service (static file hosting) |
 | **EC2** | Virtual servers (Elastic Compute Cloud) |
 | **RDS** | Managed relational database service |
 | **VPC** | Virtual Private Cloud (your network) |
@@ -134,6 +154,7 @@ Deploy your application to production.
 
 | Service | Free Allowance | Duration |
 |---------|----------------|----------|
+| S3 | 5 GB storage, 20K GET requests | 12 months |
 | EC2 | 750 hrs/month t2.micro | 12 months |
 | RDS | 750 hrs/month db.t3.micro | 12 months |
 | EBS | 30 GB storage | 12 months |
@@ -146,12 +167,14 @@ Deploy your application to production.
 
 - AWS account (free tier)
 - Spring Boot application to deploy
+- Angular application to deploy
 - Basic Linux command line knowledge
 - SSH client installed
 
 ## Additional Resources
 
 - [AWS Free Tier](https://aws.amazon.com/free/)
+- [S3 Documentation](https://docs.aws.amazon.com/s3/)
 - [EC2 Documentation](https://docs.aws.amazon.com/ec2/)
 - [RDS Documentation](https://docs.aws.amazon.com/rds/)
 - [AWS CLI Reference](https://docs.aws.amazon.com/cli/)
