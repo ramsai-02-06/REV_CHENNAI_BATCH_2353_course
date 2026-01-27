@@ -17,6 +17,15 @@ By the end of this module, you will be able to:
 
 ## Topics Covered
 
+### 0. [ORM and Hibernate Introduction](./topics/00-orm-hibernate-intro.md)
+Foundation concepts before Spring Data JPA.
+
+- Object-Relational Impedance Mismatch
+- What ORM solves
+- JPA vs Hibernate
+- EntityManager and entity lifecycle states
+- JPQL basics
+
 ### 1. [JPA Introduction](./topics/01-jpa-introduction.md)
 Introduction to JPA and Spring Data JPA.
 
@@ -63,7 +72,11 @@ Handle large datasets efficiently.
 
 ```
 ┌─────────────────────┐
-│ 1. JPA Introduction │  What and why
+│ 0. ORM & Hibernate  │  Why ORM exists
+└──────────┬──────────┘
+           ▼
+┌─────────────────────┐
+│ 1. JPA Introduction │  Spring Data JPA
 └──────────┬──────────┘
            ▼
 ┌─────────────────────┐
@@ -89,8 +102,12 @@ Handle large datasets efficiently.
 
 | Concept | Description |
 |---------|-------------|
+| **ORM** | Object-Relational Mapping - bridges objects and tables |
+| **Impedance Mismatch** | Objects and relational tables don't naturally align |
 | **JPA** | Java Persistence API - ORM specification |
 | **Hibernate** | JPA implementation (default in Spring) |
+| **EntityManager** | JPA interface for CRUD operations |
+| **Entity States** | Transient, Managed, Detached, Removed |
 | **Entity** | Java class mapped to database table |
 | **Repository** | Interface for data access operations |
 | **Derived Query** | Query generated from method name |
@@ -116,4 +133,4 @@ After completing this module, continue to **Spring Security** to learn about aut
 
 ---
 
-**Duration:** 4 days | **Difficulty:** Intermediate | **Prerequisites:** Module 16 (Spring MVC)
+**Duration:** 5 days | **Difficulty:** Intermediate | **Prerequisites:** Module 16 (Spring MVC)
