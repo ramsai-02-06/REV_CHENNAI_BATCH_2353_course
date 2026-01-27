@@ -213,6 +213,210 @@ entityManager.merge(user);  // Re-attach and sync changes
 
 ---
 
+## First-Level Cache (Session Cache)
+
+Hibernate automatically caches entities within a session/transaction. This is the **first-level cache** - it's always on and cannot be disabled.
+
+```java
+// Within the same transaction
+User user1 = entityManager.find(User.class, 1L);  // SQL SELECT executed
+User user2 = entityManager.find(User.class, 1L);  // NO SQL - returns cached object
+
+System.out.println(user1 == user2);  // true - same object instance!
+```
+
+### How It Works
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     EntityManager                           │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │            First-Level Cache (Session)                │  │
+│  │                                                       │  │
+│  │   Key: (User.class, 1L)  →  Value: User@abc123       │  │
+│  │   Key: (User.class, 2L)  →  Value: User@def456       │  │
+│  │   Key: (Order.class, 5L) →  Value: Order@ghi789      │  │
+│  │                                                       │  │
+│  └───────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                              │
+              find(User.class, 1L) - Cache HIT (no SQL)
+              find(User.class, 3L) - Cache MISS (SQL executed)
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                        Database                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Why First-Level Cache Matters
+
+| Benefit | Description |
+|---------|-------------|
+| **Performance** | Avoids redundant database queries |
+| **Identity guarantee** | Same ID always returns same object instance |
+| **Dirty checking** | Hibernate compares cached vs current state |
+| **Write-behind** | Changes batched until transaction commit |
+
+```java
+// Dirty checking in action
+User user = entityManager.find(User.class, 1L);  // Cached with original state
+user.setEmail("new@email.com");                   // Object modified
+
+// At commit, Hibernate compares:
+// - Cached original state: email = "old@email.com"
+// - Current state: email = "new@email.com"
+// → Generates UPDATE statement automatically
+```
+
+### Cache Scope
+
+The first-level cache is **transaction-scoped**:
+
+```java
+// Transaction 1
+User user1 = em.find(User.class, 1L);  // Cached in Transaction 1
+
+// Transaction 2 (different EntityManager)
+User user2 = em.find(User.class, 1L);  // Cache MISS - new query
+
+System.out.println(user1 == user2);  // false - different transactions
+```
+
+> **Note:** Second-level cache (shared across transactions) is an advanced topic requiring additional configuration (EhCache, Infinispan). It's optional and used for performance optimization.
+
+---
+
+## Entity equals() and hashCode()
+
+Hibernate relies on `equals()` and `hashCode()` for collection management, cache lookups, and dirty checking. Getting these wrong causes subtle bugs.
+
+### The Problem
+
+```java
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String email;
+    // No equals/hashCode overridden - uses Object defaults
+}
+
+// This breaks!
+Set<User> users = new HashSet<>();
+User user = new User();
+user.setEmail("john@email.com");
+users.add(user);                    // Added with id = null
+
+entityManager.persist(user);         // Now id = 1
+
+users.contains(user);               // FALSE! HashCode changed after persist
+```
+
+### Why It Breaks
+
+```
+Before persist():
+┌─────────────┐
+│ User        │
+│ id = null   │  hashCode() based on id → some value X
+│ email = ... │
+└─────────────┘
+     ↓ persist()
+┌─────────────┐
+│ User        │
+│ id = 1      │  hashCode() based on id → different value Y!
+│ email = ... │
+└─────────────┘
+
+HashSet can't find the object because it's looking in bucket X,
+but the object's hashCode now points to bucket Y.
+```
+
+### The Solution: Use Business Key
+
+Use a **natural/business key** that doesn't change, not the database ID:
+
+```java
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String email;  // Business key - unique and immutable
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return email != null && email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return email != null ? email.hashCode() : 0;
+    }
+}
+```
+
+### Rules for Entity equals/hashCode
+
+| Rule | Reason |
+|------|--------|
+| **Don't use @Id alone** | ID is null before persist, changes after |
+| **Use business key** | Unique field that's set at creation (email, ISBN, SSN) |
+| **Be consistent** | Same fields in both equals() and hashCode() |
+| **Handle null** | Check for null values |
+| **Use getClass()** | Hibernate proxies extend your class |
+
+### When No Natural Key Exists
+
+If there's no natural business key, use a UUID assigned at object creation:
+
+```java
+@Entity
+public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false, updatable = false)
+    private String uuid = UUID.randomUUID().toString();  // Set at creation
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return uuid.equals(order.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
+}
+```
+
+### Impact on Collections
+
+```java
+// With proper equals/hashCode
+Set<User> users = new HashSet<>();
+User user = new User("john@email.com");
+users.add(user);
+
+entityManager.persist(user);  // id changes, but email stays same
+
+users.contains(user);  // TRUE - hashCode based on email, unchanged
+```
+
+---
+
 ## Simple Hibernate Example (Without Spring)
 
 To appreciate Spring Data JPA, see what pure Hibernate looks like:
@@ -306,6 +510,8 @@ WHERE c.email = ?
 | **Entity** | Java class mapped to database table |
 | **EntityManager** | API for CRUD operations |
 | **Entity States** | Transient → Managed → Detached |
+| **First-Level Cache** | Session-scoped cache, always on, ensures identity |
+| **equals/hashCode** | Use business key, not @Id, for collections |
 | **JPQL** | Object-oriented query language |
 
 ---

@@ -6,7 +6,67 @@ Spring Data JPA provides repository abstractions over JPA, eliminating boilerpla
 
 ---
 
-## 1. JPA Fundamentals
+## 1. ORM and Hibernate Fundamentals
+
+### Object-Relational Impedance Mismatch
+
+| Java Objects | Relational Tables |
+|--------------|-------------------|
+| Inheritance | No direct equivalent |
+| Object references | Foreign keys |
+| Collections | Separate table + FK |
+| Identity (== vs .equals()) | Primary key |
+
+### JPA vs Hibernate
+
+- **JPA**: Specification (interfaces + annotations)
+- **Hibernate**: Implementation (default in Spring Boot)
+
+### Entity Lifecycle States
+
+| State | Description |
+|-------|-------------|
+| **Transient** | New object, not tracked |
+| **Managed** | Tracked, changes auto-sync |
+| **Detached** | Was managed, now disconnected |
+| **Removed** | Scheduled for deletion |
+
+### First-Level Cache
+
+```java
+User u1 = em.find(User.class, 1L);  // SQL executed
+User u2 = em.find(User.class, 1L);  // Cache hit - no SQL
+u1 == u2;  // true - same instance
+```
+
+- Always on, transaction-scoped
+- Guarantees identity within session
+- Enables dirty checking
+
+### Entity equals() and hashCode()
+
+**Problem:** Using @Id in equals/hashCode breaks collections when ID changes after persist.
+
+**Solution:** Use business key (email, ISBN) or UUID set at creation:
+
+```java
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    User user = (User) o;
+    return email != null && email.equals(user.email);
+}
+
+@Override
+public int hashCode() {
+    return email != null ? email.hashCode() : 0;
+}
+```
+
+---
+
+## 2. JPA Introduction
 
 ### What is JPA?
 
@@ -33,7 +93,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 ---
 
-## 2. Entity Mapping
+## 3. Entity Mapping
 
 ### Basic Entity
 
@@ -83,7 +143,7 @@ private List<Employee> employees;
 
 ---
 
-## 3. Repository Interface
+## 4. Repository Interface
 
 ### JpaRepository
 
@@ -137,7 +197,7 @@ int updateStatus(@Param("id") Long id, @Param("active") boolean active);
 
 ---
 
-## 4. CRUD Operations
+## 5. CRUD Operations
 
 ### Service Pattern
 
@@ -182,7 +242,7 @@ public class UserService {
 
 ---
 
-## 5. Pagination and Sorting
+## 6. Pagination and Sorting
 
 ### Pageable
 
