@@ -64,6 +64,24 @@ public int hashCode() {
 }
 ```
 
+### Common Pitfalls
+
+| Pitfall | Cause | Solution |
+|---------|-------|----------|
+| **LazyInitializationException** | Accessing lazy collection outside transaction | JOIN FETCH, @EntityGraph, or DTO |
+| **N+1 Problem** | Loop triggers separate query per entity | JOIN FETCH or batch fetching |
+| **Changes not persisting** | Missing @Transactional | Add @Transactional to service methods |
+
+```java
+// N+1 Problem
+List<User> users = repo.findAll();       // 1 query
+for (User u : users) u.getOrders();      // N queries!
+
+// Solution: JOIN FETCH
+@Query("SELECT u FROM User u JOIN FETCH u.orders")
+List<User> findAllWithOrders();          // 1 query
+```
+
 ---
 
 ## 2. JPA Introduction

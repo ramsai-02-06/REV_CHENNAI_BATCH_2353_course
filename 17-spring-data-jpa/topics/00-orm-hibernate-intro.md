@@ -499,6 +499,152 @@ WHERE c.email = ?
 
 ---
 
+## Common Pitfalls
+
+These are the most common issues beginners encounter. Understanding them now saves hours of debugging later.
+
+### 1. LazyInitializationException
+
+**The #1 Hibernate error for beginners.**
+
+```java
+@Entity
+public class User {
+    @Id
+    private Long id;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;  // LAZY by default
+}
+```
+
+```java
+// In service layer (transaction active)
+User user = userRepository.findById(1L).get();
+// Transaction ends here...
+
+// In controller or view (no transaction)
+user.getOrders().size();  // BOOM! LazyInitializationException
+```
+
+**Why it happens:**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  @Transactional Service Method                              │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │ User user = repo.findById(1L);                         │ │
+│  │ // orders NOT loaded yet (lazy)                        │ │
+│  │ return user;                                           │ │
+│  └────────────────────────────────────────────────────────┘ │
+│  Transaction COMMITS, EntityManager CLOSES                  │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│  Controller (no transaction)                                │
+│                                                             │
+│  user.getOrders()  →  Hibernate tries to fetch...          │
+│                    →  But session is CLOSED!                │
+│                    →  LazyInitializationException!          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Quick fixes:**
+
+| Approach | How |
+|----------|-----|
+| **Fetch eagerly** | `@OneToMany(fetch = FetchType.EAGER)` - use sparingly! |
+| **JOIN FETCH** | `SELECT u FROM User u JOIN FETCH u.orders` |
+| **DTO projection** | Return only needed fields, not entities |
+| **Initialize before returning** | `user.getOrders().size()` inside transaction |
+
+> **Rule of thumb:** Lazy is the default for collections (`@OneToMany`, `@ManyToMany`). Eager is the default for single associations (`@ManyToOne`, `@OneToOne`).
+
+### 2. N+1 Query Problem
+
+**Silent performance killer** - your app works but makes way too many queries.
+
+```java
+// Fetch all users
+List<User> users = userRepository.findAll();  // 1 query
+
+// Access each user's orders
+for (User user : users) {
+    System.out.println(user.getOrders().size());  // N queries (one per user!)
+}
+// Total: 1 + N queries = N+1 problem
+```
+
+**What you expect:**
+```sql
+SELECT * FROM users;  -- 1 query for everything
+```
+
+**What actually happens:**
+```sql
+SELECT * FROM users;                      -- 1 query
+SELECT * FROM orders WHERE user_id = 1;   -- query 2
+SELECT * FROM orders WHERE user_id = 2;   -- query 3
+SELECT * FROM orders WHERE user_id = 3;   -- query 4
+-- ... N more queries
+```
+
+**With 1000 users = 1001 database queries!**
+
+**Solutions:**
+
+```java
+// Solution 1: JOIN FETCH in JPQL
+@Query("SELECT u FROM User u JOIN FETCH u.orders")
+List<User> findAllWithOrders();  // 1 query!
+
+// Solution 2: @EntityGraph
+@EntityGraph(attributePaths = {"orders"})
+List<User> findAll();  // 1 query!
+
+// Solution 3: Batch fetching (hibernate setting)
+// application.properties
+spring.jpa.properties.hibernate.default_batch_fetch_size=25
+```
+
+**How to detect:**
+
+```properties
+# Enable SQL logging
+spring.jpa.show-sql=true
+
+# Pretty print (easier to count queries)
+spring.jpa.properties.hibernate.format_sql=true
+```
+
+Watch your console - if you see repeated similar queries, you have N+1.
+
+### 3. Forgetting @Transactional
+
+Changes to managed entities auto-sync **only within a transaction**.
+
+```java
+// WITHOUT @Transactional - changes may NOT persist!
+public void updateEmail(Long id, String newEmail) {
+    User user = userRepository.findById(id).get();
+    user.setEmail(newEmail);
+    // No explicit save... did it persist? Maybe, maybe not!
+}
+
+// WITH @Transactional - changes auto-persist at commit
+@Transactional
+public void updateEmail(Long id, String newEmail) {
+    User user = userRepository.findById(id).get();
+    user.setEmail(newEmail);
+    // Dirty checking detects change → UPDATE at commit
+}
+```
+
+> **Tip:** Spring Data JPA repository methods are transactional by default. Your service methods that modify entities should be `@Transactional`.
+
+---
+
 ## Summary
 
 | Concept | Description |
@@ -513,6 +659,8 @@ WHERE c.email = ?
 | **First-Level Cache** | Session-scoped cache, always on, ensures identity |
 | **equals/hashCode** | Use business key, not @Id, for collections |
 | **JPQL** | Object-oriented query language |
+| **LazyInitializationException** | Accessing lazy data outside transaction |
+| **N+1 Problem** | 1 query + N queries for related data |
 
 ---
 
