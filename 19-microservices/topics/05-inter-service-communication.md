@@ -336,300 +336,41 @@ public class RestTemplateConfig {
 
 ---
 
-## WebClient
+## WebClient (Brief Overview)
 
-### What is WebClient?
-
-WebClient is a modern, reactive HTTP client introduced in Spring WebFlux. It supports both synchronous and asynchronous operations and is the recommended replacement for RestTemplate.
-
-### Setup
-
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-webflux</artifactId>
-</dependency>
-```
+WebClient is a modern, reactive HTTP client introduced in Spring WebFlux. It supports both synchronous and asynchronous operations and is the recommended replacement for RestTemplate for new projects.
 
 ```java
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.client.WebClient;
-
-@Configuration
-public class WebClientConfig {
-
-    @Bean
-    public WebClient.Builder webClientBuilder() {
-        return WebClient.builder();
-    }
-
-    @Bean
-    public WebClient webClient(WebClient.Builder builder) {
-        return builder
-            .baseUrl("http://localhost:8081")
-            .defaultHeader("User-Agent", "Order Service")
-            .build();
-    }
-}
-```
-
-### GET Requests
-
-#### Synchronous (Blocking)
-
-```java
-@Service
-public class ProductService {
-
-    private final WebClient webClient;
-
-    public ProductService(WebClient.Builder builder) {
-        this.webClient = builder
-            .baseUrl("http://product-service")
-            .build();
-    }
-
-    // Block and return result
-    public Product getProduct(Long productId) {
-        return webClient.get()
-            .uri("/api/products/{id}", productId)
-            .retrieve()
-            .bodyToMono(Product.class)
-            .block();  // Blocks until response received
-    }
-
-    // With timeout
-    public Product getProductWithTimeout(Long productId) {
-        return webClient.get()
-            .uri("/api/products/{id}", productId)
-            .retrieve()
-            .bodyToMono(Product.class)
-            .block(Duration.ofSeconds(5));
-    }
-}
-```
-
-#### Asynchronous (Non-blocking)
-
-```java
-@Service
-public class ProductService {
-
-    private final WebClient webClient;
-
-    public ProductService(WebClient.Builder builder) {
-        this.webClient = builder.baseUrl("http://product-service").build();
-    }
-
-    // Return Mono (single value)
-    public Mono<Product> getProduct(Long productId) {
-        return webClient.get()
-            .uri("/api/products/{id}", productId)
-            .retrieve()
-            .bodyToMono(Product.class);
-    }
-
-    // Return Flux (multiple values)
-    public Flux<Product> getAllProducts() {
-        return webClient.get()
-            .uri("/api/products")
-            .retrieve()
-            .bodyToFlux(Product.class);
-    }
-
-    // Subscribe and handle asynchronously
-    public void getProductAsync(Long productId) {
-        webClient.get()
-            .uri("/api/products/{id}", productId)
-            .retrieve()
-            .bodyToMono(Product.class)
-            .subscribe(
-                product -> log.info("Received product: {}", product),
-                error -> log.error("Error: {}", error.getMessage()),
-                () -> log.info("Completed")
-            );
-    }
-}
-```
-
-### POST Requests
-
-```java
-@Service
-public class OrderService {
-
-    private final WebClient webClient;
-
-    public OrderService(WebClient.Builder builder) {
-        this.webClient = builder.baseUrl("http://order-service").build();
-    }
-
-    // Synchronous POST
-    public Order createOrder(OrderRequest request) {
-        return webClient.post()
-            .uri("/api/orders")
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(request)
-            .retrieve()
-            .bodyToMono(Order.class)
-            .block();
-    }
-
-    // Asynchronous POST
-    public Mono<Order> createOrderAsync(OrderRequest request) {
-        return webClient.post()
-            .uri("/api/orders")
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(request)
-            .retrieve()
-            .bodyToMono(Order.class);
-    }
-
-    // POST with headers
-    public Mono<Order> createOrderWithAuth(OrderRequest request, String token) {
-        return webClient.post()
-            .uri("/api/orders")
-            .header("Authorization", "Bearer " + token)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(request)
-            .retrieve()
-            .bodyToMono(Order.class);
-    }
-}
-```
-
-### PUT and DELETE Requests
-
-```java
-// PUT
-public Mono<Product> updateProduct(Long productId, ProductRequest request) {
-    return webClient.put()
-        .uri("/api/products/{id}", productId)
-        .bodyValue(request)
-        .retrieve()
-        .bodyToMono(Product.class);
-}
-
-// DELETE
-public Mono<Void> deleteProduct(Long productId) {
-    return webClient.delete()
-        .uri("/api/products/{id}", productId)
-        .retrieve()
-        .bodyToMono(Void.class);
-}
-
-// PATCH
-public Mono<Product> patchProduct(Long productId, Map<String, Object> updates) {
-    return webClient.patch()
-        .uri("/api/products/{id}", productId)
-        .bodyValue(updates)
-        .retrieve()
-        .bodyToMono(Product.class);
-}
-```
-
-### Error Handling
-
-```java
-@Service
-public class ProductService {
-
-    private final WebClient webClient;
-
-    public ProductService(WebClient.Builder builder) {
-        this.webClient = builder.baseUrl("http://product-service").build();
-    }
-
-    public Mono<Product> getProduct(Long productId) {
-        return webClient.get()
-            .uri("/api/products/{id}", productId)
-            .retrieve()
-            .onStatus(HttpStatus::is4xxClientError, response -> {
-                if (response.statusCode() == HttpStatus.NOT_FOUND) {
-                    return Mono.error(new ProductNotFoundException(productId));
-                }
-                return Mono.error(new ClientException("Client error"));
-            })
-            .onStatus(HttpStatus::is5xxServerError, response ->
-                Mono.error(new ServerException("Server error"))
-            )
-            .bodyToMono(Product.class)
-            .onErrorResume(WebClientRequestException.class, ex -> {
-                log.error("Network error", ex);
-                return Mono.error(new ServiceUnavailableException());
-            });
-    }
-
-    // Alternative: using onStatus with response body
-    public Mono<Product> getProductWithErrorBody(Long productId) {
-        return webClient.get()
-            .uri("/api/products/{id}", productId)
-            .retrieve()
-            .onStatus(HttpStatus::isError, response ->
-                response.bodyToMono(ErrorResponse.class)
-                    .flatMap(error -> Mono.error(
-                        new ServiceException(error.getMessage())
-                    ))
-            )
-            .bodyToMono(Product.class);
-    }
-}
-```
-
-### Advanced Features
-
-#### Exchange for Full Control
-
-```java
-public Mono<Product> getProductWithExchange(Long productId) {
-    return webClient.get()
-        .uri("/api/products/{id}", productId)
-        .exchangeToMono(response -> {
-            if (response.statusCode().equals(HttpStatus.OK)) {
-                return response.bodyToMono(Product.class);
-            } else if (response.statusCode().equals(HttpStatus.NOT_FOUND)) {
-                return Mono.empty();
-            } else {
-                return response.createException().flatMap(Mono::error);
-            }
-        });
-}
-```
-
-#### Load Balanced WebClient
-
-```java
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-
 @Configuration
 public class WebClientConfig {
 
     @Bean
     @LoadBalanced
-    public WebClient.Builder loadBalancedWebClientBuilder() {
+    public WebClient.Builder webClientBuilder() {
         return WebClient.builder();
     }
 }
 
 @Service
-public class OrderService {
+public class ProductService {
 
     private final WebClient webClient;
 
-    public OrderService(@LoadBalanced WebClient.Builder builder) {
+    public ProductService(WebClient.Builder builder) {
         this.webClient = builder.build();
     }
 
-    public Mono<Product> getProduct(Long productId) {
-        // Use service name
+    public Product getProduct(Long productId) {
         return webClient.get()
             .uri("http://product-service/api/products/{id}", productId)
             .retrieve()
-            .bodyToMono(Product.class);
+            .bodyToMono(Product.class)
+            .block();  // Blocks until response received
     }
 }
 ```
+
+For reactive applications, use `Mono` and `Flux` return types instead of `.block()`.
 
 ---
 
@@ -878,153 +619,14 @@ feign:
 
 ## Asynchronous Communication
 
-### Message-Based Communication
+For loosely coupled services, asynchronous messaging using message brokers (RabbitMQ, Kafka) is preferred. This decouples services and enables fire-and-forget patterns.
 
-#### Spring Cloud Stream with RabbitMQ
+Key technologies:
+- **Spring AMQP** for RabbitMQ integration
+- **Spring Kafka** for Apache Kafka integration
+- **Spring Cloud Stream** for abstracted messaging
 
-**Dependencies:**
-```xml
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-</dependency>
-```
-
-**Configuration:**
-```yaml
-spring:
-  cloud:
-    stream:
-      bindings:
-        orderCreated-out-0:
-          destination: order-events
-          content-type: application/json
-        orderCreated-in-0:
-          destination: order-events
-          group: payment-service
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-```
-
-**Publisher (Order Service):**
-```java
-import org.springframework.cloud.stream.function.StreamBridge;
-
-@Service
-public class OrderService {
-
-    @Autowired
-    private StreamBridge streamBridge;
-
-    public Order createOrder(OrderRequest request) {
-        Order order = orderRepository.save(new Order(request));
-
-        // Publish event
-        OrderCreatedEvent event = new OrderCreatedEvent(
-            order.getId(),
-            order.getCustomerId(),
-            order.getTotalAmount()
-        );
-
-        streamBridge.send("orderCreated-out-0", event);
-        log.info("Published order created event: {}", order.getId());
-
-        return order;
-    }
-}
-```
-
-**Consumer (Payment Service):**
-```java
-import org.springframework.context.annotation.Bean;
-import java.util.function.Consumer;
-
-@Configuration
-public class EventConsumerConfig {
-
-    @Bean
-    public Consumer<OrderCreatedEvent> orderCreated() {
-        return event -> {
-            log.info("Received order created event: {}", event.getOrderId());
-            // Process payment
-            processPayment(event);
-        };
-    }
-
-    private void processPayment(OrderCreatedEvent event) {
-        // Payment processing logic
-    }
-}
-```
-
-#### Spring Kafka
-
-**Dependencies:**
-```xml
-<dependency>
-    <groupId>org.springframework.kafka</groupId>
-    <artifactId>spring-kafka</artifactId>
-</dependency>
-```
-
-**Configuration:**
-```yaml
-spring:
-  kafka:
-    bootstrap-servers: localhost:9092
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumer:
-      group-id: payment-service
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: com.example.*
-```
-
-**Producer:**
-```java
-import org.springframework.kafka.core.KafkaTemplate;
-
-@Service
-public class OrderService {
-
-    @Autowired
-    private KafkaTemplate<String, OrderCreatedEvent> kafkaTemplate;
-
-    public Order createOrder(OrderRequest request) {
-        Order order = orderRepository.save(new Order(request));
-
-        OrderCreatedEvent event = new OrderCreatedEvent(order);
-        kafkaTemplate.send("order-events", event);
-
-        return order;
-    }
-}
-```
-
-**Consumer:**
-```java
-import org.springframework.kafka.annotation.KafkaListener;
-
-@Service
-public class PaymentEventConsumer {
-
-    @KafkaListener(topics = "order-events", groupId = "payment-service")
-    public void handleOrderCreated(OrderCreatedEvent event) {
-        log.info("Processing payment for order: {}", event.getOrderId());
-        processPayment(event);
-    }
-
-    private void processPayment(OrderCreatedEvent event) {
-        // Payment logic
-    }
-}
-```
+Asynchronous communication is covered in detail in messaging-specific modules.
 
 ---
 

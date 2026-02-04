@@ -97,107 +97,14 @@ User → Username + Password → Client → Authorization Server → Access Toke
 Client → Refresh Token → Authorization Server → New Access Token
 ```
 
-### Spring Security OAuth2 Setup
+### Authorization Server
 
-#### Authorization Server
+For production microservices, use established identity providers:
+- **Keycloak** (open source, recommended)
+- **Auth0** (cloud service)
+- **Okta** (enterprise)
 
-**Dependencies:**
-```xml
-<dependencies>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
-    </dependency>
-</dependencies>
-```
-
-**Configuration:**
-```java
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
-import org.springframework.security.web.SecurityFilterChain;
-
-@Configuration
-public class AuthorizationServerConfig {
-
-    @Bean
-    @Order(1)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
-            throws Exception {
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        return http.formLogin(Customizer.withDefaults()).build();
-    }
-
-    @Bean
-    @Order(2)
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
-            throws Exception {
-        http
-            .authorizeHttpRequests(authorize -> authorize
-                .anyRequest().authenticated()
-            )
-            .formLogin(Customizer.withDefaults());
-        return http.build();
-    }
-
-    @Bean
-    public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-            .clientId("order-service")
-            .clientSecret("{noop}secret")
-            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-            .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-            .redirectUri("http://localhost:8080/login/oauth2/code/order-service")
-            .scope("read")
-            .scope("write")
-            .build();
-
-        return new InMemoryRegisteredClientRepository(registeredClient);
-    }
-
-    @Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        KeyPair keyPair = generateRsaKey();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAKey rsaKey = new RSAKey.Builder(publicKey)
-            .privateKey(privateKey)
-            .keyID(UUID.randomUUID().toString())
-            .build();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return new ImmutableJWKSet<>(jwkSet);
-    }
-
-    private static KeyPair generateRsaKey() {
-        try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            return keyPairGenerator.generateKeyPair();
-        } catch (Exception ex) {
-            throw new IllegalStateException(ex);
-        }
-    }
-}
-```
-
-**application.yml:**
-```yaml
-spring:
-  application:
-    name: authorization-server
-server:
-  port: 9000
-```
+These handle the complexity of authorization servers including user management, SSO, and token issuance.
 
 ---
 
@@ -402,22 +309,8 @@ public class PaymentService {
 
 ## Single Sign-On (SSO)
 
-### What is SSO?
+Single Sign-On allows users to log in once and access multiple applications without re-authenticating. Use identity providers like Keycloak with OAuth2 Login:
 
-Single Sign-On allows users to log in once and access multiple applications without re-authenticating.
-
-### SSO Flow
-
-```
-User → Login → Authorization Server → Token
-User → App 1 (uses token) ✓
-User → App 2 (uses same token) ✓
-User → App 3 (uses same token) ✓
-```
-
-### Implementing SSO
-
-**OAuth2 Client Configuration:**
 ```yaml
 spring:
   security:
@@ -429,393 +322,34 @@ spring:
             client-secret: ${CLIENT_SECRET}
             scope: openid,profile,email
             authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           keycloak:
             issuer-uri: http://localhost:8080/realms/microservices
-            user-name-attribute: preferred_username
-```
-
-**Security Configuration:**
-```java
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/public/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .oauth2Login(oauth2 -> oauth2
-                .defaultSuccessUrl("/home", true)
-            )
-            .logout(logout -> logout
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-            );
-        return http.build();
-    }
-}
-```
-
-**Controller:**
-```java
-@Controller
-public class HomeController {
-
-    @GetMapping("/home")
-    public String home(@AuthenticationPrincipal OidcUser principal, Model model) {
-        model.addAttribute("username", principal.getPreferredUsername());
-        model.addAttribute("email", principal.getEmail());
-        return "home";
-    }
-}
 ```
 
 ---
 
-## Session Hijacking Prevention
+## Security Best Practices
 
-### What is Session Hijacking?
-
-Session hijacking is when an attacker steals a user's session ID to gain unauthorized access.
-
-### Prevention Techniques
-
-#### 1. HTTPS Only
-
-**Force HTTPS:**
-```java
-@Configuration
-public class SecurityConfig {
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .requiresChannel(channel -> channel
-                .anyRequest().requiresSecure()  // Force HTTPS
-            );
-        return http.build();
-    }
-}
-```
+1. **HTTPS Only**: Force HTTPS for all communications
+2. **Input Validation**: Use `@Valid` and Bean Validation annotations
+3. **SQL Injection Prevention**: Use parameterized queries (JPA handles this)
+4. **Secrets Management**: Use environment variables or secret managers (never hardcode)
+5. **Secure Cookies**: Set `HttpOnly`, `Secure`, and `SameSite` attributes
+6. **CSRF Protection**: Enable for web applications
+7. **Rate Limiting**: Implement at API Gateway level
+8. **Actuator Security**: Restrict access to management endpoints
 
 ```yaml
-server:
-  ssl:
-    enabled: true
-    key-store: classpath:keystore.p12
-    key-store-password: ${KEYSTORE_PASSWORD}
-    key-store-type: PKCS12
-```
-
-#### 2. Secure Cookies
-
-```java
-@Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http
-        .sessionManagement(session -> session
-            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-            .sessionFixation().newSession()  // Generate new session on login
-        )
-        .csrf(csrf -> csrf
-            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-        );
-    return http.build();
-}
-```
-
-```yaml
-server:
-  servlet:
-    session:
-      cookie:
-        secure: true      # Only send over HTTPS
-        http-only: true   # Not accessible via JavaScript
-        same-site: strict # Prevent CSRF
-```
-
-#### 3. Short Session Timeout
-
-```yaml
-server:
-  servlet:
-    session:
-      timeout: 30m  # 30 minutes
-```
-
-```java
-@Component
-public class SessionListener implements HttpSessionListener {
-
-    @Override
-    public void sessionCreated(HttpSessionEvent event) {
-        event.getSession().setMaxInactiveInterval(30 * 60); // 30 minutes
-    }
-}
-```
-
-#### 4. Session Validation
-
-```java
-@Component
-public class SessionValidationFilter extends OncePerRequestFilter {
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                   HttpServletResponse response,
-                                   FilterChain filterChain) throws ServletException, IOException {
-
-        HttpSession session = request.getSession(false);
-
-        if (session != null) {
-            // Validate session IP
-            String currentIp = request.getRemoteAddr();
-            String sessionIp = (String) session.getAttribute("ip");
-
-            if (sessionIp == null) {
-                session.setAttribute("ip", currentIp);
-            } else if (!sessionIp.equals(currentIp)) {
-                session.invalidate();
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
-            }
-
-            // Validate user agent
-            String currentUserAgent = request.getHeader("User-Agent");
-            String sessionUserAgent = (String) session.getAttribute("userAgent");
-
-            if (sessionUserAgent == null) {
-                session.setAttribute("userAgent", currentUserAgent);
-            } else if (!sessionUserAgent.equals(currentUserAgent)) {
-                session.invalidate();
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
-            }
-        }
-
-        filterChain.doFilter(request, response);
-    }
-}
-```
-
-#### 5. Token-Based Authentication (Stateless)
-
-**Use JWT instead of sessions:**
-```java
-@Component
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    @Autowired
-    private JwtTokenProvider tokenProvider;
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                   HttpServletResponse response,
-                                   FilterChain filterChain) throws ServletException, IOException {
-
-        String token = getJwtFromRequest(request);
-
-        if (token != null && tokenProvider.validateToken(token)) {
-            String userId = tokenProvider.getUserIdFromToken(token);
-            UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(userId, null, authorities);
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-
-        filterChain.doFilter(request, response);
-    }
-
-    private String getJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
-}
-```
-
-#### 6. CSRF Protection
-
-```java
-@Configuration
-public class SecurityConfig {
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/api/**"))
-            );
-        return http.build();
-    }
-}
-```
-
-#### 7. Logout Properly
-
-```java
-@RestController
-public class AuthController {
-
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        SecurityContextHolder.clearContext();
-        return ResponseEntity.ok().build();
-    }
-}
-```
-
-#### 8. Monitor Sessions
-
-```java
-@Component
-public class SessionEventListener implements ApplicationListener<SessionCreatedEvent> {
-
-    @Override
-    public void onApplicationEvent(SessionCreatedEvent event) {
-        HttpSession session = event.getSession();
-        log.info("Session created: {}", session.getId());
-
-        // Store in Redis for monitoring
-        sessionMonitoringService.trackSession(session.getId());
-    }
-}
-
-@Component
-public class SessionDestroyedListener implements ApplicationListener<SessionDestroyedEvent> {
-
-    @Override
-    public void onApplicationEvent(SessionDestroyedEvent event) {
-        String sessionId = event.getId();
-        log.info("Session destroyed: {}", sessionId);
-
-        sessionMonitoringService.removeSession(sessionId);
-    }
-}
-```
-
----
-
-## Additional Security Best Practices
-
-### 1. API Security
-
-```java
-@Configuration
-public class RateLimitingConfig {
-
-    @Bean
-    public KeyResolver userKeyResolver() {
-        return exchange -> Mono.just(
-            exchange.getRequest().getHeaders().getFirst("X-User-Id")
-        );
-    }
-}
-```
-
-### 2. Input Validation
-
-```java
-@RestController
-@Validated
-public class OrderController {
-
-    @PostMapping("/api/orders")
-    public Order createOrder(@Valid @RequestBody OrderRequest request) {
-        return orderService.createOrder(request);
-    }
-}
-
-public class OrderRequest {
-
-    @NotNull(message = "Product ID is required")
-    private Long productId;
-
-    @Min(value = 1, message = "Quantity must be at least 1")
-    @Max(value = 100, message = "Quantity cannot exceed 100")
-    private Integer quantity;
-
-    @Pattern(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-             flags = Pattern.Flag.CASE_INSENSITIVE,
-             message = "Invalid email format")
-    private String email;
-}
-```
-
-### 3. SQL Injection Prevention
-
-```java
-// Use JPA/Hibernate parameterized queries
-@Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
-
-    // Safe - parameterized
-    @Query("SELECT o FROM Order o WHERE o.userId = :userId")
-    List<Order> findByUserId(@Param("userId") String userId);
-
-    // Avoid - string concatenation (vulnerable)
-    // @Query("SELECT o FROM Order o WHERE o.userId = '" + userId + "'")
-}
-```
-
-### 4. Secrets Management
-
-```yaml
-# Don't hardcode secrets
-spring:
-  datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
-```
-
-**Use environment variables or secret managers:**
-```bash
-export DATABASE_PASSWORD=$(aws secretsmanager get-secret-value \
-  --secret-id db-password --query SecretString --output text)
-```
-
-### 5. Enable Actuator Security
-
-```yaml
+# Secure actuator endpoints
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info
   endpoint:
     health:
       show-details: when-authorized
-```
-
-```java
-@Configuration
-public class ActuatorSecurityConfig {
-
-    @Bean
-    public SecurityFilterChain actuatorSecurity(HttpSecurity http) throws Exception {
-        http
-            .requestMatcher(EndpointRequest.toAnyEndpoint())
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(EndpointRequest.to("health", "info")).permitAll()
-                .anyRequest().hasRole("ADMIN")
-            );
-        return http.build();
-    }
-}
 ```
 
 ---

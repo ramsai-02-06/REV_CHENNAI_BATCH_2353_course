@@ -465,61 +465,6 @@ public class GatewayConfig {
 }
 ```
 
-**Custom Gateway Filter:**
-```java
-@Component
-public class AuthenticationFilter implements GlobalFilter, Ordered {
-
-    private static final Logger log = LoggerFactory.getLogger(AuthenticationFilter.class);
-
-    @Autowired
-    private JwtTokenProvider tokenProvider;
-
-    @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        ServerHttpRequest request = exchange.getRequest();
-
-        // Skip authentication for public endpoints
-        if (isPublicPath(request.getPath().toString())) {
-            return chain.filter(exchange);
-        }
-
-        // Extract token from header
-        String token = extractToken(request);
-
-        if (token == null || !tokenProvider.validateToken(token)) {
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
-        }
-
-        // Add user info to headers for downstream services
-        String userId = tokenProvider.getUserIdFromToken(token);
-        ServerHttpRequest modifiedRequest = request.mutate()
-            .header("X-User-Id", userId)
-            .build();
-
-        return chain.filter(exchange.mutate().request(modifiedRequest).build());
-    }
-
-    @Override
-    public int getOrder() {
-        return -1; // High priority
-    }
-
-    private boolean isPublicPath(String path) {
-        return path.startsWith("/api/auth/") || path.equals("/api/health");
-    }
-
-    private String extractToken(ServerHttpRequest request) {
-        String bearerToken = request.getHeaders().getFirst("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
-}
-```
-
 **Fallback Controller:**
 ```java
 @RestController
@@ -658,26 +603,6 @@ public class OrderService {
         order.setStatus(OrderStatus.PENDING_VALIDATION);
 
         return CompletableFuture.completedFuture(orderRepository.save(order));
-    }
-}
-```
-
-**Bulkhead Pattern:**
-```java
-@Service
-public class ProductService {
-
-    @Autowired
-    private InventoryServiceClient inventoryServiceClient;
-
-    @Bulkhead(name = "inventoryService", fallbackMethod = "checkStockFallback")
-    public boolean checkStock(Long productId, Integer quantity) {
-        return inventoryServiceClient.checkStock(productId, quantity);
-    }
-
-    public boolean checkStockFallback(Long productId, Integer quantity, Exception ex) {
-        log.warn("Inventory service unavailable, assuming in stock");
-        return true; // Optimistic fallback
     }
 }
 ```
@@ -839,15 +764,6 @@ public class ConfigController {
 
 // Refresh configuration without restart:
 // POST http://localhost:8081/actuator/refresh
-```
-
-**Encrypted Properties:**
-```bash
-# Encrypt value
-curl http://localhost:8888/encrypt -d "mysecret"
-
-# Decrypt value
-curl http://localhost:8888/decrypt -d "{cipher}encryptedvalue"
 ```
 
 ---
@@ -1021,32 +937,7 @@ public class NotificationService {
 }
 ```
 
-**Kafka Example:**
-```java
-// Producer
-@Service
-public class OrderEventProducer {
-
-    @Autowired
-    private KafkaTemplate<String, OrderCreatedEvent> kafkaTemplate;
-
-    public void publishOrderCreated(Order order) {
-        OrderCreatedEvent event = new OrderCreatedEvent(order);
-        kafkaTemplate.send("order-events", event);
-    }
-}
-
-// Consumer
-@Service
-public class InventoryEventConsumer {
-
-    @KafkaListener(topics = "order-events", groupId = "inventory-service")
-    public void handleOrderCreated(OrderCreatedEvent event) {
-        // Update inventory
-        inventoryService.reserveStock(event.getProductId(), event.getQuantity());
-    }
-}
-```
+Kafka follows a similar pattern with `@KafkaListener` for consumers and `KafkaTemplate` for producers.
 
 ---
 
@@ -1291,6 +1182,3 @@ By the end of this module, developers should be able to:
 After mastering these concepts, proceed to:
 - [Module 20: TypeScript](../20-typescript/) - Modern frontend development
 - Practice building complete microservices applications
-- Explore advanced topics: event sourcing, CQRS, saga pattern
-- Learn container orchestration with Kubernetes
-- Study service mesh architectures (Istio, Linkerd)

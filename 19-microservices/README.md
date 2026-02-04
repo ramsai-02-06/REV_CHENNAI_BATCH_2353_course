@@ -46,43 +46,28 @@ By the end of this module, you will be able to:
 - Circuit Breaker with Resilience4j
 - Retry Mechanisms
 - Fallback Methods
-- Bulkhead Pattern
-- Rate Limiter
-- Combining Resilience Patterns
 
 ### 5. [Inter-Service Communication](./topics/05-inter-service-communication.md)
 - REST Template
-- WebClient (Reactive)
 - Feign Client (Declarative)
-- Asynchronous Communication
-- Spring Cloud Stream
-- Message Brokers (RabbitMQ, Kafka)
+- Asynchronous Communication Overview
 
 ### 6. [Security](./topics/06-security.md)
 - OAuth2 Authorization Framework
 - Resource Server Configuration
-- Single Sign-On (SSO)
-- Session Hijacking Prevention
 - JWT Authentication
-- API Security Best Practices
+- Security Best Practices
 
 ### 7. [Configuration Management](./topics/07-configuration-management.md)
 - Spring Cloud Config Server
 - Config Client Setup
-- Centralized Configuration
-- Git-based Configuration Repository
 - Refresh Scope
-- Spring Cloud Bus
-- Configuration Encryption
 
 ### 8. [Monitoring and Observability](./topics/08-monitoring-observability.md)
 - Distributed Tracing with Sleuth and Zipkin
-- Logging Aggregation (ELK Stack)
+- Logging Best Practices
 - Metrics Collection with Actuator
-- Prometheus Integration
-- Grafana Dashboards
 - Health Checks
-- Security Best Practices
 
 ## Key Concepts
 
@@ -179,20 +164,12 @@ See the [exercises](./exercises/) directory for hands-on practice problems inclu
 ## Common Patterns
 
 ### Communication Patterns
-- **Synchronous**: REST, gRPC (request-response)
-- **Asynchronous**: Message queues, event streaming
-- **Service Mesh**: Istio, Linkerd (infrastructure layer)
+- **Synchronous**: REST (request-response)
+- **Asynchronous**: Message queues
 
 ### Data Patterns
 - **Database per Service**: Each service owns its data
 - **Saga Pattern**: Distributed transactions
-- **CQRS**: Command Query Responsibility Segregation
-- **Event Sourcing**: Store events, not current state
-
-### Deployment Patterns
-- **Blue-Green Deployment**: Zero downtime
-- **Canary Deployment**: Gradual rollout
-- **Rolling Deployment**: Update instances incrementally
 
 ## Additional Resources
 
@@ -200,27 +177,10 @@ See the [exercises](./exercises/) directory for hands-on practice problems inclu
 - [Spring Cloud Documentation](https://spring.io/projects/spring-cloud)
 - [Microservices.io](https://microservices.io/)
 - [12 Factor App](https://12factor.net/)
-- [Domain-Driven Design](https://www.domainlanguage.com/ddd/)
 
 ### Books
 - "Building Microservices" by Sam Newman
 - "Microservices Patterns" by Chris Richardson
-- "Domain-Driven Design" by Eric Evans
-- "Release It!" by Michael Nygard
-
-### Tools
-- **Service Mesh**: Istio, Linkerd, Consul
-- **Container Orchestration**: Kubernetes, Docker Swarm
-- **Monitoring**: Prometheus, Grafana, ELK Stack
-- **API Gateway**: Kong, Apigee, AWS API Gateway
-
-### Online Resources
-- [Spring Cloud Examples](https://github.com/spring-cloud-samples)
-- [Microservices Patterns GitHub](https://github.com/microservices-patterns)
-- [Awesome Microservices](https://github.com/mfornos/awesome-microservices)
-
-### Cheat Sheets
-- See [resources/cheat-sheets/](../resources/cheat-sheets/) for quick references
 
 ## Hands-On Lab
 
@@ -271,64 +231,19 @@ You should be comfortable with:
 
 ### Challenge 1: Data Consistency
 **Problem**: Maintaining consistency across distributed services
-**Solutions**:
-- Saga pattern for distributed transactions
-- Event sourcing and CQRS
-- Eventual consistency model
+**Solution**: Saga pattern for distributed transactions
 
 ### Challenge 2: Service Discovery
 **Problem**: How services find each other dynamically
-**Solutions**:
-- Eureka for service registry
-- DNS-based discovery
-- Service mesh (Istio, Linkerd)
+**Solution**: Eureka for service registry
 
 ### Challenge 3: Distributed Tracing
 **Problem**: Tracking requests across multiple services
-**Solutions**:
-- Spring Cloud Sleuth + Zipkin
-- Jaeger
-- AWS X-Ray
+**Solution**: Spring Cloud Sleuth + Zipkin
 
 ### Challenge 4: Configuration Management
 **Problem**: Managing configuration across many services
-**Solutions**:
-- Spring Cloud Config
-- Consul
-- Kubernetes ConfigMaps
-
-### Challenge 5: Testing
-**Problem**: Testing distributed systems
-**Solutions**:
-- Contract testing (Pact, Spring Cloud Contract)
-- Consumer-driven contracts
-- Chaos engineering (Chaos Monkey)
-
-## Migration Strategy
-
-### Monolith to Microservices
-1. **Strangler Pattern**: Gradually extract services
-2. **Identify Bounded Contexts**: Use DDD to find boundaries
-3. **Extract Service**: Start with least dependent module
-4. **Build Anti-Corruption Layer**: Isolate old and new
-5. **Repeat**: Incrementally extract services
-
-### Steps
-1. Analyze monolith and identify bounded contexts
-2. Set up microservices infrastructure
-3. Extract peripheral services first
-4. Implement event-driven communication
-5. Migrate data gradually
-6. Decommission monolith when ready
-
-## Next Steps
-
-Once you've completed this module and feel confident with microservices:
-- Explore service mesh technologies (Istio, Linkerd)
-- Learn Kubernetes for container orchestration
-- Study advanced patterns (Event Sourcing, CQRS)
-- Practice chaos engineering
-- Explore serverless architectures
+**Solution**: Spring Cloud Config
 
 ---
 

@@ -284,110 +284,30 @@ How to search across all logs?
 All Services → Log Aggregator → Elasticsearch → Kibana (UI)
 ```
 
-### ELK Stack (Elasticsearch, Logstash, Kibana)
+### Centralized Logging
 
-#### Architecture
+For production, aggregate logs from all services using tools like:
+- **ELK Stack** (Elasticsearch, Logstash, Kibana)
+- **Splunk**
+- **Datadog**
 
-```
-┌─────────────┐
-│  Service A  │──┐
-├─────────────┤  │
-│  Service B  │──┼─→ Logstash ─→ Elasticsearch ─→ Kibana
-├─────────────┤  │                                    ▲
-│  Service C  │──┘                                    │
-└─────────────┘                              (Search & Visualize)
-```
-
-#### Logback Configuration
-
-**logback-spring.xml:**
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-
-    <!-- Console Appender -->
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <!-- JSON Appender for ELK -->
-    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <includeMdcKeyName>trace-id</includeMdcKeyName>
-            <includeMdcKeyName>span-id</includeMdcKeyName>
-            <customFields>{"service":"order-service"}</customFields>
-        </encoder>
-    </appender>
-
-    <!-- File Appender -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/order-service.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/order-service-%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="JSON"/>
-        <appender-ref ref="FILE"/>
-    </root>
-
-    <logger name="com.example" level="DEBUG"/>
-</configuration>
-```
-
-**Dependency:**
-```xml
-<dependency>
-    <groupId>net.logstash.logback</groupId>
-    <artifactId>logstash-logback-encoder</artifactId>
-    <version>7.4</version>
-</dependency>
-```
-
-#### Structured Logging
+#### Structured Logging with MDC
 
 ```java
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 @Service
 public class OrderService {
 
-    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
-
     public Order createOrder(OrderRequest request) {
-        // Add context to MDC (Mapped Diagnostic Context)
         MDC.put("userId", request.getUserId());
         MDC.put("orderId", UUID.randomUUID().toString());
 
-        log.info("Creating order for user: {}", request.getUserId());
-        log.debug("Order details: {}", request);
-
         try {
-            Order order = processOrder(request);
-            log.info("Order created successfully: {}", order.getId());
-            return order;
-
-        } catch (InsufficientStockException ex) {
-            log.warn("Insufficient stock for product: {}", request.getProductId());
-            throw ex;
-
-        } catch (Exception ex) {
-            log.error("Failed to create order", ex);
-            throw ex;
-
+            log.info("Creating order for user: {}", request.getUserId());
+            return processOrder(request);
         } finally {
-            MDC.clear();  // Clean up
+            MDC.clear();
         }
     }
 }
@@ -578,86 +498,23 @@ GET http://localhost:8081/actuator/health
 
 #### Custom Metrics
 
-```java
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.Timer;
+Use Micrometer to create custom metrics:
 
+```java
 @Service
 public class OrderService {
 
     private final Counter orderCreatedCounter;
-    private final Counter orderFailedCounter;
-    private final Timer orderProcessingTimer;
 
     public OrderService(MeterRegistry registry) {
         this.orderCreatedCounter = Counter.builder("orders.created")
             .description("Total number of orders created")
-            .tag("type", "order")
-            .register(registry);
-
-        this.orderFailedCounter = Counter.builder("orders.failed")
-            .description("Total number of failed orders")
-            .tag("type", "order")
-            .register(registry);
-
-        this.orderProcessingTimer = Timer.builder("orders.processing.time")
-            .description("Order processing time")
-            .register(registry);
-    }
-
-    public Order createOrder(OrderRequest request) {
-        return orderProcessingTimer.record(() -> {
-            try {
-                Order order = processOrder(request);
-                orderCreatedCounter.increment();
-                return order;
-            } catch (Exception ex) {
-                orderFailedCounter.increment();
-                throw ex;
-            }
-        });
-    }
-}
-```
-
-**Gauge for Current Values:**
-```java
-@Component
-public class OrderMetrics {
-
-    @Autowired
-    private OrderRepository orderRepository;
-
-    public OrderMetrics(MeterRegistry registry) {
-        Gauge.builder("orders.pending.count", this::getPendingOrdersCount)
-            .description("Number of pending orders")
-            .register(registry);
-    }
-
-    private long getPendingOrdersCount() {
-        return orderRepository.countByStatus(OrderStatus.PENDING);
-    }
-}
-```
-
-**Distribution Summary:**
-```java
-@Service
-public class OrderService {
-
-    private final DistributionSummary orderAmountSummary;
-
-    public OrderService(MeterRegistry registry) {
-        this.orderAmountSummary = DistributionSummary.builder("order.amount")
-            .description("Order amount distribution")
-            .baseUnit("USD")
             .register(registry);
     }
 
     public Order createOrder(OrderRequest request) {
         Order order = processOrder(request);
-        orderAmountSummary.record(order.getAmount().doubleValue());
+        orderCreatedCounter.increment();
         return order;
     }
 }
@@ -665,7 +522,8 @@ public class OrderService {
 
 ### Prometheus Integration
 
-**Dependency:**
+Add Prometheus dependency to expose metrics:
+
 ```xml
 <dependency>
     <groupId>io.micrometer</groupId>
@@ -673,251 +531,9 @@ public class OrderService {
 </dependency>
 ```
 
-**Prometheus scrapes metrics:**
-```
-GET http://localhost:8081/actuator/prometheus
-```
+Access metrics at: `http://localhost:8081/actuator/prometheus`
 
-**prometheus.yml:**
-```yaml
-scrape_configs:
-  - job_name: 'order-service'
-    metrics_path: '/actuator/prometheus'
-    scrape_interval: 10s
-    static_configs:
-      - targets: ['localhost:8081']
-        labels:
-          application: 'order-service'
-
-  - job_name: 'payment-service'
-    metrics_path: '/actuator/prometheus'
-    scrape_interval: 10s
-    static_configs:
-      - targets: ['localhost:8082']
-        labels:
-          application: 'payment-service'
-```
-
-### Grafana Dashboards
-
-**Connect Grafana to Prometheus:**
-1. Add Prometheus data source
-2. Import Spring Boot dashboard (ID: 4701)
-3. Create custom dashboards
-
-**Example Dashboard Panels:**
-- Request rate (requests/sec)
-- Response time (p50, p95, p99)
-- Error rate
-- JVM memory usage
-- CPU usage
-- Database connections
-- Custom business metrics
-
----
-
-## Security Best Practices
-
-### 1. Secure Inter-Service Communication
-
-**Use mTLS (Mutual TLS):**
-```yaml
-server:
-  ssl:
-    enabled: true
-    key-store: classpath:keystore.p12
-    key-store-password: ${KEYSTORE_PASSWORD}
-    key-store-type: PKCS12
-    trust-store: classpath:truststore.p12
-    trust-store-password: ${TRUSTSTORE_PASSWORD}
-    client-auth: need  # Require client certificates
-```
-
-### 2. API Authentication
-
-**JWT Validation:**
-```java
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/actuator/health").permitAll()
-                .anyRequest().authenticated()
-            )
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
-        return http.build();
-    }
-}
-```
-
-### 3. Rate Limiting
-
-**Implement rate limiting at API Gateway level:**
-```yaml
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: order-service
-          uri: lb://order-service
-          filters:
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 100
-                redis-rate-limiter.burstCapacity: 200
-```
-
-### 4. Input Validation
-
-```java
-@RestController
-@Validated
-public class OrderController {
-
-    @PostMapping("/api/orders")
-    public Order createOrder(@Valid @RequestBody OrderRequest request) {
-        return orderService.createOrder(request);
-    }
-}
-
-public class OrderRequest {
-
-    @NotNull
-    @Min(1)
-    private Long productId;
-
-    @NotNull
-    @Min(1)
-    @Max(100)
-    private Integer quantity;
-
-    @NotBlank
-    @Email
-    private String email;
-}
-```
-
-### 5. Secure Configuration
-
-**Encrypt sensitive properties:**
-```yaml
-spring:
-  datasource:
-    password: '{cipher}AQAEncryptedPassword...'
-```
-
-### 6. Security Headers
-
-```java
-@Configuration
-public class SecurityConfig {
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .headers(headers -> headers
-                .contentSecurityPolicy("default-src 'self'")
-                .xssProtection()
-                .frameOptions().deny()
-                .httpStrictTransportSecurity()
-            );
-        return http.build();
-    }
-}
-```
-
-### 7. Audit Logging
-
-```java
-@Aspect
-@Component
-public class AuditAspect {
-
-    private static final Logger log = LoggerFactory.getLogger(AuditAspect.class);
-
-    @Around("@annotation(Audited)")
-    public Object audit(ProceedingJoinPoint joinPoint) throws Throwable {
-        String method = joinPoint.getSignature().getName();
-        Object[] args = joinPoint.getArgs();
-
-        log.info("Audit: method={}, user={}, args={}",
-            method,
-            SecurityContextHolder.getContext().getAuthentication().getName(),
-            args
-        );
-
-        try {
-            Object result = joinPoint.proceed();
-            log.info("Audit: method={} completed successfully", method);
-            return result;
-        } catch (Exception ex) {
-            log.error("Audit: method={} failed", method, ex);
-            throw ex;
-        }
-    }
-}
-```
-
-### 8. Dependency Scanning
-
-```bash
-# Maven dependency check
-mvn dependency-check:check
-
-# OWASP Dependency Check
-mvn org.owasp:dependency-check-maven:check
-```
-
-### 9. API Documentation Security
-
-**Secure Swagger UI:**
-```yaml
-springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
-```
-
-```java
-@Configuration
-public class SwaggerSecurityConfig {
-
-    @Bean
-    public SecurityFilterChain swaggerSecurity(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").hasRole("ADMIN")
-            );
-        return http.build();
-    }
-}
-```
-
-### 10. Secrets Management
-
-**Use external secret managers:**
-```yaml
-# AWS Secrets Manager
-spring:
-  cloud:
-    aws:
-      secretsmanager:
-        enabled: true
-        region: us-east-1
-
-# HashiCorp Vault
-spring:
-  cloud:
-    vault:
-      authentication: TOKEN
-      token: ${VAULT_TOKEN}
-```
+Use **Grafana** to visualize Prometheus metrics with pre-built Spring Boot dashboards.
 
 ---
 

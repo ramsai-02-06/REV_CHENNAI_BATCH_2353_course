@@ -15,16 +15,6 @@ Microservices are an approach to developing a single application as a suite of s
 - **Resilience**: Designed to handle failures gracefully
 - **Technology Diversity**: Different services can use different technologies
 
-### Evolution from SOA
-
-```
-Traditional SOA → Microservices
-- Heavy ESB        → Lightweight communication
-- SOAP             → REST/gRPC
-- Shared DB        → Database per service
-- Monolithic ESB   → Decentralized
-```
-
 ---
 
 ## Monolith vs Microservices
@@ -291,15 +281,12 @@ Need to maintain API contracts while evolving services.
 
 ## Domain-Driven Design (DDD)
 
-Domain-Driven Design is crucial for identifying and designing microservice boundaries.
+Domain-Driven Design helps identify microservice boundaries based on business domains.
 
-### Core DDD Concepts
+### Key DDD Concepts for Microservices
 
-#### 1. **Domain**
-The sphere of knowledge and activity around which the business logic revolves.
-
-#### 2. **Bounded Context**
-A boundary within which a particular domain model is defined and applicable.
+#### 1. **Bounded Context**
+A boundary within which a particular domain model is defined. Each bounded context typically maps to one microservice.
 
 ```
 E-Commerce System:
@@ -315,95 +302,32 @@ E-Commerce System:
 
 Note: "Customer" means different things in each context.
 
-#### 3. **Ubiquitous Language**
+#### 2. **Ubiquitous Language**
 A common language shared by developers and domain experts within a bounded context.
-
-#### 4. **Entities**
-Objects with unique identity that persists over time.
-
-```java
-@Entity
-public class Order {
-    @Id
-    private Long orderId; // Unique identity
-    private OrderStatus status;
-    private List<OrderItem> items;
-}
-```
-
-#### 5. **Value Objects**
-Objects defined by their attributes, not identity.
-
-```java
-public class Money {
-    private final BigDecimal amount;
-    private final Currency currency;
-
-    // No ID, equality based on values
-}
-```
-
-#### 6. **Aggregates**
-A cluster of domain objects treated as a single unit.
-
-```java
-// Order is the Aggregate Root
-public class Order {
-    private Long orderId;
-    private List<OrderItem> items; // Part of aggregate
-
-    // All access to OrderItems goes through Order
-    public void addItem(OrderItem item) {
-        this.items.add(item);
-    }
-}
-```
-
-#### 7. **Services**
-Operations that don't naturally belong to any entity or value object.
-
-```java
-@Service
-public class OrderPricingService {
-    public Money calculateTotal(Order order) {
-        // Pricing logic
-    }
-}
-```
 
 ### Applying DDD to Microservices
 
 **Step 1: Identify Bounded Contexts**
 ```
 E-Commerce Domain:
-- Sales Context
-- Inventory Context
-- Shipping Context
-- Customer Context
-- Payment Context
+- Sales Context → Order Service
+- Payment Context → Payment Service
+- Inventory Context → Inventory Service
 ```
 
-**Step 2: Map Contexts to Services**
-```
-Bounded Context → Microservice
-Sales Context → Order Service
-Payment Context → Payment Service
-```
-
-**Step 3: Define Context Boundaries**
+**Step 2: Define Context Boundaries**
 ```java
-// Order Service owns Order aggregate
+// Order Service owns Order data
 public class Order {
     private Long orderId;
-    private Long customerId; // Reference to Customer Service
+    private Long customerId; // Reference to Customer Service (not FK)
     private List<OrderItem> items;
 }
 
-// Customer Service owns Customer aggregate
+// Customer Service owns Customer data
 public class Customer {
     private Long customerId;
     private String name;
-    private List<Address> addresses;
 }
 ```
 
@@ -575,37 +499,6 @@ java -jar flyway.jar migrate
 
 # Data cleanup job
 java -jar app.jar --spring.profiles.active=admin cleanup
-```
-
-### Applying 12 Factor to Spring Boot Microservices
-
-```java
-@SpringBootApplication
-public class OrderServiceApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(OrderServiceApplication.class, args);
-    }
-}
-```
-
-```yaml
-# application.yml - Configuration
-spring:
-  application:
-    name: order-service # Factor I: Codebase
-  datasource:
-    url: ${DATABASE_URL} # Factor III: Config, IV: Backing Services
-  profiles:
-    active: ${SPRING_PROFILES_ACTIVE:default} # Factor X: Dev/Prod Parity
-
-server:
-  port: ${PORT:8080} # Factor VII: Port Binding
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info # Factor XI: Logs, XII: Admin
 ```
 
 ---
