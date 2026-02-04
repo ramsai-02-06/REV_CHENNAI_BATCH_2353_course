@@ -1,0 +1,7 @@
+# Notification Service Configuration
+server:
+  port: 8083
+
+logging:
+  level:
+    com.example.notificationservice: DEBUG
