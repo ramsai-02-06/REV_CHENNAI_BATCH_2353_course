@@ -440,12 +440,56 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 #### 3. Session Fixation Protection
 
-```java
-http
-    .sessionManagement(session -> session
-        .sessionFixation().newSession()  // Generate new session ID on login
-    );
+**What is Session Fixation?**
+
+Session fixation is an attack where the attacker sets (or "fixes") a user's session ID before the user logs in. When the user authenticates, they unknowingly use the attacker's pre-set session ID, giving the attacker access to the authenticated session.
+
+**Attack Flow:**
+
 ```
+1. Attacker visits site → Gets session ID: ABC123
+2. Attacker tricks victim to use ABC123 (via malicious link, XSS, etc.)
+3. Victim logs in with session ID ABC123
+4. Session ABC123 is now authenticated
+5. Attacker uses ABC123 → Has victim's access!
+```
+
+**Example Attack Scenario:**
+
+```
+Attacker sends email with link:
+https://bank.com/login;jsessionid=ATTACKER_SESSION_ID
+
+Victim clicks link → Logs in with that session ID
+Attacker now uses same session ID → Full access to victim's account
+```
+
+**Spring Security Protection Options:**
+
+Spring Security provides three session fixation strategies:
+
+```java
+http.sessionManagement(session -> session
+    // Option 1: Create entirely new session (most secure)
+    .sessionFixation().newSession()
+
+    // Option 2: Migrate attributes to new session (default in Spring Security)
+    // .sessionFixation().migrateSession()
+
+    // Option 3: Disable protection (NOT recommended)
+    // .sessionFixation().none()
+);
+```
+
+| Strategy | Behavior | Use Case |
+|----------|----------|----------|
+| `newSession()` | Discards old session, creates fresh one | Most secure, use when no session data needed |
+| `migrateSession()` | New session ID, copies attributes | Default; keeps shopping cart, etc. |
+| `none()` | No protection | Never use in production |
+
+**Why `migrateSession()` is the default:**
+
+It balances security with usability. If a user has items in their shopping cart (stored in session) before logging in, `migrateSession()` preserves that data while still generating a new session ID.
 
 #### 4. Token-Based Authentication (Stateless)
 
