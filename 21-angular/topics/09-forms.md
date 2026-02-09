@@ -1013,4 +1013,4 @@ export class UserRegistrationComponent {
 
 ## Next Topic
 
-Continue to [State Management](./09-state-management.md) to learn about managing application state in Angular.
+Continue to [State Management](./10-state-management.md) to learn about managing application state in Angular.

@@ -882,4 +882,4 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 ## Next Topic
 
-Continue to [Forms](./08-forms.md) to learn about template-driven and reactive forms in Angular.
+Continue to [Forms](./09-forms.md) to learn about template-driven and reactive forms in Angular.

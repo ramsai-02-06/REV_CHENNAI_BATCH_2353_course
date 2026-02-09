@@ -933,4 +933,4 @@ export class MyComponent {
 
 ## Next Topic
 
-Continue to [Testing and Debugging](./10-testing-and-debugging.md) to learn about testing Angular applications.
+Continue to [Testing and Debugging](./11-testing-and-debugging.md) to learn about testing Angular applications.

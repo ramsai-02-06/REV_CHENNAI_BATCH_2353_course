@@ -53,26 +53,33 @@ By the end of this module, you will understand and be able to apply the key conc
 - Lazy Loading
 - Signals (Angular 16+)
 
-### 7. [HTTP Client](./topics/07-http-client.md)
+### 7. [RxJS Fundamentals](./topics/07-rxjs-fundamentals.md)
+- Observables and Subscriptions
+- Pipe and Operators (map, filter, catchError)
+- Subjects and BehaviorSubject
+- Unsubscribing and Memory Leaks
+- Common Patterns (async pipe, takeUntil)
+
+### 8. [HTTP Client](./topics/08-http-client.md)
 - Making HTTP Requests (GET, POST, PUT, DELETE)
 - Error Handling
 - HTTP Interceptors
 - Best Practices
 
-### 8. [Forms](./topics/08-forms.md)
+### 9. [Forms](./topics/09-forms.md)
 - Template-Driven Forms
 - Reactive Forms
 - Form Validation
 - Custom Validators
 - Dynamic Forms
 
-### 9. [State Management](./topics/09-state-management.md)
+### 10. [State Management](./topics/10-state-management.md)
 - Application State
 - State Management Patterns
 - Service-based State
 - BehaviorSubject Pattern
 
-### 10. [Testing and Debugging](./topics/10-testing-and-debugging.md)
+### 11. [Testing and Debugging](./topics/11-testing-and-debugging.md)
 - Jasmine Framework
 - Karma Test Runner
 - Testing Components, Services, and Pipes

@@ -857,4 +857,4 @@ this.route.data.subscribe(data => {
 
 ## Next Topic
 
-Continue to [HTTP Client](./07-http-client.md) to learn about making HTTP requests in Angular.
+Continue to [RxJS Fundamentals](./07-rxjs-fundamentals.md) to learn reactive programming before working with HTTP.
